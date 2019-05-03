@@ -1,0 +1,53 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "mocha":true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "rules": {
+        "semi": "warn",
+        "prefer-const": "warn",
+        "no-const-assign": "warn",
+        "no-var": "warn",
+        "no-new-object": "error",
+        "no-new-func": "error",
+        "object-shorthand": "warn",
+        "quote-props": ["warn", "as-needed"],
+        "array-callback-return": "warn",
+        "prefer-destructuring": "warn",
+        "quotes": ["warn", "single", { "avoidEscape": true}],
+        "prefer-template": "warn",
+        "func-style": ["error", "expression", {"allowArrowFunctions": true}],
+        "no-param-reassign": "warn",
+        "prefer-arrow-callback": "warn",
+        "arrow-spacing": ["warn", {"before": true, "after": true}],
+        "dot-notation": "warn",
+        "one-var": "off",
+        "no-undef": "warn",
+        "no-multi-assign": "error",
+        "no-plusplus": "error",
+        "max-len": ["error", { "code": 80 }],
+        "no-unused-vars": "warn",
+        "eqeqeq": "error",
+        "nonblock-statement-body-position": ["error", "beside"],
+        "no-else-return": "error",
+        "spaced-comment": ["error", "always"],
+        "indent": ["error", 4],
+        "space-before-blocks": "error",
+        "keyword-spacing": ["error", { "before": true }],
+        "space-infix-ops": "error",
+        "eol-last": ["error", "always"],
+        "object-curly-spacing": ["error", "always"],
+        "array-bracket-spacing": ["error", "always"]
+    }
+}
