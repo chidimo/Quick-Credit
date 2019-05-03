@@ -1,0 +1,44 @@
+{
+    "name": "quick-credit",
+    "description": "Affordable funding for small businesses.",
+    "version": "0.0.0",
+    "private": true,
+    "repository": "https://github.com/chidimo/QuickCredit.git",
+    "author": "orji chidi <orjichidi95@gmail.com>",
+    "license": "MIT",
+    "keywords": [
+        "funding",
+        "small business",
+        "loan"
+    ],
+    "scripts": {
+        "start": "node ./bin/www",
+        "devstart": "nodemon ./bin/www",
+        "test": "node_modules/.bin/mocha test/*",
+        "test-coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec test/*",
+        "test-coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    },
+    "bugs": {
+        "url": "https://github.com/chidimo/QuickCredit/issues"
+    },
+    "homepage": "https://github.com/chidimo/QuickCredit#readme",
+    "dependencies": {
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.6.9",
+        "ejs": "^2.6.1",
+        "express": "~4.16.0",
+        "http-errors": "~1.6.2",
+        "morgan": "~1.9.0",
+        "underscore": "^1.9.1"
+    },
+    "devDependencies": {
+        "coveralls": "^3.0.3",
+        "eslint": "^5.16.0",
+        "istanbul": "^0.4.5",
+        "mocha": "^6.1.4",
+        "mocha-lcov-reporter": "^1.3.0",
+        "nodemon": "^1.18.11",
+        "should": "^13.2.3",
+        "supertest": "^4.0.2"
+    }
+}
