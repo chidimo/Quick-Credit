@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="Author" content="Orji Chidi Matthew">
+        <meta name="description" content="Easily accessible short term loans">
+        <meta name="keywords", content="loan, cash, short term loan">
+        <link rel="stylesheet" href="./css/style.css">
+        <title>Quick Credit | User - email@address.com</title>
+    </head>
+
+    <body>
+        <header id="header">
+            <div class="container">
+                <div id="branding">
+                    <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                </div>
+
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="authentication.html"><button id="sign_in" class="button_1">Log out</button></a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+        
+        <section id="main_loan">
+            <div class="container">
+
+                <div class="top_grid_container">
+                    <!--show the checkmark only if the load has been repaid-->
+                    <div class="username">
+                        <h1 id="page_title">User | <code>email@address.com</code> <span style="color:green">&#x2714</span></h1>
+                    </div>
+
+                    <div class="user_buttons">
+
+                        <!--Each of these buttons will be available based on the user's verification status-->
+                        <button
+                            id="verify_user"
+                            class="button_1 shadowed_button approve"
+                        >
+                            Verify
+                        </button>
+
+                        <button
+                            id="un_verify_user"
+                            class="button_1 shadowed_button reject"
+                        >
+                            Revoke verification
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bottom_grid_container">
+
+                    <div class="major_grid">
+                        <h3>User Details</h3>
+
+                        <div class="mini_grid">
+                            <p><b>Status</b></p>
+                            <p>Verified <span style="color:green">&#x2714</span></p>
+                        </div>
+
+                        <div class="mini_grid">
+                            <p><b>Email</b></p>
+                            <p>email@address.com</p>
+                        </div>
+
+                        <div class="mini_grid">
+                            <p><b>Name</b></p>
+                            <p>first_name, last_name</p>
+                        </div>
+        
+                        <div class="mini_grid">
+                            <p><b>Phone number</b></p>
+                            <p>+2341234567890</p>
+                        </div>
+        
+                        <div class="mini_grid">
+                            <p><b>Home Address</b></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
+                        </div>
+
+                        <div class="mini_grid">
+                            <p><b>Office Address</b></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
+                        </div>
+
+                    </div>
+            
+                    <div class="major_grid">
+                        <h3>email@address.com's Recent Loans</h3>
+
+                        <div class="table_wrapper">
+                            <table>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>Application date</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                </tr>
+    
+                                <tr>
+                                    <td>1</td>
+                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                    <td>Pending</td>
+                                    <td> - </td>
+                                </tr>
+    
+                                <tr>
+                                    <td>2</td>
+                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                    <td style="color:green">Approved</td>
+                                    <td>50,000</td>
+                                </tr>
+    
+                                <tr>
+                                    <td>3</td>
+                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                    <td style="color:red">Rejected</td>
+                                    <td> - </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="loan_payment_modal" class="modal">
+            <span class="close" onclick="document.getElementById('loan_payment_modal').style.display='none'">&times;</span>
+            <form action="" class="modal_content">
+                <div class="container">
+                    <h3>Post payment to loan <code>123456789</code></h3>
+                    <hr>
+                    <label for="payment_amount"><b>Amount</b></label>
+                    <input class="modal_input" type="text" placeholder="Enter payment amount" name="payment_amount" required>
+
+                    <div class="clearfix">
+                        <button
+                            onclick="document.getElementById('loan_payment_modal').style.display='none'"
+                            class="button_1 shadowed_button cancel_button">
+                            Cancel
+                        </button>
+                        <button type="submit" class="button_1 shadowed_button save_profile_button">Post payment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <footer>
+            <p>Quick Credit &copy; 2019</p>
+        </footer>
+        
+        <script src="./js/user.js"></script>
+    </body>
+</html>
