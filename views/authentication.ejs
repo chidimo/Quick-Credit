@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ./partials/head.ejs %>
+    </head>
+
+    <body>
+        <header id="header">
+            <div class="container">
+                <div id="branding" style="float:none;text-align:center;margin-bottom:10px;">
+                    <a id="brand_name" href="/"><h1>Quick Credit</h1></a>
+                </div>
+            </div>
+        </header>
+        
+        <section class="registration_section">
+
+            <div id="reg_form_toggle" class="container">
+                <div id="activate_signin" class="registration_div">
+                    <h4>Sign In</h4>
+                </div>
+
+                <div id='activate_signup' class="registration_div deselected">
+                    <h4>Sign Up</h4>
+                </div>
+            </div>
+
+            <div id="main_registration" class="container">
+
+                <div id="signin_form" class="">
+                    <h1 class="registration_title">Sign in to your account</h1>
+                    <hr>
+                    <form class="registration sign_in" action="/auth/signin" method="post">
+                        <label for="email"><b>Email</b></label>
+                        <input type="email" placeholder="Enter email" name="email">
+    
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter password" name="password">
+
+                        <label for="remember">
+                            <input type="checkbox" checked="checked" name="remember">Remember me
+                        </label>
+                        <button type="submit" class="shadowed_button registration_button">Sign In</button>
+                    </form>
+                </div>
+
+                <div id="signup_form" class="hide_form">
+                    <h1 class="registration_title">Create your account</h1>
+                    <p id="fill_form">Please fill the form to create an account.</p>
+                    <hr>
+                    <form class="registration sign_up" action="/auth/signup" method="post">
+                        <label for="email"><b>Email</b></label>
+                        <input type="email" placeholder="Enter email" name="email">
+    
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter password" name="password">
+    
+                        <label for="confirm_password"><b>Confirm password</b></label>
+                        <input type="password" placeholder="Confirm password" name="confirm_password">
+    
+                        <label for="remember">
+                            <input type="checkbox" checked="checked">Remember me
+                        </label>
+                        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                        <button type="submit" class="shadowed_button registration_button">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <script src="/js/signup.js"></script>        
+    </body>
+</html>
