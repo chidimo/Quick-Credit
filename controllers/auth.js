@@ -44,7 +44,7 @@ const signup = (req, res) => {
 
 const signin = (req, res) => {
     if (req.method === 'GET') {
-        res.render( 'registration', { title: 'Sign In' });
+        res.render( 'authentication', { title: 'Sign In' });
     }
     else {
         const { email, password } = req.body;
