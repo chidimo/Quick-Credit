@@ -112,64 +112,6 @@
             </div>
         </section>
 
-        <div id="loan_application_modal" class="modal">
-            <span class="close" onclick="document.getElementById('loan_application_modal').style.display='none'">&times;</span>
-            <form action="" class="modal_content">
-                <div class="container">
-                    <h3>Apply for loan</h3>
-                    <hr>
-                    <label for="amount"><b>Amount</b></label>
-                    <input class="modal_input" type="text" placeholder="Enter loan amount" name="amount" required>
-
-                    <label for="tenor"><b>Tenor</b></label>
-                    <input class="modal_input" type="number" min="1" max="12" placeholder="Tenor" name="tenor" required>
-
-                    <div class="clearfix">
-                        <button
-                            onclick="document.getElementById('loan_application_modal').style.display='none'"
-                            class="button_1 shadowed_button cancel_button">
-                            Cancel
-                        </button>
-                        <button type="submit" class="button_1 shadowed_button save_profile_button">Apply</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div id="edit_profile_modal" class="modal">
-            <span class="close" onclick="document.getElementById('edit_profile_modal').style.display='none'">&times;</span>
-            <form action="" class="modal_content">
-                <div class="container">
-                    <h3>Edit your profile</h3>
-                    <hr>
-                    <label for="first_name"><b>First Name</b></label>
-                    <input class="modal_input" type="text" placeholder="First Name" name="first_name" required>
-
-                    <label for="last_name"><b>Last Name</b></label>
-                    <input class="modal_input" type="text" placeholder="Last Name" name="last_name" required>
-
-                    <label for="phone_number"><b>Phone Number</b></label>
-                    <input class="modal_input" type="tel" placeholder="Phone Number" name="phone_number" required>
-
-                    <label for="home_address"><b>Home Address</b></label>
-                    <textarea class="modal_input" type="text" placeholder="Home Address" name="home_address"></textarea>
-
-                    <label for="office_address"><b>Office Address</b></label>
-                    <textarea class="modal_input" type="text" placeholder="Home Address" name="office_address"></textarea>
-
-                    <div class="clearfix">
-                        <button
-                            onclick="document.getElementById('edit_profile_modal').style.display='none'"
-                            class="button_1 shadowed_button cancel_button">
-                            Cancel
-                        </button>
-                        <button type="submit" class="button_1 shadowed_button save_profile_button">Save Profile</button>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-
         <footer>
             <p>Quick Credit &copy; 2019</p>
         </footer>
