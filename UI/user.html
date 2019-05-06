@@ -25,134 +25,76 @@
                         <li><a href="authentication.html"><button id="sign_in" class="button_1">Log out</button></a></li>
                     </ul>
                 </nav>
-
             </div>
         </header>
         
         <section id="main_loan">
             <div class="container">
-
-                <div class="top_grid_container">
-                    <!--show the checkmark only if the load has been repaid-->
-                    <div class="username">
-                        <h1 id="page_title">User | <code>email@address.com</code> <span style="color:green">&#x2714</span></h1>
-                    </div>
-
-                    <div class="user_buttons">
-
-                        <!--Each of these buttons will be available based on the user's verification status-->
-                        <button
-                            id="verify_user"
-                            class="button_1 shadowed_button approve"
-                        >
-                            Verify
-                        </button>
-
-                        <button
-                            id="un_verify_user"
-                            class="button_1 shadowed_button reject"
-                        >
-                            Revoke verification
-                        </button>
-                    </div>
+                <!--show the checkmark only if the load has been repaid-->
+                <div class="page_heading">
+                    <h1>User | <code>email@address.com</code>
+                        <span class="action_span" id="verify_user" style="color:green">&#10004;</span>
+                        <span class="action_span" id="un_verify_user" style="color:red">&#10006;</span>
+                    </h1>
                 </div>
 
-                <div class="bottom_grid_container">
-
-                    <div class="major_grid">
-                        <h3>User Details</h3>
-
-                        <div class="mini_grid">
-                            <p><b>Status</b></p>
-                            <p>Verified <span style="color:green">&#x2714</span></p>
+                <div class="">
+                    <div class="user_card">
+                        <div class="user_photo">
+                            <img src="https://via.placeholder.com/150" alt="">
                         </div>
-
-                        <div class="mini_grid">
-                            <p><b>Email</b></p>
-                            <p>email@address.com</p>
+    
+                        <div class="user_info">
+                            <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
+                            <p><a href="mailto:email@address.com">email@address.com</a></p>
+                            <p><a href="tel:+2341234567890">+2341234567890</a></p>
                         </div>
-
-                        <div class="mini_grid">
-                            <p><b>Name</b></p>
-                            <p>first_name, last_name</p>
-                        </div>
-        
-                        <div class="mini_grid">
-                            <p><b>Phone number</b></p>
-                            <p>+2341234567890</p>
-                        </div>
-        
-                        <div class="mini_grid">
-                            <p><b>Home Address</b></p>
+    
+                        <div class="user_address">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
                         </div>
-
-                        <div class="mini_grid">
-                            <p><b>Office Address</b></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
-                        </div>
-
                     </div>
+                </div>
             
-                    <div class="major_grid">
-                        <h3>email@address.com's Recent Loans</h3>
+                <div class="user_grid_2 table_wrapper">
+                    <h3>email@address.com's Recent Loans</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Application date</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
 
-                        <div class="table_wrapper">
-                            <table>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Application date</th>
-                                    <th>Status</th>
-                                    <th>Amount</th>
-                                </tr>
-    
-                                <tr>
-                                    <td>1</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td>Pending</td>
-                                    <td> - </td>
-                                </tr>
-    
-                                <tr>
-                                    <td>2</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td style="color:green">Approved</td>
-                                    <td>50,000</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>3</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td style="color:red">Rejected</td>
-                                    <td> - </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                <td>Pending</td>
+                                <td> - </td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                <td style="color:green">Approved</td>
+                                <td>50,000</td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                <td style="color:red">Rejected</td>
+                                <td> - </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
-
-        <div id="loan_payment_modal" class="modal">
-            <span class="close" onclick="document.getElementById('loan_payment_modal').style.display='none'">&times;</span>
-            <form action="" class="modal_content">
-                <div class="container">
-                    <h3>Post payment to loan <code>123456789</code></h3>
-                    <hr>
-                    <label for="payment_amount"><b>Amount</b></label>
-                    <input class="modal_input" type="text" placeholder="Enter payment amount" name="payment_amount" required>
-
-                    <div class="clearfix">
-                        <button
-                            onclick="document.getElementById('loan_payment_modal').style.display='none'"
-                            class="button_1 shadowed_button cancel_button">
-                            Cancel
-                        </button>
-                        <button type="submit" class="button_1 shadowed_button save_profile_button">Post payment</button>
-                    </div>
-                </div>
-            </form>
-        </div>
 
         <footer>
             <p>Quick Credit &copy; 2019</p>
