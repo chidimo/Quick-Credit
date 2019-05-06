@@ -292,7 +292,9 @@ footer {
 }
 
 /* About */
-.authentication_section {
+.authentication_section,
+.profile_edit,
+.loan_application {
     padding: 30px 20px;
 }
 
@@ -330,7 +332,7 @@ footer {
 }
 
 /* Sign up/sign in */
-#main_authentication {
+.form_wrapper {
     max-width: 650px;
     margin-left: auto;
     margin-right: auto;
@@ -340,7 +342,13 @@ footer {
     border-bottom-right-radius: 5px;
 }
 
-#main_authentication input[type='email'], #main_authentication input[type='password'] {
+.form_wrapper input[type='email'],
+.form_wrapper input[type='number'],
+.form_wrapper input[type='text'],
+.form_wrapper input[type='tel'],
+.form_wrapper input[type='password'],
+.form_wrapper textarea
+{
     display: inline-block;
     width: 100%;
 }
