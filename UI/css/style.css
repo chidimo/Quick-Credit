@@ -13,6 +13,7 @@ body {
     width: 80%;
     margin: auto;
     overflow: hidden;
+    padding-top: 10px;
 }
 
 input {
@@ -149,6 +150,10 @@ header .active a {
     font-weight: bold;
 }
 
+span.action_span {
+    cursor: pointer;
+}
+
 /* Showcase */
 
 #showcase {
@@ -210,7 +215,7 @@ footer {
     margin-top: 20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 999px) {
     .container {
         width: 95%;
     }
@@ -245,10 +250,7 @@ footer {
         width: 100%;
     }
 
-    div.bottom_grid_container,
-    div.top_grid_container,
-    div.mini_grid
-    {
+    div.top_grid_container {
         display: grid;
         grid-template-columns: auto;
     }
@@ -263,6 +265,29 @@ footer {
 
     button.cancel_button, button.save_profile_button {
         width: 100%;
+    }
+
+    div.page_heading {
+        text-align: center;
+    }
+
+    div.admin_grid {
+        grid-gap: 10px;
+        grid-template-areas: 
+            'admin_grid_item_1'
+            'admin_grid_item_2'
+            'admin_grid_item_3'
+    }
+    
+    div.loan_grid {
+        grid-gap: 10px;
+        grid-template-areas: 
+            'loan_grid_1'
+            'loan_grid_2'
+    }
+
+    div.user_card, div.loan_card {
+        margin: auto;
     }
 }
 
@@ -330,6 +355,34 @@ footer {
 
 /* Dashboard */
 
+.user_card {
+    width: 500px;
+    margin-right: auto;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 1px 3px ghostwhite;
+    display: grid;
+    padding: 10px;
+    grid-gap: 10px;
+    grid-template-areas:
+        'user_photo user_info user_info'
+        'user_address user_address user_address'
+}
+
+.user_photo img{
+    grid-area: user_photo;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user_info {
+    grid-area: user_info;
+}
+
+.user_address {
+    grid-area: user_address;
+}
+
 .user_buttons {
     margin-left: auto;
     margin-top: auto;
@@ -339,31 +392,6 @@ footer {
 .top_grid_container {
     margin-top: 5px;
     padding: 10px;
-}
-
-.top_grid_container, .bottom_grid_container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
-
-.major_grid {
-    padding: 10px;
-    overflow-x: auto;
-}
-
-.mini_grid
-{
-    display: grid;
-    grid-template-columns: 30% 70%;
-    background: #e6e6e6;
-    border: 1px solid #cccccc;
-    margin-bottom: 5px;
-    padding: 5px;
-}
-
-.mini_grid p
-{
-    margin: 0;
 }
 
 .modal {
@@ -429,4 +457,80 @@ footer {
 
 .reject {
     background: #ff0000;
+}
+
+/* Admin */
+
+.admin_grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: 
+        'admin_grid_item_1 admin_grid_item_2'
+        'admin_grid_item_1 admin_grid_item_3'
+}
+
+.admin_grid_item_1 {
+    grid-area: admin_grid_item_1
+}
+
+.admin_grid_item_2 {
+    grid-area: admin_grid_item_2
+}
+
+.admin_grid_item_3 {
+    grid-area: admin_grid_item_3
+}
+
+/* Loan */
+
+.loan_grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: 
+        'loan_grid_1 loan_grid_2'
+}
+
+.loan_grid_1 {
+    grid-area: loan_grid_1;
+}
+
+.loan_grid_2 {
+    grid-area: loan_grid_2;
+}
+
+.loan_card {
+    width: 500px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 1px 3px ghostwhite;
+    display: grid;
+    padding: 10px;
+    grid-gap: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    grid-template-areas: 
+        'loan_status loan_status'
+        'loan_amount loan_tenor'
+        'loan_interest loan_installments'
+}
+
+.loan_status {
+    grid-area: loan_status;
+}
+
+.loan_amount {
+    grid-area: loan_amount;
+}
+
+.loan_tenor {
+    grid-area: loan_tenor;
+}
+
+.loan_interest {
+    grid-area: loan_interest;
+}
+
+.loan_installments {
+    grid-area: loan_installments;
 }
