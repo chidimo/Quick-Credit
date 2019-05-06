@@ -10,120 +10,89 @@
         </header>
         
         <section id="dashboard">
-            <div  class="container">
 
-                <div class="top_grid_container">
-                    <div class="username">
-                        <h1 id="page_title">Orji Chidi <span style="color:green">Admin</span></h1>
-                    </div>
+            <div class="container">
 
-                    <div class="user_buttons">
-                        <button
-                            class="button_1 shadowed_button"
-                            onclick="document.getElementById('edit_profile_modal').style.display='block'"
-                        >
-                            Edit profile
-                        </button>
-                    </div>
+                <div class="page_heading">
+                    <h1>Admin Dashboard</h1>
                 </div>
-    
-                <div class="bottom_grid_container">
-    
-                    <div class="major_grid">
-                        <h3>User Details</h3>
 
-                        <div class="mini_grid">
-                            <p><b>Email</b></p>
-                            <p>email@address.com</p>
-                        </div>
-
-                        <div class="mini_grid">
-                            <p><b>Name</b></p>
-                            <p>first_name, last_name</p>
-                        </div>
-        
-                        <div class="mini_grid">
-                            <p><b>Phone number</b></p>
-                            <p>+2341234567890</p>
-                        </div>
-        
-                        <div class="mini_grid">
-                            <p><b>Home Address</b></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
-                        </div>
-
-                        <div class="mini_grid">
-                            <p><b>Office Address</b></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
-                        </div>
+                <div class="admin_grid">    
+                    <div class="admin_grid_item_1">
+                        <% include ./partials/user.card.ejs %>
                     </div>
-    
-                    <div class="major_grid">
+        
+                    <div class="admin_grid_item_2 table_wrapper">
                         <h3>Recent Loans</h3>
-                        <div class="table_wrapper">
-                            <table>
+                        <table>
+                            <thead>
                                 <tr>
                                     <th>S/N</th>
                                     <th>Application date</th>
                                     <th>Status</th>
                                     <th>Amount</th>
                                 </tr>
-    
+                            </thead>
+
+                            <tbody>
                                 <tr>
                                     <td>1</td>
                                     <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
                                     <td>Pending</td>
                                     <td>nil</td>
                                 </tr>
-    
+
                                 <tr>
                                     <td>2</td>
                                     <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
                                     <td style="color:green">Approved</td>
                                     <td>50,000</td>
                                 </tr>
-    
+
                                 <tr>
                                     <td>3</td>
                                     <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
                                     <td style="color:red">Rejected</td>
                                     <td>nil</td>
                                 </tr>
-                            </table>
-                        </div>
-                        <p><a href="/loans" class="see_more">See All Loans</a></p>
-
-                        <h3>Recent Users</h3>
-                        <div class="table_wrapper">
-                            <table>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Jackie Chan</td>
-                                    <td style="color:green">Verified</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>2</td>
-                                    <td>Marcus Rashford</td>
-                                    <td style="color:green">Verified</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>3</td>
-                                    <td>Jose Mourinho</td>
-                                    <td style="color:red">Not Verified</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <p><a href="/users" class="see_more">See All Users</a></p>
+                            </tbody>
+                        </table>
+                        <p><a href="loans.html" class="see_more">See All Loans</a></p>
                     </div>
-            </div>
 
+                    <div class="admin_grid_item_3 table_wrapper">
+                        <h3>Recent Users</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Name</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Jackie Chan</td>
+                                        <td style="color:green">Verified</td>
+                                    </tr>
+        
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Marcus Rashford</td>
+                                        <td style="color:green">Verified</td>
+                                    </tr>
+        
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Jose Mourinho</td>
+                                        <td style="color:red">Not Verified</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <p><a href="users.html" class="see_more">See All Users</a></p>
+                    </div>
+                </div>
             </div>
         </section>
 
