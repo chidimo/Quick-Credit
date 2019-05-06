@@ -1,7 +1,7 @@
-# QuickCredit
+# Quick-Credit
 
-[![Build Status](https://travis-ci.com/chidimo/QuickCredit.svg?branch=develop)](https://travis-ci.com/chidimo/QuickCredit)
-[![Coverage Status](https://coveralls.io/repos/github/chidimo/QuickCredit/badge.svg?branch=develop)](https://coveralls.io/github/chidimo/QuickCredit?branch=develop)
+[![Build Status](https://travis-ci.com/chidimo/Quick-Credit.svg?branch=develop)](https://travis-ci.com/chidimo/Quick-Credit)
+[![Coverage Status](https://coveralls.io/repos/github/chidimo/Quick-Credit/badge.svg?branch=develop)](https://coveralls.io/github/chidimo/Quick-Credit?branch=develop)
 
 ## Description
 
@@ -21,7 +21,7 @@ income earners.
 ## Installation
 
 1. Install yarn in your system. Check out the yarn installation [docs](https://yarnpkg.com/lang/en/docs/install)
-1. Clone the repo using the github link <https://github.com/chidimo/QuickCredit.git>
+1. Clone the repo using the github link <https://github.com/chidimo/Quick-Credit.git>
 1. Open a `cmd` shell and `cd` into the root of the project.
 1. Install project dependencies with `yarn install`.
 1. Optionally install the development dependencies with `yarn install --dev`
@@ -29,7 +29,7 @@ income earners.
 
 ## Testing
 
-1. Clone the repo using the github link <https://github.com/chidimo/QuickCredit.git>
+1. Clone the repo using the github link <https://github.com/chidimo/Quick-Credit.git>
 1. Open a `cmd` shell and `cd` into the root of the project.
 1. Run command `yarn test`
 1. Alternative you can start the server with `yarn devstart` and use postman to make API calls to the endpoints defined above. You man use this [postman collection](https://www.getpostman.com/collections/ef92586429ff3a723ee2)
