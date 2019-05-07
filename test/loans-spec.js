@@ -1,7 +1,8 @@
-require('should');
-const supertest = require('supertest');
-const assert = require('assert');
-const app = require('../app');
+// should is not used directly in the file but is added as a mocha requirement
+
+import supertest from 'supertest';
+import assert from 'assert';
+import app from '../app';
 
 const server = supertest.agent(app);
 

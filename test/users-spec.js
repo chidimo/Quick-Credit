@@ -1,8 +1,21 @@
-require('should');
-const supertest = require('supertest');
-const app = require('../app');
+// should is not used directly in the file but is added as a mocha requirement
+
+import supertest from 'supertest';
+import app from '../app';
 
 const server = supertest.agent(app);
+
+describe('Users endpoint: Dashboard', () => {
+    it('should return 200', done => {
+        server
+            .get('/users/dashboard')
+            .expect(200)
+            .end((err, res) => {
+                res.status.should.be.equal(200);
+                done();
+            });
+    });
+});
 
 describe('Users endpoint: Verify user', () => {
     it('should verify user', done => {
@@ -13,6 +26,17 @@ describe('Users endpoint: Verify user', () => {
                 res.body.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Object);
                 res.body.data.should.have.property('status', 'verified');
+                done();
+            });
+    });
+
+    it('should return error if user is not found', done => {
+        server
+            .patch('/users/bbc@bbc.go/verify')
+            .expect(200)
+            .end((err, res) => {
+                res.body.status.should.equal(404);
+                res.body.error.should.be.equal('User not found');
                 done();
             });
     });

@@ -1,10 +1,10 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import express from 'express';
+import createError from 'http-errors';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
 
-const indexRouter = require('./routes/index');
+import indexRouter from './routes/index';
 
 const app = express();
 
@@ -35,4 +35,4 @@ app.use((err, req, res, next) => {
     res.render('error');
 });
 
-module.exports = app;
+export default app;
