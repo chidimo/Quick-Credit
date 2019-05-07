@@ -131,4 +131,4 @@ const loans = [
     }
 ];
 
-module.exports = loans;
+export default loans;

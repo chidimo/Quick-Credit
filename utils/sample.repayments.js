@@ -68,4 +68,4 @@ const repayments = [
     }
 ];
 
-module.exports = repayments;
+export default repayments;

@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-const app = require('../app');
-const debug = require('debug')('quick-credit:server');
-const http = require('http');
+// const debug = require('debug')('quick-credit:server');
+
+import debug from 'debug';
+import app from '../app';
+import http from 'http';
 
 /**
  * Normalize a port into a number, string, or false.

@@ -12,9 +12,11 @@
         "loan"
     ],
     "scripts": {
-        "start": "node ./bin/www",
-        "devstart": "nodemon ./bin/www",
-        "test": "nyc mocha test/*",
+        "start": "node --require @babel/register ./bin/www ",
+        "devstart": "nodemon --exec babel-node ./bin/www",
+        "build": "babel . --out-dir dist",
+        "test": "nyc mocha --require @babel/register --require should",
+        "lint": "./node_modules/.bin/eslint ./",
         "test-coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec test/*",
         "test-coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
     },
@@ -23,6 +25,11 @@
     },
     "homepage": "https://github.com/chidimo/Quick-Credit#readme",
     "dependencies": {
+        "@babel/cli": "^7.4.4",
+        "@babel/core": "^7.4.4",
+        "@babel/node": "^7.2.2",
+        "@babel/preset-env": "^7.4.4",
+        "@babel/register": "^7.4.4",
         "cookie-parser": "~1.4.3",
         "debug": "~2.6.9",
         "ejs": "^2.6.1",

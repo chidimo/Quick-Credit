@@ -1,22 +1,22 @@
-require('should');
-const supertest = require('supertest');
-const app = require('../app');
+// should is not used directly in the file but is added as a mocha requirement
+
+import supertest from 'supertest';
+import app from '../app';
 
 const server = supertest.agent(app);
 
-describe('Index: Home page', () => {
-    it('should return home page', done => {
+describe('Auth endpoint: SignUp', () => {
+
+    it('should return the signup form page', done => {
         server
-            .get('/')
+            .get('/auth/signup')
             .expect(200)
             .end((err, res) => {
-                res.status.should.equal(200);
+                res.status.should.be.equal(200);
                 done();
             });
     });
-});
 
-describe('Auth endpoint: SignUp', () => {
     it('should register and return user', done => {
         server
             .post('/auth/signup')
@@ -47,6 +47,17 @@ describe('Auth endpoint: SignUp', () => {
 });
 
 describe('Auth endpoint: SignIn', () => {
+
+    it('should return the signin form page', done => {
+        server
+            .get('/auth/signin')
+            .expect(200)
+            .end((err, res) => {
+                res.status.should.be.equal(200);
+                done();
+            });
+    });
+
     it('should return registered user if found', done => {
         server
             .post('/auth/signin')
