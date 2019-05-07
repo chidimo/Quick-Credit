@@ -6,5 +6,5 @@ matrix:
 cache:
     directories: "node_modules"
 
-# Generate and send coverage data to coveralls
-after_script: yarn test-coveralls
+# Generate and send coverage report to coveralls
+after_success: yarn coverage
