@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="Author" content="Orji Chidi Matthew">
+        <meta name="description" content="Easily accessible short term loans">
+        <meta name="keywords", content="loan, cash, short term loan">
+        <link rel="stylesheet" href="./css/style.css">
+        <title>Quick Credit | Dashboard</title>
+    </head>
+
+    <body>
+        <header id="header">
+            <div class="nav_div">
+                <div id="branding">
+                    <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                </div>
+
+                <nav class="menu">
+                    <ul class="base_ul">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        
+                        <li>
+                            <div class="micro_image_wrapper">
+                                <img src="https://via.placeholder.com/100" alt="">
+                            </div>
+
+                            <ul class="sub_menu">
+                                <p class="username">email@address.com</p>
+                                <hr>
+                                <li><a href="loan.new.html">Apply for loan</a></li>
+                                <hr>
+                                <li><a href="profile.edit.html">Edit profile</a></li>
+                                <hr>
+                                <li><a href="authentication.html">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <section class="loan_application">
+            <div class="container form_wrapper">
+                <form action="" method="POST">
+                    <h1>Apply for loan</h1>
+                    <hr>
+                    <label for="amount"><b>Amount</b></label>
+                    <input type="number" placeholder="Enter loan amount" name="amount" required>
+    
+                    <label for="tenor"><b>Tenor</b></label>
+                    <input type="number" min="1" max="12" placeholder="Tenor" name="tenor" required>
+    
+                    <button type="submit" class="shadowed_button submit_button">Apply</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>Quick Credit &copy; 2019</p>
+        </footer>
+        
+        <script src="./js/qcredit.js"></script>
+
+    </body>
+</html>
