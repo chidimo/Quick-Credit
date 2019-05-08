@@ -13,125 +13,100 @@
 
     <body>
         <header id="header">
-            <div class="container">
+            <div class="nav_div">
                 <div id="branding">
                     <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
                 </div>
 
-                <nav>
-                    <ul>
+                <nav class="menu">
+                    <ul class="base_ul">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="authentication.html"><button id="sign_in" class="button_1">Log out</button></a></li>
+                        
+                        <li>
+                            <div class="micro_image_wrapper">
+                                <img src="https://via.placeholder.com/100" alt="">
+                            </div>
+
+                            <ul class="sub_menu">
+                                <p class="username">email@address.com</p>
+                                <hr>
+                                <li><a href="loan.new.html">Apply for loan</a></li>
+                                <hr>
+                                <li><a href="profile.edit.html">Edit profile</a></li>
+                                <hr>
+                                <li><a href="authentication.html">Logout</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
-
             </div>
         </header>
         
         <section id="main_loan">
             <div class="container">
 
-                <div class="top_grid_container">
-                    <!--show the checkmark only if the load has been repaid-->
-                    <div class="username">
-                        <h1 id="page_title">Loan | <code>123456789</code> <span style="color:green">&#x2714</span></h1>
+                <!--show the checkmark only if the load has been repaid-->
+                <h2 class="page_heading">Loan | <code>123456789</code> <span style="color:green">&#x2714</span></h2>
+
+                <div class="admin_actions_buttons">
+                    <!--Approve and reject buttons will be visible only if the loan status is pending-->
+                    <button
+                        id="approve_loan_application"
+                        class="button_1 shadowed_button approve"
+                    >
+                        Approve
+                    </button>
+
+                    <button
+                        id="reject_loan_application"
+                        class="button_1 shadowed_button reject"
+                    >
+                        Reject
+                    </button>
+
+                    <!--This button will only be visible for open loans-->
+                    <button
+                        id="post_payment_to_loan"
+                        class="button_1 shadowed_button"
+                        onclick="document.getElementById('loan_payment_modal').style.display='block'"
+                    >
+                        Post payment
+                    </button>
+                </div>
+
+                <div class="loan_card card">
+                    <div class="loan_left_grid">
+                        <p class="amount">500,000</p>
+                        <p class="status">Approved</p>
                     </div>
 
-                    <div class="user_buttons">
+                    <hr class="card_divider">
 
-                        <!--Approve and reject buttons will be visible only if the loan status is pending-->
-                        <button
-                            id="approve_loan_application"
-                            class="button_1 shadowed_button approve"
-                        >
-                            Approve
-                        </button>
-
-                        <button
-                            id="reject_loan_application"
-                            class="button_1 shadowed_button reject"
-                        >
-                            Reject
-                        </button>
-
-                        <!--This button will only be visible for open loans-->
-                        <button
-                            id="post_payment_to_loan"
-                            class="button_1 shadowed_button"
-                            onclick="document.getElementById('loan_payment_modal').style.display='block'"
-                        >
-                            Post payment
-                        </button>
+                    <div class="loan_right_grid">
+                        <p class="interest">Interest: 25,000</p>
+                        <p class="tenor">Tenor: 12 months</p>
+                        <p class="installments">Installments: 43,750</p>
+                        <p class="balance">Balance: 481,250</p>
                     </div>
                 </div>
 
-                <div class="bottom_grid_container">
-
-                        <div class="major_grid">
-                            <h3>Loan Details</h3>
-    
-                            <div class="mini_grid">
-                                <p><b>Status</b></p>
-                                <p>Pending</p>
-                            </div>
-    
-                            <div class="mini_grid">
-                                <p><b>Amount</b></p>
-                                <p>50,000</p>
-                            </div>
-    
-                            <div class="mini_grid">
-                                <p><b>Interest</b></p>
-                                <p>2,500</p>
-                            </div>
-            
-                            <div class="mini_grid">
-                                <p><b>Tenor</b></p>
-                                <p>12 months</p>
-                            </div>
-            
-                            <div class="mini_grid">
-                                <p><b>Installments</b></p>
-                                <p>4,375</p>
-                            </div>
-                        </div>
-
-                    <div class="major_grid">
-                        <h3>Requesting User Details</h3>
-
-                        <div class="mini_grid">
-                            <p><b>Status</b></p>
-                            <p>Verified <span style="color:green">&#x2714</span></p>
-                        </div>
-
-                        <div class="mini_grid">
-                            <p><b>Email</b></p>
-                            <p>email@address.com</p>
-                        </div>
-
-                        <div class="mini_grid">
-                            <p><b>Name</b></p>
-                            <p>first_name, last_name</p>
-                        </div>
-        
-                        <div class="mini_grid">
-                            <p><b>Phone number</b></p>
-                            <p>+2341234567890</p>
-                        </div>
-        
-                        <div class="mini_grid">
-                            <p><b>Home Address</b></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
-                        </div>
-
-                        <div class="mini_grid">
-                            <p><b>Office Address</b></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
-                        </div>
-
+                <div class="user_card card">
+                    <div class="user_photo">
+                        <img src="https://via.placeholder.com/150" alt="">
                     </div>
+                    <hr class="card_divider">
 
+                    <div class="user_info">
+                        <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
+                        <p><a href="mailto:email@address.com">emailaddress@address.com</a></p>
+                        <p><a href="tel:+2341234567890">+2341234567890</a></p>
+                    </div>
+                </div>
+
+                <div class="user_address card">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
                 </div>
             </div>
         </section>

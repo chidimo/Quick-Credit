@@ -13,6 +13,7 @@ body {
     width: 80%;
     margin: auto;
     overflow: hidden;
+    padding-top: 10px;
 }
 
 input {
@@ -57,8 +58,41 @@ button {
     border-radius: 3px;
 }
 
+hr {
+    color: #547CFF;
+    opacity: 0.3;
+}
+
 .shadowed_button:hover {
-    opacity: 0.8;
+    opacity: 0.9;
+}
+
+/* forms */
+.form_wrapper {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 30px 30px 30px;
+    background: #AAD6FF;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.form_wrapper input[type='email'],
+.form_wrapper input[type='number'],
+.form_wrapper input[type='text'],
+.form_wrapper input[type='tel'],
+.form_wrapper input[type='password'],
+.form_wrapper textarea
+{
+    display: inline-block;
+    width: 100%;
+}
+
+.form_wrapper h1,
+p.form_message
+{
+    text-align: center;
 }
 
 label {
@@ -67,6 +101,7 @@ label {
     display: block;
 }
 
+/* tables */
 .table_wrapper {
     overflow-x: auto;
 }
@@ -117,15 +152,6 @@ header a {
     font-size: 16px;
 }
 
-header li {
-    display: inline;
-    padding: 0 20px 0 20px;
-}
-
-header #branding {
-    float: left;
-}
-
 header #branding h1 {
     margin: 0;
 }
@@ -134,19 +160,73 @@ header #brand_name:hover {
     color: #ffffff;
 }
 
-header nav {
-    float: right;
+header a.active {
+    color: #132B40;
+    font-weight: bold;
+}
+
+span.action_span {
+    cursor: pointer;
+}
+
+ul.base_ul {
+    display: flex;
+}
+
+nav.menu {
     margin-top: 10px;
 }
 
-header a:hover {
-    color: #132B40;
-    font-weight: bold;
+.micro_image_wrapper img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: block;
 }
 
-header .active a {
-    color: #132B40;
-    font-weight: bold;
+.nav_div {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.menu > ul > li {
+	display:inline-block;
+    position:relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    list-style: none;
+}
+
+.sub_menu {
+	width: 350%;
+    position: absolute;
+	top: 100%;
+    left: -150px;
+    padding: 10px;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity linear 0.15s;
+	box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+.sub_menu p {
+    color: #3a81bf;
+    font-size: 12px;
+    text-align: center;
+}
+
+.sub_menu a {
+    color: #547CFF;
+}
+
+.menu li:hover .sub_menu {
+	z-index:1;
+	opacity:1;
 }
 
 /* Showcase */
@@ -211,28 +291,34 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .container {
+
+    .nav_div {
+        display: block;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    nav > ul {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        justify-content: space-evenly;
+    }
+
+    .container, .nav_div {
         width: 95%;
     }
     button {
         margin-top: 5px;
     }
     header #branding,
-    header nav,
     #newsletter h1,
     #newsletter form
     {
         float: none;
         text-align: center;
         width: 100%;
-    }
-
-    header nav {
-        margin-bottom: 10px;
-    }
-
-    header li {
-        padding: 0 5px 0 5px;
     }
 
     #newsletter input[type='email'] {
@@ -245,18 +331,6 @@ footer {
         width: 100%;
     }
 
-    div.bottom_grid_container,
-    div.top_grid_container,
-    div.mini_grid
-    {
-        display: grid;
-        grid-template-columns: auto;
-    }
-
-    div.user_buttons {
-        margin: 0
-    }
-
     form.modal_content {
         width: 80%;
     }
@@ -264,14 +338,43 @@ footer {
     button.cancel_button, button.save_profile_button {
         width: 100%;
     }
+
+    div.user_card,
+    div.loan_card
+    {
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 450px) {
+
+    /* loan */
+    div.loan_card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    div.loan_right_grid {
+        margin: 0;
+        text-align: center;
+    }
+
+    .user_photo,
+    hr.card_divider
+    {
+        display: none;
+    }
 }
 
 /* About */
-.authentication_section {
+.authentication_section,
+.profile_edit,
+.loan_application {
     padding: 30px 20px;
 }
 
-/* registration control */
+/* authentication */
+
 #reg_form_toggle {
     margin-top: 30px;
     display: grid;
@@ -281,7 +384,7 @@ footer {
     border-top-left-radius: 5px;
 }
 
-.registration_div {
+.authentication_div {
     background: #AAD6FF;
     text-align: center;
     cursor: pointer;
@@ -304,66 +407,51 @@ footer {
     display: none;
 }
 
-/* Sign up/sign in */
-#main_authentication {
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 30px 30px 30px;
-    background: #AAD6FF;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-
-#main_authentication input[type='email'], #main_authentication input[type='password'] {
-    display: inline-block;
+.submit_button {
     width: 100%;
-}
-
-.registration_button {
-    width: 100%;
-}
-
-#main_authentication h1, #main_authentication p#fill_form {
-    text-align: center;
 }
 
 /* Dashboard */
 
-.user_buttons {
+.card {
+    padding: 10px;
+    max-width: 500px;
+    margin-bottom: 15px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 1px 3px ghostwhite;
+}
+
+.user_card {
+    margin-right: auto;
+    display: grid;
+    grid-row-gap: 50px;
+    grid-template-columns: 30% 1% 68%;
+}
+
+.user_photo {
+    margin: auto;
+}
+
+.user_photo img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+}
+
+.user_info {
+    margin: auto auto auto 5px;    
+}
+
+.user_address {
+    margin-right: auto;
+}
+
+.admin_actions_buttons {
     margin-left: auto;
     margin-top: auto;
-    margin-bottom: auto;
-}
-
-.top_grid_container {
-    margin-top: 5px;
-    padding: 10px;
-}
-
-.top_grid_container, .bottom_grid_container {
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
-
-.major_grid {
-    padding: 10px;
-    overflow-x: auto;
-}
-
-.mini_grid
-{
-    display: grid;
-    grid-template-columns: 30% 70%;
-    background: #e6e6e6;
-    border: 1px solid #cccccc;
-    margin-bottom: 5px;
-    padding: 5px;
-}
-
-.mini_grid p
-{
-    margin: 0;
+    margin-bottom: 10px;
 }
 
 .modal {
@@ -429,4 +517,25 @@ footer {
 
 .reject {
     background: #ff0000;
+}
+
+.loan_card {
+    display: grid;
+    grid-row-gap: 50px;
+    margin-right: auto;
+    font-weight: bold;
+    grid-template-columns: 30% 1% 68%;
+}
+
+.loan_left_grid {
+    font-size: 28px;
+    text-align: center;
+}
+
+.loan_left_grid p.status {
+    color: green;
+}
+
+.loan_right_grid {
+    margin: auto auto auto 5px;    
 }
