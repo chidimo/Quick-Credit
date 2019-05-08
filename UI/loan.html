@@ -13,16 +13,31 @@
 
     <body>
         <header id="header">
-            <div class="container">
+            <div class="nav_div">
                 <div id="branding">
                     <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
                 </div>
 
-                <nav>
-                    <ul>
+                <nav class="menu">
+                    <ul class="base_ul">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="authentication.html"><button id="sign_in" class="button_1">Log out</button></a></li>
+                        
+                        <li>
+                            <div class="user_profile_img_micro_wrapper">
+                                <img class="user_profile_img_micro" src="https://via.placeholder.com/100" alt="">
+                            </div>
+
+                            <ul class="sub_menu">
+                                <p class="username">email@address.com</p>
+                                <hr>
+                                <li><a href="loan.new.html">Apply for loan</a></li>
+                                <hr>
+                                <li><a href="profile.edit.html">Edit profile</a></li>
+                                <hr>
+                                <li><a href="authentication.html">Logout</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
 
