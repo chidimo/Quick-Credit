@@ -50,58 +50,44 @@
                 <h2 class="page_heading">Loan | <code>123456789</code> <span style="color:green">&#x2714</span></h2>
 
                 <div class="admin_actions_buttons">
-                        <!--Approve and reject buttons will be visible only if the loan status is pending-->
-                        <button
-                            id="approve_loan_application"
-                            class="button_1 shadowed_button approve"
-                        >
-                            Approve
-                        </button>
+                    <!--Approve and reject buttons will be visible only if the loan status is pending-->
+                    <button
+                        id="approve_loan_application"
+                        class="button_1 shadowed_button approve"
+                    >
+                        Approve
+                    </button>
 
-                        <button
-                            id="reject_loan_application"
-                            class="button_1 shadowed_button reject"
-                        >
-                            Reject
-                        </button>
+                    <button
+                        id="reject_loan_application"
+                        class="button_1 shadowed_button reject"
+                    >
+                        Reject
+                    </button>
 
-                        <!--This button will only be visible for open loans-->
-                        <button
-                            id="post_payment_to_loan"
-                            class="button_1 shadowed_button"
-                            onclick="document.getElementById('loan_payment_modal').style.display='block'"
-                        >
-                            Post payment
-                        </button>
-                    </div>
+                    <!--This button will only be visible for open loans-->
+                    <button
+                        id="post_payment_to_loan"
+                        class="button_1 shadowed_button"
+                        onclick="document.getElementById('loan_payment_modal').style.display='block'"
+                    >
+                        Post payment
+                    </button>
                 </div>
 
-                <div class="major_grid">
-                    <h3>Loan Details</h3>
-
-                    <div class="mini_grid">
-                        <p><b>Status</b></p>
-                        <p>Pending</p>
+                <div class="loan_card card">
+                    <div class="loan_left_grid">
+                        <p class="amount">500,000</p>
+                        <p class="status">Approved</p>
                     </div>
 
-                    <div class="mini_grid">
-                        <p><b>Amount</b></p>
-                        <p>50,000</p>
-                    </div>
+                    <hr class="card_divider">
 
-                    <div class="mini_grid">
-                        <p><b>Interest</b></p>
-                        <p>2,500</p>
-                    </div>
-    
-                    <div class="mini_grid">
-                        <p><b>Tenor</b></p>
-                        <p>12 months</p>
-                    </div>
-    
-                    <div class="mini_grid">
-                        <p><b>Installments</b></p>
-                        <p>4,375</p>
+                    <div class="loan_right_grid">
+                        <p class="interest">Interest: 25,000</p>
+                        <p class="tenor">Tenor: 12 months</p>
+                        <p class="installments">Installments: 43,750</p>
+                        <p class="balance">Balance: 481,250</p>
                     </div>
                 </div>
 

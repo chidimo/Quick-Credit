@@ -46,27 +46,25 @@
         <section id="main_loan">
             <div class="container">
                 <!--show the checkmark only if the load has been repaid-->
-                <h2 id="page_title">
+                <h2 id="page_heading">
                     User | <code>email@address.com</code> <span style="color:green">&#x2714</span>
                 </h1>
 
-                    <div class="user_buttons">
+                <div class="admin_actions_buttons">
+                    <!--Each of these buttons will be available based on the user's verification status-->
+                    <button
+                        id="verify_user"
+                        class="button_1 shadowed_button approve"
+                    >
+                        Verify
+                    </button>
 
-                        <!--Each of these buttons will be available based on the user's verification status-->
-                        <button
-                            id="verify_user"
-                            class="button_1 shadowed_button approve"
-                        >
-                            Verify
-                        </button>
-
-                        <button
-                            id="un_verify_user"
-                            class="button_1 shadowed_button reject"
-                        >
-                            Revoke verification
-                        </button>
-                    </div>
+                    <button
+                        id="un_verify_user"
+                        class="button_1 shadowed_button reject"
+                    >
+                        Revoke verification
+                    </button>
                 </div>
 
                 <div class="user_card card">
@@ -87,41 +85,37 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
                 </div>
             
-                    <div class="major_grid">
-                        <h3>email@address.com's Recent Loans</h3>
+                <h3>email@address.com's Recent Loans</h3>
+                <div class="table_wrapper">
+                    <table>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Application date</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                        </tr>
 
-                        <div class="table_wrapper">
-                            <table>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Application date</th>
-                                    <th>Status</th>
-                                    <th>Amount</th>
-                                </tr>
-    
-                                <tr>
-                                    <td>1</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td>Pending</td>
-                                    <td> - </td>
-                                </tr>
-    
-                                <tr>
-                                    <td>2</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td style="color:green">Approved</td>
-                                    <td>50,000</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>3</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td style="color:red">Rejected</td>
-                                    <td> - </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                        <tr>
+                            <td>1</td>
+                            <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                            <td>Pending</td>
+                            <td> - </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                            <td style="color:green">Approved</td>
+                            <td>50,000</td>
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                            <td style="color:red">Rejected</td>
+                            <td> - </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </section>

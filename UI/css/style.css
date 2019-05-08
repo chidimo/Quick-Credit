@@ -331,36 +331,12 @@ footer {
         width: 100%;
     }
 
-    div.top_grid_container {
-        display: grid;
-        grid-template-columns: auto;
-    }
-
-    div.admin_actions_buttons {
-        margin: 0
-    }
-
     form.modal_content {
         width: 80%;
     }
 
     button.cancel_button, button.save_profile_button {
         width: 100%;
-    }
-
-    div.admin_grid {
-        grid-gap: 10px;
-        grid-template-areas: 
-            'admin_grid_item_1'
-            'admin_grid_item_2'
-            'admin_grid_item_3'
-    }
-    
-    div.loan_grid {
-        grid-gap: 10px;
-        grid-template-areas: 
-            'loan_grid_1'
-            'loan_grid_2'
     }
 
     div.user_card,
@@ -371,6 +347,17 @@ footer {
 }
 
 @media (max-width: 450px) {
+
+    /* loan */
+    div.loan_card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    div.loan_right_grid {
+        margin: 0;
+        text-align: center;
+    }
 
     .user_photo,
     hr.card_divider
@@ -429,6 +416,7 @@ footer {
 .card {
     padding: 10px;
     max-width: 500px;
+    margin-bottom: 15px;
     background-color: #f1f1f1;
     border-radius: 10px;
     box-shadow: 1px 3px ghostwhite;
@@ -454,11 +442,9 @@ footer {
 
 .user_info {
     margin: auto auto auto 5px;    
-    /* overflow: scroll; */
 }
 
 .user_address {
-    margin-top: 15px;
     margin-right: auto;
 }
 
@@ -466,11 +452,6 @@ footer {
     margin-left: auto;
     margin-top: auto;
     margin-bottom: 10px;
-}
-
-.top_grid_container {
-    margin-top: 5px;
-    padding: 10px;
 }
 
 .modal {
@@ -536,4 +517,25 @@ footer {
 
 .reject {
     background: #ff0000;
+}
+
+.loan_card {
+    display: grid;
+    grid-row-gap: 50px;
+    margin-right: auto;
+    font-weight: bold;
+    grid-template-columns: 30% 1% 68%;
+}
+
+.loan_left_grid {
+    font-size: 28px;
+    text-align: center;
+}
+
+.loan_left_grid p.status {
+    color: green;
+}
+
+.loan_right_grid {
+    margin: auto auto auto 5px;    
 }
