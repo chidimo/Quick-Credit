@@ -336,7 +336,7 @@ footer {
         grid-template-columns: auto;
     }
 
-    div.user_buttons {
+    div.admin_actions_buttons {
         margin: 0
     }
 
@@ -462,10 +462,10 @@ footer {
     margin-right: auto;
 }
 
-.user_buttons {
+.admin_actions_buttons {
     margin-left: auto;
     margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 10px;
 }
 
 .top_grid_container {
