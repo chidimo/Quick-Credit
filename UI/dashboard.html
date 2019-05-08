@@ -24,8 +24,8 @@
                         <li><a href="about.html">About</a></li>
                         
                         <li>
-                            <div class="user_profile_img_micro_wrapper">
-                                <img class="user_profile_img_micro" src="https://via.placeholder.com/100" alt="">
+                            <div class="micro_image_wrapper">
+                                <img src="https://via.placeholder.com/100" alt="">
                             </div>
 
                             <ul class="sub_menu">
@@ -40,170 +40,76 @@
                         </li>
                     </ul>
                 </nav>
-
             </div>
         </header>
         
         <section id="dashboard">
             <div class="container">
-
-                <div class="top_grid_container">
-                    <div class="username">
-                        <h1 id="page_title">Orji Chidi <span style="color:green">&#x2714</span></h1>
-                    </div>
-
-                    <div class="user_buttons">
-
-                        <button
-                            class="button_1 shadowed_button"
-                            onclick="document.getElementById('loan_application_modal').style.display='block'"
-                        >
-                            Apply for loan
-                        </button>
-
-                        <button
-                            class="button_1 shadowed_button"
-                            onclick="document.getElementById('edit_profile_modal').style.display='block'"
-                        >
-                            Edit profile
-                        </button>
-                    </div>
-                </div>
-    
-                <div class="bottom_grid_container">
-
-                    <div class="major_grid">
-                        <h3>User Details</h3>
-
-                        <div class="mini_grid">
-                            <p><b>Email</b></p>
-                            <p>email@address.com</p>
-                        </div>
-
-                        <div class="mini_grid">
-                            <p><b>Name</b></p>
-                            <p>first_name, last_name</p>
-                        </div>
-        
-                        <div class="mini_grid">
-                            <p><b>Phone number</b></p>
-                            <p>+2341234567890</p>
-                        </div>
-        
-                        <div class="mini_grid">
-                            <p><b>Home Address</b></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
-                        </div>
-
-                        <div class="mini_grid">
-                            <p><b>Office Address</b></p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
-                        </div>
-                    </div>
-    
-                    <div class="major_grid">
-                        <h3>Summary of recent loans</h3>
-
-                        <div class="table_wrapper">
-                            <table>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Application date</th>
-                                    <th>Status</th>
-                                    <th>Amount</th>
-                                </tr>
-    
-                                <tr>
-                                    <td>1</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td>Pending</td>
-                                    <td> - </td>
-                                </tr>
-    
-                                <tr>
-                                    <td>2</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td style="color:green">Approved</td>
-                                    <td>50,000</td>
-                                </tr>
-    
-                                <tr>
-                                    <td>3</td>
-                                    <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                    <td style="color:red">Rejected</td>
-                                    <td> - </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
+                <div class="page_heading">
+                    <h1>Orji Chidi </h1>
                 </div>
 
+                <div class="user_card card">
+                    <div class="user_photo">
+                        <img src="https://via.placeholder.com/150" alt="">
+                    </div>
+                    <hr class="card_divider">
+
+                    <div class="user_info">
+                        <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
+                        <p><a href="mailto:email@address.com">emailaddress@address.com</a></p>
+                        <p><a href="tel:+2341234567890">+2341234567890</a></p>
+                    </div>
+                </div>
+
+                <div class="user_address card">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
+                </div>
+    
+                <h3>Loans</h3>
+                <div class="table_wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Application date</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                <td>Pending</td>
+                                <td> - </td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                <td style="color:green">Approved</td>
+                                <td>50,000</td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                <td style="color:red">Rejected</td>
+                                <td> - </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
-
-        <div id="loan_application_modal" class="modal">
-            <span class="close" onclick="document.getElementById('loan_application_modal').style.display='none'">&times;</span>
-            <form action="" class="modal_content">
-                <div class="container">
-                    <h3>Apply for loan</h3>
-                    <hr>
-                    <label for="amount"><b>Amount</b></label>
-                    <input class="modal_input" type="text" placeholder="Enter loan amount" name="amount" required>
-
-                    <label for="tenor"><b>Tenor</b></label>
-                    <input class="modal_input" type="number" min="1" max="12" placeholder="Tenor" name="tenor" required>
-
-                    <div class="clearfix">
-                        <button
-                            onclick="document.getElementById('loan_application_modal').style.display='none'"
-                            class="button_1 shadowed_button cancel_button">
-                            Cancel
-                        </button>
-                        <button type="submit" class="button_1 shadowed_button save_profile_button">Apply</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div id="edit_profile_modal" class="modal">
-            <span class="close" onclick="document.getElementById('edit_profile_modal').style.display='none'">&times;</span>
-            <form action="" class="modal_content">
-                <div class="container">
-                    <h3>Edit your profile</h3>
-                    <hr>
-                    <label for="first_name"><b>First Name</b></label>
-                    <input class="modal_input" type="text" placeholder="First Name" name="first_name" required>
-
-                    <label for="last_name"><b>Last Name</b></label>
-                    <input class="modal_input" type="text" placeholder="Last Name" name="last_name" required>
-
-                    <label for="phone_number"><b>Phone Number</b></label>
-                    <input class="modal_input" type="tel" placeholder="Phone Number" name="phone_number" required>
-
-                    <label for="home_address"><b>Home Address</b></label>
-                    <textarea class="modal_input" type="text" placeholder="Home Address" name="home_address"></textarea>
-
-                    <label for="office_address"><b>Office Address</b></label>
-                    <textarea class="modal_input" type="text" placeholder="Home Address" name="office_address"></textarea>
-
-                    <div class="clearfix">
-                        <button
-                            onclick="document.getElementById('edit_profile_modal').style.display='none'"
-                            class="button_1 shadowed_button cancel_button">
-                            Cancel
-                        </button>
-                        <button type="submit" class="button_1 shadowed_button save_profile_button">Save Profile</button>
-                    </div>
-                </div>
-
-            </form>
-        </div>
 
         <footer>
             <p>Quick Credit &copy; 2019</p>
         </footer>
         
-        <script src="./js/dashboard.js"></script>
+        <script src="./js/qcredit.js"></script>
     </body>
 </html>
