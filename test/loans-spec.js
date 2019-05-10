@@ -6,7 +6,7 @@ import app from '../app';
 
 const server = supertest.agent(app);
 
-describe('Loans endpoint: Get all loans', () => {
+describe('/loans: Get all loans', () => {
     it('should be return a list of all loans', done => {
         server
             .get('/loans')
@@ -22,7 +22,7 @@ describe('Loans endpoint: Get all loans', () => {
     });
 });
 
-describe('Loans endpoint: Get loan', () => {
+describe('/loans: Get loan', () => {
     it('should return correct data for existent loan', done => {
         server
             .get('/loans/123456789')
@@ -47,7 +47,7 @@ describe('Loans endpoint: Get loan', () => {
     });
 });
 
-describe('Loans endpoint: Get all loans by their repayment status', () => {
+describe('/loans: Get all loans by their repayment status', () => {
     it('should return all loans which have NOT been repaid', done => {
         server
             .get('/loans')
@@ -81,7 +81,7 @@ describe('Loans endpoint: Get all loans by their repayment status', () => {
     });
 });
 
-describe('Loans endpoint: Create a loan', () => {
+describe('/loans: Create a loan', () => {
     it('should create and return a new loan', done => {
         server
             .post('/loans')
@@ -96,9 +96,27 @@ describe('Loans endpoint: Create a loan', () => {
                 done();
             });
     });
+
+    it('should return errors for large tenor and large amount', done => {
+        server
+            .post('/loans')
+            .send({ email: 'user@email.com', amount: 5000000, tenor: 13 })
+            .expect(200)
+            .end((err, res) => {
+                res.status.should.be.equal(422);
+                res.body.errors.should.be.an.instanceOf(Array);
+                res.body.errors[0].msg.should.equal(
+                    'Tenor cannot be greater than 12'
+                );
+                res.body.errors[1].msg.should.equal(
+                    'Amount cannot be greater than 1,000,000'
+                );
+                done();
+            });
+    });
 });
 
-describe('Loans endpoint: Approve or reject a loan application', () => {
+describe('/loans: Approve or reject a loan application', () => {
     it('should set status to approved', done => {
         server
             .patch('/loans/123456789/approve')
@@ -122,7 +140,7 @@ describe('Loans endpoint: Approve or reject a loan application', () => {
     });
 });
 
-describe('Loans endpoint: View loan repayment history', () => {
+describe('/loans: View loan repayment history', () => {
     it('should return array of loan repayments given a loan Id', done => {
         server
             .get('/loans/123456789/repayments')
@@ -138,7 +156,7 @@ describe('Loans endpoint: View loan repayment history', () => {
     });
 });
 
-describe('Loans endpoint: Create loan repayment', () => {
+describe('/loans: Create loan repayment', () => {
     it('should create and return a repayment', done => {
         server
             .post('/loans/123456789/repayment')
@@ -149,6 +167,20 @@ describe('Loans endpoint: Create loan repayment', () => {
                 res.body.data.should.be.an.instanceOf(Object);
                 res.body.data.should.have.property('loanId', '123456789');
                 res.body.data.should.have.property('amount', 4375);
+                done();
+            });
+    });
+
+    it('should return error if amount is not a number', done => {
+        server
+            .post('/loans/123456789/repayment')
+            .send({ amount: '4375+' })
+            .expect(200)
+            .end((err, res) => {
+                res.status.should.equal(422);
+                res.body.errors[0].msg.should.equal(
+                    'Repayment amount must be a number'
+                );
                 done();
             });
     });
