@@ -15,7 +15,7 @@
         "start": "node --require @babel/register ./bin/www ",
         "devstart": "set DEBUG=* & nodemon --exec babel-node ./bin/www",
         "lint": "./node_modules/.bin/eslint ./",
-        "test": "nyc --reporter=html --reporter=text mocha --require @babel/register --require should",
+        "test": "nyc --reporter=html --reporter=text mocha -r @babel/register -r should",
         "cover": "nyc report --reporter=text-lcov | coveralls",
         "coverage": "nyc report --reporter=text-lcov | coveralls && rm -rf ./.nyc_output && rm -rf coverage/"
     },
@@ -30,10 +30,12 @@
         "@babel/preset-env": "^7.4.4",
         "@babel/register": "^7.4.4",
         "cookie-parser": "~1.4.3",
+        "dotenv": "^8.0.0",
         "ejs": "^2.6.1",
         "express": "~4.16.0",
         "express-validator": "^5.3.1",
         "http-errors": "~1.6.2",
+        "jsonwebtoken": "^8.5.1",
         "morgan": "~1.9.0",
         "underscore": "^1.9.1"
     },
