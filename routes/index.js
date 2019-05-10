@@ -3,15 +3,25 @@ import express from 'express';
 import AuthController from '../controllers/AuthController';
 import UsersController from '../controllers/UsersController';
 import LoansController from '../controllers/LoansController';
+import AppController from '../controllers/AppController';
+
+import AuthenticationMiddleware from '../middleware/authentication';
 
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', AuthController.index);
-router.get('/about', AuthController.about);
-router.post('/auth/signup', AuthController.signup);
+router.get('/', AppController.index);
+router.get('/about', AppController.about);
+
+router.post('/auth/signup',
+    AuthenticationMiddleware.generateToken,
+    AuthController.signup
+);
 router.get('/auth/signup', AuthController.signup);
-router.post('/auth/signin', AuthController.signin);
+router.post('/auth/signin',
+    AuthenticationMiddleware.verifyToken,
+    AuthController.signin
+);
 router.get('/auth/signin', AuthController.signin);
 
 

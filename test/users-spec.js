@@ -23,7 +23,7 @@ describe('/users: Verify user', () => {
             .patch('/users/bbc@bbc.uk/verify')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Object);
                 res.body.data.should.have.property('status', 'verified');
                 done();
@@ -35,7 +35,7 @@ describe('/users: Verify user', () => {
             .patch('/users/bbc@bbc.go/verify')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(404);
+                res.status.should.equal(404);
                 res.body.error.should.be.equal('User not found');
                 done();
             });
@@ -48,7 +48,7 @@ describe('/users: Get all users', () => {
             .get('/users')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Array);
                 done();
             });
@@ -59,7 +59,7 @@ describe('/users: Get all users', () => {
             .get('/users')
             .query({ status: 'verified' })
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 for (const user of res.body.data) {
                     user.status.should.equal('verified');
                 }
@@ -72,7 +72,7 @@ describe('/users: Get all users', () => {
             .get('/users')
             .query({ status: 'unverified' })
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 for (const user of res.body.data) {
                     user.status.should.equal('unverified');
                 }
@@ -87,7 +87,7 @@ describe('/users: Get a user', () => {
             .get('/users/123456789')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Object);
                 done();
             });
@@ -98,7 +98,7 @@ describe('/users: Get a user', () => {
             .get('/users/12345')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(404);
+                res.status.should.equal(404);
                 res.body.error.should.equal('User with id 12345 not found');
                 done();
             });
@@ -117,7 +117,7 @@ describe('/users: Edit profile', () => {
                 office: 'newOffice' })
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Object);
                 res.body.data.should.have.property('firstName', 'newFN');
                 res.body.data.should.have.property('lastName', 'newLN');
@@ -140,7 +140,9 @@ describe('/users: Edit profile', () => {
             .expect(200)
             .end((err, res) => {
                 res.status.should.equal(422);
-                res.body.errors[0].msg.should.equal('Wrong number format: E.G. 07012345678');
+                res.body.errors[0].msg.should.equal(
+                    'Wrong number format: E.G. 07012345678'
+                );
                 done();
             });
     });

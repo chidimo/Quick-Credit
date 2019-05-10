@@ -12,7 +12,7 @@ describe('/loans: Get all loans', () => {
             .get('/loans')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Array);
                 for (const each of res.body.data) {
                     assert(each.should.be.an.instanceOf(Object));
@@ -28,7 +28,7 @@ describe('/loans: Get loan', () => {
             .get('/loans/123456789')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Object);
                 done();
             });
@@ -39,7 +39,7 @@ describe('/loans: Get loan', () => {
             .get('/loans/12345')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(404);
+                res.status.should.equal(404);
                 res.body.error.should.equal('Loan with id 12345 not found');
                 assert(res.body.error === 'Loan with id 12345 not found');
                 done();
@@ -54,7 +54,7 @@ describe('/loans: Get all loans by their repayment status', () => {
             .query({ status: 'approved', repaid: false })
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Array);
                 for (const loan of res.body.data) {
                     assert(loan.status === 'approved');
@@ -70,7 +70,7 @@ describe('/loans: Get all loans by their repayment status', () => {
             .query({ status: 'approved', repaid: true })
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Array);
                 for (const loan of res.body.data) {
                     assert(loan.status === 'approved');
@@ -88,7 +88,7 @@ describe('/loans: Create a loan', () => {
             .send({ email: 'user@email.com', amount: 50000, tenor: 12 })
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.be.equal(201);
+                res.status.should.be.equal(201);
                 res.body.data.should.be.an.instanceOf(Object);
                 res.body.data.should.have.property('status', 'pending');
                 res.body.data.should.have.property('paymentInstallment', 4375);
@@ -122,7 +122,7 @@ describe('/loans: Approve or reject a loan application', () => {
             .patch('/loans/123456789/approve')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.status.should.be.equal('approved');
                 done();
             });
@@ -133,7 +133,7 @@ describe('/loans: Approve or reject a loan application', () => {
             .patch('/loans/123456789/reject')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.status.should.be.equal('rejected');
                 done();
             });
@@ -146,7 +146,7 @@ describe('/loans: View loan repayment history', () => {
             .get('/loans/123456789/repayments')
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(200);
+                res.status.should.equal(200);
                 res.body.data.should.be.an.instanceOf(Array);
                 for (const payment of res.body.data) {
                     payment.loanId.should.equal('123456789');
@@ -163,7 +163,7 @@ describe('/loans: Create loan repayment', () => {
             .send({ amount: 4375 })
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(201);
+                res.status.should.equal(201);
                 res.body.data.should.be.an.instanceOf(Object);
                 res.body.data.should.have.property('loanId', '123456789');
                 res.body.data.should.have.property('amount', 4375);
