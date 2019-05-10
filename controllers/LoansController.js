@@ -1,5 +1,6 @@
+import { body, validationResult } from 'express-validator/check';
+import { sanitizeBody } from 'express-validator/filter';
 
-import { _ } from 'underscore';
 import loans from '../utils/sample.loans';
 import repayments from '../utils/sample.repayments';
 
@@ -11,91 +12,118 @@ const LoansController = {
         
         // if both status and repaid is unspecified
         if ((status !== undefined) && (repaid !== undefined)) {
-            const data = _.filter(loans, loan => (
+            const data = loans.filter(loan => (
                 loan.status === status && loan.repaid === boolean_repaid
             ));
             res.send({ status: 200, data });
         }
         else {
             const data = [];
-            _.map(loans, loan => {
-                data.push(loan);
-            });
+            loans.map(loan => data.push(loan));
             res.send({ status: 200, data });
         }
     },
         
     get_loan: (req, res) => {
         const { id } = req.params;
-        const data = _.filter(loans, loan => (loan.id === id));
+        const data = loans.filter(loan => (loan.id === id));
         if (data.length === 0) {
             res.send({ status: 404, error: `Loan with id ${id} not found` });
         }
         else res.send({ status: 200, data });
     },
-        
-    create_loan: (req, res) => {
-        const { email } = req.body;
-        const amount = Number(req.body.amount);
-        const tenor = Number(req.body.tenor);
-        const interest = 0.05 * amount;
-        const paymentInstallment = (amount + interest) / tenor;
-        const balance = amount - 0;
-        
-        res.send({
-            status: 201,
-            data: {
-                loanId: '',
-                status: 'pending',
-                email,
-                amount,
-                tenor,
-                interest,
-                paymentInstallment,
-                balance
+
+    create_loan: [
+        body('tenor')
+            .isInt({ min: 1 })
+            .withMessage('Tenor cannot be less than 1')
+            .isInt({ max: 12 })
+            .withMessage('Tenor cannot be greater than 12'),
+        body('amount')
+            .isFloat({ min: 50000 })
+            .withMessage('Amount cannot be less than 50,000')
+            .isFloat({ max: 1000000 })
+            .withMessage('Amount cannot be greater than 1,000,000'),
+            
+        sanitizeBody('tenor').toInt(),
+        sanitizeBody('amount').toFloat(),
+            
+        (req, res) => {
+                
+            // don't validate email since we'll read it from logged in user
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({ errors: errors.array() });
             }
-        });
-    },
+
+            const { email, amount, tenor } = req.body;
+            const interest = 0.05 * amount;
+            const paymentInstallment = (amount + interest) / tenor;
+            const balance = amount - 0;
+
+            res.send({
+                status: 201,
+                data: {
+                    loanId: '',
+                    status: 'pending',
+                    email,
+                    amount,
+                    tenor,
+                    interest,
+                    paymentInstallment,
+                    balance
+                }
+            });
+        }
+    ],
         
     approve_loan: (req, res) => {
         const { id } = req.params;
-        const loan = _.filter(loans, loan => (loan.id === id));
-        const [ data, ] = loan;
-        data.status = 'approved';
-        res.send({ status: 200, data });
+        const loan = loans.find(loan => (loan.id === id));
+        loan.status = 'approved';
+        res.send({ status: 200, data: loan });
     },
     
     reject_loan: (req, res) => {
         const { id } = req.params;
-        const loan = _.filter(loans, loan => (loan.id === id));
-        const [ data, ] = loan;
-        data.status = 'rejected';
-        res.send({ status: 200, data });
-        
+        const loan = loans.find(loan => (loan.id === id));
+        loan.status = 'rejected';
+        res.send({ status: 200, data: loan });
     },
     
     loan_repayment_history: (req, res) => {
         const { id } = req.params;
-        const data = _.filter(repayments, payment => (payment.loanId === id));
+        const data = repayments.filter(payment => (payment.loanId === id));
         res.send({ status: 200, data });
     },
 
-    post_repayment: (req, res) => {
-        const { id } = req.params;
-        const amount = Number(req.body.amount);
+    post_repayment: [
+        body('amount')
+            .isInt()
+            .withMessage('Repayment amount must be a number'),
         
-        const repay = {
-            id: '',
-            createdOn: new Date(),
-            loanId: id,
-            amount,
-        };
-        // update loan balance
-        const [ loan, ] = _.filter(loans, loan => (loan.id === id));
-        loan.balance = loan.balance + amount;
-        
-        res.send({ status: 201, data: repay });
-    },
+        sanitizeBody('amount').toFloat(),
+        (req, res) => {
+
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(422).json({ errors: errors.array() });
+            }
+
+            const { id } = req.params;
+            const { amount } = req.body;
+            const repay = {
+                id: '',
+                createdOn: new Date(),
+                loanId: id,
+                amount,
+            };
+            // update loan balance
+            const loan = loans.find(loan => (loan.id === id));
+            loan.balance = loan.balance + amount;
+            res.send({ status: 201, data: repay });
+        }
+    ],
 };
 
 export default LoansController;
