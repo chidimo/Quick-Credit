@@ -5,7 +5,7 @@ import app from '../app';
 
 const server = supertest.agent(app);
 
-describe('App: Home page', () => {
+describe('/: Home page', () => {
     it('should return home page', done => {
         server
             .get('/')
@@ -17,7 +17,7 @@ describe('App: Home page', () => {
     });
 });
 
-describe('App: About', () => {
+describe('/: About', () => {
     it('should return 200', done => {
         server
             .get('/about')
@@ -29,7 +29,7 @@ describe('App: About', () => {
     });
 });
 
-describe('App: server 404', () => {
+describe('/: server 404', () => {
     it('should render the error page', done => {
         server
             .get('/unknown-page')

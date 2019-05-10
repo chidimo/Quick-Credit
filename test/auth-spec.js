@@ -5,7 +5,7 @@ import app from '../app';
 
 const server = supertest.agent(app);
 
-describe('Auth endpoint: SignUp', () => {
+describe('/auth: SignUp', () => {
 
     it('should return the signup form page', done => {
         server
@@ -39,14 +39,15 @@ describe('Auth endpoint: SignUp', () => {
                 confirm_password: 'wrong' })
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(404);
-                res.body.error.should.equal('Passwords do not match');
+                res.status.should.equal(422);
+                res.body.errors[0].msg.should.equal(
+                    'Password confirmation does not match password');
                 done();
             });
     });
 });
 
-describe('Auth endpoint: SignIn', () => {
+describe('/auth: SignIn', () => {
 
     it('should return the signin form page', done => {
         server
@@ -74,11 +75,11 @@ describe('Auth endpoint: SignIn', () => {
     it('should return error if user is found but password is wrong', done => {
         server
             .post('/auth/signin')
-            .send({ email: 'me@yahoo.com', password: 'wrong_password' })
+            .send({ email: 'me@yahoo.com', password: 'wrongpassword' })
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(404);
-                res.body.error.should.equal('Email and password do not match');
+                res.status.should.equal(422);
+                res.body.errors[0].msg.should.equal('Wrong password');
                 done();
             });
     });
@@ -89,8 +90,8 @@ describe('Auth endpoint: SignIn', () => {
             .send({ email: 'email@address.com', password: 'password' })
             .expect(200)
             .end((err, res) => {
-                res.body.status.should.equal(404);
-                res.body.error.should.equal('User not found');
+                res.status.should.equal(422);
+                res.body.errors[0].msg.should.equal('User not found');
                 done();
             });
     });
