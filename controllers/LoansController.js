@@ -15,12 +15,12 @@ const LoansController = {
             const data = loans.filter(loan => (
                 loan.status === status && loan.repaid === boolean_repaid
             ));
-            res.send({ status: 200, data });
+            res.status(200).json({ data });
         }
         else {
             const data = [];
             loans.map(loan => data.push(loan));
-            res.send({ status: 200, data });
+            res.status(200).json({ data });
         }
     },
         
@@ -28,9 +28,9 @@ const LoansController = {
         const { id } = req.params;
         const data = loans.filter(loan => (loan.id === id));
         if (data.length === 0) {
-            res.send({ status: 404, error: `Loan with id ${id} not found` });
+            res.status(404).json({ error: `Loan with id ${id} not found` });
         }
-        else res.send({ status: 200, data });
+        else res.status(200).json({ data });
     },
 
     create_loan: [
@@ -61,8 +61,7 @@ const LoansController = {
             const paymentInstallment = (amount + interest) / tenor;
             const balance = amount - 0;
 
-            res.send({
-                status: 201,
+            res.status(201).json({
                 data: {
                     loanId: '',
                     status: 'pending',
@@ -81,20 +80,20 @@ const LoansController = {
         const { id } = req.params;
         const loan = loans.find(loan => (loan.id === id));
         loan.status = 'approved';
-        res.send({ status: 200, data: loan });
+        res.status(200).json({ data: loan });
     },
     
     reject_loan: (req, res) => {
         const { id } = req.params;
         const loan = loans.find(loan => (loan.id === id));
         loan.status = 'rejected';
-        res.send({ status: 200, data: loan });
+        res.status(200).json({ data: loan });
     },
     
     loan_repayment_history: (req, res) => {
         const { id } = req.params;
         const data = repayments.filter(payment => (payment.loanId === id));
-        res.send({ status: 200, data });
+        res.status(200).json({ data });
     },
 
     post_repayment: [
@@ -121,7 +120,7 @@ const LoansController = {
             // update loan balance
             const loan = loans.find(loan => (loan.id === id));
             loan.balance = loan.balance + amount;
-            res.send({ status: 201, data: repay });
+            res.status(201).json({ data: repay });
         }
     ],
 };
