@@ -1,11 +1,10 @@
 import { body, validationResult } from 'express-validator/check';
 import { sanitizeBody } from 'express-validator/filter';
-
-import debug from 'debug';
+// import debug from 'debug';
 
 import users from '../utils/sample.users';
 
-const logger = message => (debug('dev')(message));
+// const logger = message => (debug('dev')(message));
 
 const UsersController = {
 
@@ -18,11 +17,11 @@ const UsersController = {
         const user = users.find(user => (user.email === email));
         
         if (user === undefined) {
-            res.send({ status: 404, error: 'User not found' });
+            res.status(404).json({ error: 'User not found' });
         }
         else {
             user.status = 'verified';
-            res.send({ status: 200, data: user });
+            res.status(200).json({ data: user });
         }
     },
     
@@ -31,12 +30,12 @@ const UsersController = {
         
         if (status) {
             const data = users.filter(user => (user.status === status));
-            res.send({ status: 200, data });
+            res.status(200).json({ data });
         }
         else {
             const data = [];
             users.map(user => data.push(user));
-            res.send({ status: 200, data });
+            res.status(200).json({ data });
         }
     },
 
@@ -44,9 +43,9 @@ const UsersController = {
         const { id } = req.params;
         const user = users.find(user => (user.id === id));
         if (user === undefined) {
-            res.send({ status: 404, error: `User with id ${id} not found` });
+            res.status(404).json({ error: `User with id ${id} not found` });
         }
-        else res.send({ status: 200, data: user });
+        else res.status(200).json({ data: user });
     },
 
     update_user: [
@@ -85,7 +84,7 @@ const UsersController = {
             user.address.home = home;
             user.address.office = office;
                 
-            res.send({ status: 200, data: user });
+            res.status(200).json({ data: user });
         }
     ],
 };
