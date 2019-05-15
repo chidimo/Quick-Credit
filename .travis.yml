@@ -1,8 +1,30 @@
 language: node_js
+env:
+  global:
+    - CC_TEST_REPORTER_ID=03990f10d1bc434a08af1af70b30627f5333955eb21bf21c3b45eade086b92b5
+    - NODE_ENV=test
+    - PGPASSWORD=
+    - PGPORT=5433
+    - PGUSER=postgres
+    - PGHOST=localhost
+services:
+  - postgresql
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
+before_script:
+  - psql -c 'create database testdb;' -U postgres
+before_install:
+  - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+  - sudo service postgresql restart
+  - sleep 1
 matrix:
   include:
   - node_js: '10'
-  - node_js: '12'
+  # - node_js: '12'
 cache:
   directories: node_modules
 deploy:
