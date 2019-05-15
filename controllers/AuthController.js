@@ -8,27 +8,22 @@ import
 const users_model = new Model('users');
 
 const AuthController = {
-    signup: (req, res) => {
+    signup: async (req, res) => {
         const { email } = req.body;
+        const user = await check_user_existence(
+            users_model, req, res);
 
-        (async () => {
-            const user = await check_user_existence(
-                users_model, req, res);
-
-            if (user) {
-                return res
-                    .status(404)
-                    .json({ error: `User with email ${email} already exists` });
-            }
-            await create_user(users_model, req, res);
-            return get_user(users_model, req, res, 201);
-        })();
+        if (user) {
+            return res
+                .status(404)
+                .json({ error: `User with email ${email} already exists` });
+        }
+        await create_user(users_model, req, res);
+        return get_user(users_model, req, res, 201);
     },
     
-    signin: (req, res) => {
-        (async () => {
-            get_user(users_model, req, res, 200);
-        })();
+    signin: async (req, res) => {
+        get_user(users_model, req, res, 200);
     },
 };
 
