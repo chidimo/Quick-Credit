@@ -1,46 +1,30 @@
-import users from '../utils/sample.users';
+import Model from '../models/Model';
+// import { dev_logger } from '../utils/loggers';
+import 
+{ 
+    check_user_existence, create_user, get_user
+} from './helpers/AuthController';
+
+const users_model = new Model('users');
 
 const AuthController = {
-    signup: (req, res) => {
-            
-        if (req.method === 'GET') {
-            res.render('authentication', { title: 'Sign Up' });
-        }
-        else {
-            const { email, password } = req.body;
+    signup: async (req, res) => {
+        const { email } = req.body;
+        const user = await check_user_existence(
+            users_model, req, res);
 
-            res.status(200).json({
-                status: 201,
-                data: {
-                    id: 2,
-                    email,
-                    password,
-                    first_name: '',
-                    last_name: '',
-                    address: {
-                        home: '',
-                        office: '',
-                    },
-                    status: 'unverified',
-                    isAdmin: false,
-                    token: req.token,
-                }
-            });
+        if (user) {
+            return res
+                .status(404)
+                .json({ error: `User with email ${email} already exists` });
         }
+        await create_user(users_model, req, res);
+        return get_user(users_model, req, res, 201);
     },
     
-    signin: (req, res) => {
-        if (req.method === 'GET') {
-            res.render( 'authentication', { title: 'Sign In' });
-        }
-        else {
-            const { email } = req.body;
-            const user = users.find(user => user.email === email);
-            const data = { ... user, token: req.token };
-            res.status(200).json({ data });
-        }
+    signin: async (req, res) => {
+        get_user(users_model, req, res, 200);
     },
 };
 
 export default AuthController;
-

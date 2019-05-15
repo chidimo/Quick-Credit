@@ -3,35 +3,34 @@ import express from 'express';
 import AuthController from '../controllers/AuthController';
 import UsersController from '../controllers/UsersController';
 import LoansController from '../controllers/LoansController';
-import AppController from '../controllers/AppController';
 
 import AuthenticationMiddleware from '../middleware/authentication';
+import ParamterValidators from '../middleware/validators.js';
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', AppController.index);
-router.get('/about', AppController.about);
-
 router.post('/auth/signup',
+    ParamterValidators.emailValidator,
+    ParamterValidators.passwordValidator,
+    ParamterValidators.confirmPasswordValidator,
     AuthenticationMiddleware.generateToken,
     AuthController.signup
 );
-router.get('/auth/signup', AuthController.signup);
+
 router.post('/auth/signin',
     AuthenticationMiddleware.verifyToken,
+    ParamterValidators.passwordValidator,
     AuthController.signin
 );
-router.get('/auth/signin', AuthController.signin);
 
-
-router.get('/users/dashboard', UsersController.dashboard);
-
-router.patch('/users/:email/verify', UsersController.verify_user);
+router.patch('/users/:id/verify', UsersController.verify_user);
 router.get('/users', UsersController.get_users);
 router.get('/users/:id', UsersController.get_user);
 router.get('/users?status=verified', UsersController.get_users);
-router.patch('/users/:id/update', UsersController.update_user);
+router.patch('/users/:id/update',
+    ParamterValidators.updateProfileValidator,
+    UsersController.update_user
+);
 
 router.get('/loans', LoansController.get_all_loans);
 router.get('/loans/:id', LoansController.get_loan);

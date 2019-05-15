@@ -1,92 +1,85 @@
-import { body, validationResult } from 'express-validator/check';
-import { sanitizeBody } from 'express-validator/filter';
-// import debug from 'debug';
+import Model from '../models/Model';
+import { InternalServerError } from '../utils/errorHandlers';
+// import { dev_logger } from '../utils/loggers';
 
-import users from '../utils/sample.users';
-
-// const logger = message => (debug('dev')(message));
+const users_model = new Model('users');
 
 const UsersController = {
 
-    dashboard: (req, res) => {
-        res.render( 'dashboard', { title: 'Dashboard' });
-    },
-    
-    verify_user: (req, res) => {
-        const { email } = req.params;
-        const user = users.find(user => (user.email === email));
-        
-        if (user === undefined) {
-            res.status(404).json({ error: 'User not found' });
-        }
-        else {
-            user.status = 'verified';
-            res.status(200).json({ data: user });
-        }
-    },
-    
-    get_users: (req, res) => {
-        const { status } = req.query;
-        
-        if (status) {
-            const data = users.filter(user => (user.status === status));
-            res.status(200).json({ data });
-        }
-        else {
-            const data = [];
-            users.map(user => data.push(user));
-            res.status(200).json({ data });
-        }
-    },
-
-    get_user: (req, res) => {
+    get_user: async (req, res) => {
         const { id } = req.params;
-        const user = users.find(user => (user.id === id));
-        if (user === undefined) {
-            res.status(404).json({ error: `User with id ${id} not found` });
+        try {
+            const { rows } = await users_model.select(
+                `id, email, password, firstname,
+                    lastname, phone, status, address`,
+                `id=${id}`
+            );
+            if (rows.length === 0) {
+                // user was not found
+                return res.status(404).json({
+                    error: `User with id ${id} not found`
+                });
+            }
+            return res.status(200).json({ data: rows[0] });
         }
-        else res.status(200).json({ data: user });
+        catch (e) {
+            return InternalServerError(req, res, e);
+        }
     },
 
-    update_user: [
-        body('firstName')
-            .not().isEmpty().withMessage('First name cannot be empty'),
-        body('lastName')
-            .not().isEmpty().withMessage('Last namecannot be empty'),
-        body('phone')
-            .not().isEmpty().withMessage('Phone number cannot be empty')
-            .matches(/^0\d{10}$/).withMessage(
-                'Wrong number format: E.G. 07012345678'),
-        body('home')
-            .not().isEmpty().withMessage('Home address cannot be empty'),
-        body('office')
-            .not().isEmpty().withMessage('Office address cannot be empty'),
-
-        sanitizeBody('firstName').trim().escape(),
-        sanitizeBody('lastName').trim().escape(),
-        sanitizeBody('phone').trim().escape(),
-        sanitizeBody('home').trim().escape(),
-        sanitizeBody('office').trim().escape(),
-
-        (req, res) => {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json({ errors: errors.array() });
-            }
-
-            const { id } = req.params;
-            const { firstName, lastName, phone, home, office } = req.body;
-            const user = users.find(user => (user.id === id));
-                
-            user.firstName = firstName;
-            user.lastName = lastName;
-            user.phone = phone;
-            user.address.home = home;
-            user.address.office = office;
-                
-            res.status(200).json({ data: user });
+    verify_user: async (req, res) => {
+        const { id } = req.params;
+        try {
+            await users_model.update(
+                'status=\'verified\'',
+                `id=${id}`
+            );
+            UsersController.get_user(req, res);
         }
-    ],
+        catch (e) { return InternalServerError(req, res, e); }
+    
+    },
+
+    get_users: async (req, res) => {
+        const { status } = req.query;
+        try {
+            let data;
+            if (status) {
+                data = await users_model.select(
+                    `id, email, password, firstname,
+                    lastname, phone, status, address`,
+                    `status='${status}'`
+                );
+            }
+            else {
+                data = await users_model.select(
+                    `id, email, password, firstname,
+                        lastname, phone, status, address`,
+                );
+            }
+            return res.status(200).json({ data: data.rows });
+        }
+        catch (e) { return InternalServerError(req, res, e); }
+    },
+
+    update_user: async (req, res) => {
+        const { id } = req.params;
+        const { firstname, lastname, phone, home, office } = req.body;
+
+        try {
+            await users_model.update(
+                `firstname='${firstname}',
+                    lastname='${lastname}',
+                    phone='${phone}',
+                    address='{"home": "${home}", "office": "${office}"}'`,
+                `id=${id}`
+            );
+            UsersController.get_user(req, res);
+        }
+        catch (e) {
+            return InternalServerError(req, res, e);
+        }
+    }
 };
 
 export default UsersController;
