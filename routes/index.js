@@ -9,10 +9,6 @@ import AuthenticationMiddleware from '../middleware/authentication';
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', AppController.index);
-router.get('/about', AppController.about);
-
 router.post('/auth/signup',
     AuthenticationMiddleware.generateToken,
     AuthController.signup
@@ -22,7 +18,6 @@ router.post('/auth/signin',
     AuthenticationMiddleware.verifyToken,
     AuthController.signin
 );
-router.get('/auth/signin', AuthController.signin);
 
 
 router.get('/users/dashboard', UsersController.dashboard);
