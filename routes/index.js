@@ -10,10 +10,10 @@ import ParamterValidators from '../middleware/validators.js';
 const router = express.Router();
 
 router.post('/auth/signup',
-    AuthenticationMiddleware.generateToken,
     ParamterValidators.emailValidator,
     ParamterValidators.passwordValidator,
     ParamterValidators.confirmPasswordValidator,
+    AuthenticationMiddleware.generateToken,
     AuthController.signup
 );
 
