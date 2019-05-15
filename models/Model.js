@@ -26,10 +26,6 @@ class Model {
         });
     }
 
-    async version() {
-        return await this.pool.query('SELECT version()');
-    }
-    
     async select(columns, clause) {
         let query = `SELECT ${columns} FROM ${this.table}`;
         if (clause) query = `${query} WHERE ${clause}`;
