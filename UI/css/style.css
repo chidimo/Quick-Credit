@@ -127,6 +127,20 @@ td {
     padding: 5px;
 }
 
+td div.item_link {
+    color: #ffffff;
+    background: #52658F;
+    text-decoration: none;
+    width: 25px;
+    border-radius: 50%;
+    height: 25px;
+    margin: 0;
+}
+
+td a {
+    text-decoration: none;
+}
+
 td div {
     width: 100px;
     white-space: nowrap;
