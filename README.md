@@ -4,6 +4,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/chidimo/Quick-Credit/badge.svg?branch=develop)](https://coveralls.io/github/chidimo/Quick-Credit?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/38d7483bb05e2777f391/maintainability)](https://codeclimate.com/github/chidimo/Quick-Credit/maintainability)
 
+## Website
+
+[Quick Credit](https://chidimo.github.io/Quick-Credit/UI/index.html)
+
 ## Description
 
 Quick Credit is an online lending platform that provides short term soft loans to individuals. This

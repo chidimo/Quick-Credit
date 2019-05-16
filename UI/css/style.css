@@ -2,6 +2,7 @@ body {
     font: 16px/1.5 Arial, Helvetica sans-serif;
     padding: 0;
     margin: 0;
+    background: #E8E8E8;
 }
 
 * {
@@ -10,7 +11,7 @@ body {
 
 /* Global */
 .container {
-    width: 80%;
+    width: 60%;
     margin: auto;
     overflow: hidden;
     padding-top: 10px;
@@ -45,13 +46,14 @@ textarea:focus {
 ul {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 button {
     height: 35px;
     color: #ffffff;
-    background: #132B40;
-    border: none;
+    background: #333A56;
+    border: 1px solid #F7F5E6;
     cursor: pointer;
     padding-left: 20px;
     padding-right: 20px;
@@ -59,7 +61,7 @@ button {
 }
 
 hr {
-    color: #547CFF;
+    color: #333A56;
     opacity: 0.3;
 }
 
@@ -73,7 +75,7 @@ hr {
     margin-left: auto;
     margin-right: auto;
     padding: 0 30px 30px 30px;
-    background: #AAD6FF;
+    background: #ffffff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -156,8 +158,7 @@ header {
     padding-top: 30px;
     padding-bottom: 30px;
     min-height: 70px;
-    background: #547CFF;
-    border-bottom: 3px solid #132B40;
+    background: #333A56;
 }
 
 header a {
@@ -170,12 +171,7 @@ header #branding h1 {
     margin: 0;
 }
 
-header #brand_name:hover {
-    color: #ffffff;
-}
-
 header a.active {
-    color: #132B40;
     font-weight: bold;
 }
 
@@ -187,15 +183,23 @@ ul.base_ul {
     display: flex;
 }
 
-nav.menu {
-    margin-top: 10px;
+.micro_avatar_wrapper {
+    display: inline-block;
+    width: 2.3em;
+    height: 2.3em;
+    position: relative;
+    vertical-align: middle;
 }
 
-.micro_image_wrapper img {
-    width: 30px;
-    height: 30px;
+.micro_avatar {
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    display: block;
+}
+
+.icon {
+    width: 20px;
+    display: inline-block;
 }
 
 .nav_div {
@@ -208,24 +212,25 @@ nav.menu {
 }
 
 .menu > ul > li {
-	display:inline-block;
-    position:relative;
+    display: inline-block;
+    position: relative;
+    margin: auto;
     padding-left: 15px;
     padding-right: 15px;
     list-style: none;
 }
 
-.sub_menu {
-	width: 350%;
+#sub_menu {
+	width: 250%;
     position: absolute;
 	top: 100%;
     left: -150px;
-    padding: 10px;
+    padding: 0;
 	z-index: -1;
 	opacity: 0;
 	transition: opacity linear 0.15s;
 	box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
-    background: #f1f1f1;
+    background: #F7F5E6;
     border-radius: 5px;
     color: #333A56;
     font-weight: bold;
@@ -283,7 +288,7 @@ nav.menu {
 #newsletter {
     color: #ffffff;
     padding: 15px;
-    background: #547CFF
+    background: #333A56
 }
 
 #newsletter h1 {
@@ -304,19 +309,21 @@ nav.menu {
 }
 
 /* Info section */
-#first_info_section {
-    margin-top: 40px;
-}
-
 .info_section {
+    margin-top: 40px;
     margin-bottom: 10px;
     text-align: left;
     padding: 30px 20px;
-    background: #AAD6FF;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.info_section li {
+    padding: 20px 10px;
 }
 
 footer {
-    background: #132B40;
+    background: #52658F;
     text-align: center;
     color: #ffffff;
     padding: 20px;
@@ -398,13 +405,18 @@ footer {
 }
 
 /* About */
-.authentication_section,
 .profile_edit,
 .loan_application {
     padding: 30px 20px;
 }
 
 /* authentication */
+
+.authentication_div {
+    background: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
 
 #reg_form_toggle {
     margin-top: 30px;
@@ -415,12 +427,6 @@ footer {
     border-top-left-radius: 5px;
 }
 
-.authentication_div {
-    background: #AAD6FF;
-    text-align: center;
-    cursor: pointer;
-}
-
 #reg_form_toggle h4 {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -429,8 +435,8 @@ footer {
 
 .deselected {
     border-bottom: 1px solid #132B40;
-    background: #9AC1E6;
-    color:#3a81bf;
+    background: #F7F5E6;
+    color:#333A56;
     font-size: 14px;
 }
 
@@ -448,7 +454,7 @@ footer {
     padding: 10px;
     max-width: 500px;
     margin-bottom: 15px;
-    background-color: #f1f1f1;
+    background-color: #FFF;
     border-radius: 10px;
     box-shadow: 1px 3px ghostwhite;
 }
