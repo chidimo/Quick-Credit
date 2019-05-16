@@ -136,7 +136,16 @@ td div.item_link {
     width: 25px;
     border-radius: 50%;
     height: 25px;
-    margin: 0;
+    margin: auto;
+}
+
+thead tr {
+    background: #333A56;
+    color: #ffffff;
+}
+
+tr:nth-of-type(2) {
+    background: #ffffff;
 }
 
 td a {
