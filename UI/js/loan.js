@@ -8,7 +8,7 @@ const reject_loan_application = document.getElementById(
 approve_loan_application.addEventListener('click', e => {
     e.preventDefault();
     const cont = prompt(
-        'Please confirm if you want to approve this loan?',
+        'Confirm loan approval',
         'Click okay to approve this loan request');
     
     if (cont !== null) {
@@ -22,7 +22,7 @@ approve_loan_application.addEventListener('click', e => {
 reject_loan_application.addEventListener('click', e => {
     e.preventDefault();
     const cont = prompt(
-        'Please confirm if you want to reject this loan?',
+        'Confirm loan rejection',
         'Click okay to reject this loan request');
     
     if (cont !== null) {
