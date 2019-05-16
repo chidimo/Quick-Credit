@@ -20,22 +20,44 @@
 
                 <nav class="menu">
                     <ul class="base_ul">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        
                         <li>
-                            <div class="micro_image_wrapper">
-                                <img src="https://via.placeholder.com/100" alt="">
-                            </div>
+                            <a id="profile_dropdown" href="#" class="">
+                                <span class="micro_avatar_wrapper">
+                                    <img class="micro_avatar" src="./img/chidi.jpg" alt="">
+                                </span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 17 8.59"
+                                    class="icon">
+                                        <path
+                                            d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
+                                            fill="none"
+                                            stroke="#686b6e"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-miterlimit="10">
+                                        </path>
+                                </svg>
+                            </a>
 
-                            <ul class="sub_menu">
-                                <p class="username">email@address.com</p>
-                                <hr>
-                                <li><a href="loan.new.html">Apply for loan</a></li>
-                                <hr>
-                                <li><a href="profile.edit.html">Edit profile</a></li>
-                                <hr>
-                                <li><a href="authentication.html">Logout</a></li>
+                            <ul id="sub_menu">
+                                <div class="submenu_username">
+                                    <a href="./dashboard.html">
+                                        <div>first name last name</div>
+                                    </a>
+                                </div>
+                                <hr class="submenu_hr">
+                                <li>
+                                    <a href="profile.edit.html">
+                                        <div class="sub_routes">Edit profile</div>
+                                    </a>
+                                </li>
+                                <hr class="submenu_hr">
+                                <li>
+                                    <a href="authentication.html">
+                                        <div class="sub_routes">Logout</div>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -49,10 +71,12 @@
                     <h1>Apply for loan</h1>
                     <hr>
                     <label for="amount"><b>Amount</b></label>
-                    <input type="number" placeholder="Enter loan amount" name="amount" required>
+                    <input type="number" min="100000" max="1000000" placeholder="Enter loan amount" name="amount" required>
     
                     <label for="tenor"><b>Tenor</b></label>
                     <input type="number" min="1" max="12" placeholder="Tenor" name="tenor" required>
+
+                    <input type="hidden" id="userid" name="userid" value="2">
     
                     <button type="submit" class="shadowed_button submit_button">Apply</button>
                 </form>
@@ -61,6 +85,7 @@
 
         <footer>
             <p>Quick Credit &copy; 2019</p>
+            <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
         </footer>
         
         <script src="./js/qcredit.js"></script>

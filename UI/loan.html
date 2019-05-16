@@ -20,22 +20,46 @@
 
                 <nav class="menu">
                     <ul class="base_ul">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        
-                        <li>
-                            <div class="micro_image_wrapper">
-                                <img src="https://via.placeholder.com/100" alt="">
-                            </div>
+                        <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
 
-                            <ul class="sub_menu">
-                                <p class="username">email@address.com</p>
-                                <hr>
-                                <li><a href="loan.new.html">Apply for loan</a></li>
-                                <hr>
-                                <li><a href="profile.edit.html">Edit profile</a></li>
-                                <hr>
-                                <li><a href="authentication.html">Logout</a></li>
+                        <li>
+                            <a id="profile_dropdown" href="#" class="">
+                                <span class="micro_avatar_wrapper">
+                                    <img class="micro_avatar" src="./img/chidi.jpg" alt="">
+                                </span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 17 8.59"
+                                    class="icon">
+                                        <path
+                                            d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
+                                            fill="none"
+                                            stroke="#686b6e"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-miterlimit="10">
+                                        </path>
+                                </svg>
+                            </a>
+
+                            <ul id="sub_menu">
+                                <div class="submenu_username">
+                                    <a href="./dashboard.html">
+                                        <div>first name last name</div>
+                                    </a>
+                                </div>
+                                <hr class="submenu_hr">
+                                <li>
+                                    <a href="profile.edit.html">
+                                        <div class="sub_routes">Edit profile</div>
+                                    </a>
+                                </li>
+                                <hr class="submenu_hr">
+                                <li>
+                                    <a href="authentication.html">
+                                        <div class="sub_routes">Logout</div>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -93,20 +117,20 @@
 
                 <div class="user_card card">
                     <div class="user_photo">
-                        <img src="https://via.placeholder.com/150" alt="">
+                        <img src="./img/chidi.jpg" alt="">
                     </div>
                     <hr class="card_divider">
 
                     <div class="user_info">
                         <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
-                        <p><a href="mailto:email@address.com">emailaddress@address.com</a></p>
-                        <p><a href="tel:+2341234567890">+2341234567890</a></p>
+                        <p>email@address.com</p>
+                        <p>+2341234567890</p>
                     </div>
                 </div>
 
                 <div class="user_address card">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget risus odio</p>
+                    <p>21 Olugbani street, Ikotun, Lagos.</p>
+                    <p>21 Olugbani street, Ikotun, Lagos.</p>
                 </div>
             </div>
         </section>
@@ -118,7 +142,8 @@
                     <h3>Post payment to loan <code>123456789</code></h3>
                     <hr>
                     <label for="payment_amount"><b>Amount</b></label>
-                    <input class="modal_input" type="text" placeholder="Enter payment amount" name="payment_amount" required>
+                    <input class="modal_input" type="number" min="1" placeholder="Enter payment amount" name="payment_amount" required>
+                    <input type="hidden" id="adminid" name="adminid" value="4">
 
                     <div class="clearfix">
                         <button
@@ -134,6 +159,7 @@
 
         <footer>
             <p>Quick Credit &copy; 2019</p>
+            <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
         </footer>
         
         <script src="./js/loan.js"></script>

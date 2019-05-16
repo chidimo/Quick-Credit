@@ -4,6 +4,20 @@ const signup_form = document.getElementById('signup_form');
 const activate_signup = document.getElementById('activate_signup');
 const activate_signin = document.getElementById('activate_signin');
 
+const sign_in_button = document.getElementById('sign_in_button');
+const sign_up_button = document.getElementById('sign_up_button');
+
+// temporarily redirect the sign up and sign in pages to dashboard
+sign_in_button.addEventListener('click', e => {
+    e.preventDefault();
+    window.location = './dashboard.html';
+});
+
+sign_up_button.addEventListener('click', e => {
+    e.preventDefault();
+    window.location = './profile.edit.html';
+});
+
 activate_signin.addEventListener('click', e => {
     e.preventDefault();
     signup_form.classList.add('hide_form');
