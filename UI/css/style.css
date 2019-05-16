@@ -188,6 +188,7 @@ nav.menu {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: space-between;
+    align-items: center;
     width: 80%;
     margin: auto;
 }
@@ -212,19 +213,37 @@ nav.menu {
 	box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
     background: #f1f1f1;
     border-radius: 5px;
-}
-
-.sub_menu p {
-    color: #3a81bf;
-    font-size: 12px;
+    color: #333A56;
+    font-weight: bold;
     text-align: center;
 }
 
-.sub_menu a {
-    color: #547CFF;
+.submenu_username {
+    background-color: #cccccc;
+    padding: 10px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
 }
 
-.menu li:hover .sub_menu {
+.submenu_username a {
+    text-transform: capitalize;
+    margin: 0;
+    font-size: 16px;
+}
+
+.sub_routes {
+    padding: 15px 5px;
+}
+
+.submenu_hr {
+    margin: 0;
+}
+
+#sub_menu a {
+    color: #333A56;
+}
+
+.menu li:hover #sub_menu {
 	z-index:1;
 	opacity:1;
 }
@@ -297,7 +316,7 @@ footer {
     }
 
     nav {
-        margin-top: 10px;
+        padding: 5px 0;
     }
 
     nav > ul {
@@ -309,9 +328,7 @@ footer {
     .container, .nav_div {
         width: 95%;
     }
-    button {
-        margin-top: 5px;
-    }
+
     header #branding,
     #newsletter h1,
     #newsletter form
