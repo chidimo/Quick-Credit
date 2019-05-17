@@ -84,8 +84,8 @@ hr {
     margin-right: auto;
     padding: 0 30px 30px 30px;
     background: #ffffff;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgb(51, 58, 86, 0.5);
 }
 
 .form_wrapper input[type='email'],
@@ -433,18 +433,21 @@ footer {
 /* authentication */
 
 .authentication_div {
-    background: #ffffff;
     text-align: center;
     cursor: pointer;
+    opacity: 0.4
 }
 
 #reg_form_toggle {
     margin-top: 30px;
     display: grid;
     max-width: 650px;
+    border-radius: 5px;
     grid-template-columns: 50% 50%;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+    background: #f1f1f1;
+    padding-top: 0;
 }
 
 #reg_form_toggle h4 {
@@ -453,11 +456,12 @@ footer {
     text-transform: uppercase;
 }
 
-.deselected {
-    border-bottom: 1px solid #132B40;
-    background: #F7F5E6;
+.selected {
+    /* border-bottom: 1px solid rgb(51, 58, 86, 0.3); */
+    background: #FFFFFF;
     color:#333A56;
-    font-size: 14px;
+    font-size: 18px;
+    opacity: 1;
 }
 
 .hide_form {

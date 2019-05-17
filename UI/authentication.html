@@ -25,11 +25,11 @@
                 <section class="authentication_section">
         
                     <div id="reg_form_toggle" class="container">
-                        <div id="activate_signin" class="authentication_div">
+                        <div id="activate_signin" class="authentication_div selected">
                             <h4>Sign In</h4>
                         </div>
         
-                        <div id='activate_signup' class="authentication_div deselected">
+                        <div id='activate_signup' class="authentication_div">
                             <h4>Sign Up</h4>
                         </div>
                     </div>
@@ -61,6 +61,12 @@
                                 <label for="email"><b>Email</b></label>
                                 <input type="email" placeholder="Enter email" name="email">
             
+                                <label for="first_name"><b>First Name</b></label>
+                                <input type="text" placeholder="First Name" name="first_name" required>
+                
+                                <label for="last_name"><b>Last Name</b></label>
+                                <input type="text" placeholder="Last Name" name="last_name" required>
+                
                                 <label for="password"><b>Password</b></label>
                                 <input type="password" placeholder="Enter password" name="password">
             

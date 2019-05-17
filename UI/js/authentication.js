@@ -15,7 +15,7 @@ sign_in_button.addEventListener('click', e => {
 
 sign_up_button.addEventListener('click', e => {
     e.preventDefault();
-    window.location = './profile.edit.html';
+    window.location = './dashboard.html';
 });
 
 activate_signin.addEventListener('click', e => {
@@ -23,8 +23,8 @@ activate_signin.addEventListener('click', e => {
     signup_form.classList.add('hide_form');
     signin_form.classList.remove('hide_form');
 
-    activate_signin.classList.remove('deselected');
-    activate_signup.classList.add('deselected');
+    activate_signin.classList.add('selected');
+    activate_signup.classList.remove('selected');
 });
 
 activate_signup.addEventListener('click', e => {
@@ -32,6 +32,6 @@ activate_signup.addEventListener('click', e => {
     signin_form.classList.add('hide_form');
     signup_form.classList.remove('hide_form');
 
-    activate_signup.classList.remove('deselected');
-    activate_signin.classList.add('deselected');
+    activate_signup.classList.add('selected');
+    activate_signin.classList.remove('selected');
 });
