@@ -1,23 +1,15 @@
-import { body, validationResult } from 'express-validator/check';
+import { body } from 'express-validator/check';
 import { sanitizeBody } from 'express-validator/filter';
+import validate_error_or_next from './validate_error_or_next';
 
-// import { dev_logger } from '../utils/loggers';
-
-const ParamterValidators = {
+const UsersValidators = {
     emailValidator: [
         body('email')
             .isEmail()
             .withMessage('Please provide a valid email address')
             .normalizeEmail(),
         sanitizeBody('email').trim().escape(),
-
-        (req, res, next) => {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json({ errors: errors.array() });
-            }
-            return next();
-        }
+        validate_error_or_next
     ],
 
     passwordValidator: [
@@ -30,14 +22,7 @@ const ParamterValidators = {
             .isAlphanumeric().withMessage('Password must be alphanumeric'),
         sanitizeBody('password').trim().escape(),
         sanitizeBody('confirm_password').trim().escape(),
-
-        (req, res, next) => {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json({ errors: errors.array() });
-            }
-            return next();
-        }
+        validate_error_or_next
     ],
 
     confirmPasswordValidator: [
@@ -50,14 +35,7 @@ const ParamterValidators = {
                 }
                 else return value;
             }),
-
-        (req, res, next) => {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json({ errors: errors.array() });
-            }
-            return next();
-        }
+        validate_error_or_next
     ],
 
     updateProfileValidator: [
@@ -79,15 +57,8 @@ const ParamterValidators = {
         sanitizeBody('phone').trim().escape(),
         sanitizeBody('home').trim().escape(),
         sanitizeBody('office').trim().escape(),
-
-        (req, res, next) => {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json({ errors: errors.array() });
-            }
-            return next();
-        }
+        validate_error_or_next
     ]
 };
 
-export default ParamterValidators;
+export default UsersValidators;
