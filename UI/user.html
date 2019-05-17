@@ -12,143 +12,152 @@
     </head>
 
     <body>
-        <header id="header">
-            <div class="nav_div">
-                <div id="branding">
-                    <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
-                </div>
-
-                <nav class="menu">
-                    <ul class="base_ul">
-                        <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
-
-                        <li>
-                            <a id="profile_dropdown" href="#" class="">
-                                <span class="micro_avatar_wrapper">
-                                    <img class="micro_avatar" src="./img/chidi.jpg" alt="">
-                                </span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 17 8.59"
-                                    class="icon">
-                                        <path
-                                            d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
-                                            fill="none"
-                                            stroke="#686b6e"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-miterlimit="10">
-                                        </path>
-                                </svg>
-                            </a>
-
-                            <ul id="sub_menu">
-                                <div class="submenu_username">
-                                    <a href="./dashboard.html">
-                                        <div>first name last name</div>
-                                    </a>
-                                </div>
-                                <hr class="submenu_hr">
+        <div class="page_wrapper">
+            <div class="page_section_one">
+                <header id="header">
+                    <div class="nav_div">
+                        <div id="branding">
+                            <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                        </div>
+        
+                        <nav class="menu">
+                            <ul class="base_ul">
+                                <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
+        
                                 <li>
-                                    <a href="profile.edit.html">
-                                        <div class="sub_routes">Edit profile</div>
+                                    <a id="profile_dropdown" href="#" class="">
+                                        <span class="micro_avatar_wrapper">
+                                            <img class="micro_avatar" src="./img/chidi.jpg" alt="">
+                                        </span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 17 8.59"
+                                            class="icon">
+                                                <path
+                                                    d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
+                                                    fill="none"
+                                                    stroke="#686b6e"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-miterlimit="10">
+                                                </path>
+                                        </svg>
                                     </a>
-                                </li>
-                                <hr class="submenu_hr">
-                                <li>
-                                    <a href="authentication.html">
-                                        <div class="sub_routes">Logout</div>
-                                    </a>
+        
+                                    <ul id="sub_menu">
+                                        <div class="submenu_username">
+                                            <a href="./dashboard.html">
+                                                <div>first name last name</div>
+                                            </a>
+                                        </div>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="profile.edit.html">
+                                                <div class="sub_routes">Edit profile</div>
+                                            </a>
+                                        </li>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="authentication.html">
+                                                <div class="sub_routes">Logout</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+                        </nav>
+                    </div>
+                </header>
+                
+                <section id="main_loan">
+                    <div class="container">
+                        <!--show the checkmark only if the load has been repaid-->
+                        <h2 id="page_heading">
+                            User | <code>email@address.com</code> <span style="color:green">&#x2714</span>
+                        </h1>
         
-        <section id="main_loan">
-            <div class="container">
-                <!--show the checkmark only if the load has been repaid-->
-                <h2 id="page_heading">
-                    User | <code>email@address.com</code> <span style="color:green">&#x2714</span>
-                </h1>
-
-                <div class="admin_actions_buttons">
-                    <!--Each of these buttons will be available based on the user's verification status-->
-                    <button
-                        id="verify_user"
-                        class="button_1 shadowed_button approve"
-                    >
-                        Verify
-                    </button>
-
-                    <button
-                        id="un_verify_user"
-                        class="button_1 shadowed_button reject"
-                    >
-                        Revoke verification
-                    </button>
-                </div>
-
-                <div class="user_card card">
-                    <div class="user_photo">
-                        <img src="./img//chidi.jpg" alt="">
-                    </div>
-                    <hr class="card_divider">
-
-                    <div class="user_info">
-                        <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
-                        <p>email@address.com</p>
-                        <p>+2341234567890</p>
-                    </div>
-                </div>
-
-                <div class="user_address card">
-                    <p>21 Olugbani street, Ikotun, Lagos.</p>
-                    <p>21 Olugbani street, Ikotun, Lagos.</p>
-                </div>
+                        <div class="admin_actions_buttons">
+                            <!--Each of these buttons will be available based on the user's verification status-->
+                            <button
+                                id="verify_user"
+                                class="button_1 shadowed_button approve"
+                            >
+                                Verify
+                            </button>
+        
+                            <button
+                                id="un_verify_user"
+                                class="button_1 shadowed_button reject"
+                            >
+                                Revoke verification
+                            </button>
+                        </div>
+        
+                        <div class="user_card card">
+                            <div class="user_photo">
+                                <img src="./img//chidi.jpg" alt="">
+                            </div>
+                            <hr class="card_divider">
+        
+                            <div class="user_info">
+                                <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
+                                <p>email@address.com</p>
+                                <p>+2341234567890</p>
+                            </div>
+                        </div>
+        
+                        <div class="user_address card">
+                            <p>21 Olugbani street, Ikotun, Lagos.</p>
+                            <p>21 Olugbani street, Ikotun, Lagos.</p>
+                        </div>
+                    
+                        <h3>email@address.com's Recent Loans</h3>
+                        <div class="table_wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Application date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+        
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                        <td>Pending</td>
+                                        <td>100,000</td>
+                                    </tr>
             
-                <h3>email@address.com's Recent Loans</h3>
-                <div class="table_wrapper">
-                    <table>
-                        <tr>
-                            <th>S/N</th>
-                            <th>Application date</th>
-                            <th>Status</th>
-                            <th>Amount</th>
-                        </tr>
-
-                        <tr>
-                            <td>1</td>
-                            <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                            <td>Pending</td>
-                            <td>100,000</td>
-                        </tr>
-
-                        <tr>
-                            <td>2</td>
-                            <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                            <td style="color:green">Approved</td>
-                            <td>50,000</td>
-                        </tr>
-
-                        <tr>
-                            <td>3</td>
-                            <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                            <td style="color:red">Rejected</td>
-                            <td>1,000,000</td>
-                        </tr>
-                    </table>
-                </div>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                        <td style="color:green">Approved</td>
+                                        <td>50,000</td>
+                                    </tr>
+            
+                                    <tr>
+                                        <td>3</td>
+                                        <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
+                                        <td style="color:red">Rejected</td>
+                                        <td>1,000,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
-
-        <footer>
-            <p>Quick Credit &copy; 2019</p>
-            <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
-        </footer>
-        
+    
+            <footer>
+                <div class="footer_text">
+                    <p>Quick Credit &copy; 2019</p>
+                    <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
+                </div>
+            </footer>
+        </div>
         <script src="./js/user.js"></script>
     </body>
 </html>

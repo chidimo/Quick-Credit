@@ -12,69 +12,79 @@
     </head>
 
     <body>
-        <header id="header">
-            <div class="container">
-                <div id="branding">
-                    <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
-                </div>
-            </div>
-        </header>
+        <div class="page_wrapper">
+            <div class="page_section_one">
+                <header id="header">
+                    <div class="container">
+                        <div id="branding">
+                            <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                        </div>
+                    </div>
+                </header>
+                
+                <section class="authentication_section">
         
-        <section class="authentication_section">
-
-            <div id="reg_form_toggle" class="container">
-                <div id="activate_signin" class="authentication_div">
-                    <h4>Sign In</h4>
-                </div>
-
-                <div id='activate_signup' class="authentication_div deselected">
-                    <h4>Sign Up</h4>
-                </div>
+                    <div id="reg_form_toggle" class="container">
+                        <div id="activate_signin" class="authentication_div">
+                            <h4>Sign In</h4>
+                        </div>
+        
+                        <div id='activate_signup' class="authentication_div deselected">
+                            <h4>Sign Up</h4>
+                        </div>
+                    </div>
+        
+                    <div class="form_wrapper container">
+        
+                        <div id="signin_form" class="">
+                            <h1 class="authentication_title">Sign in to your account</h1>
+                            <hr>
+                            <form class="authentication sign_up" action="">
+                                <label for="email"><b>Email</b></label>
+                                <input type="email" placeholder="Enter email" name="email">
+            
+                                <label for="password"><b>Password</b></label>
+                                <input type="password" placeholder="Enter password" name="password">
+        
+                                <label for="remember">
+                                    <input type="checkbox" checked="checked" name="remember">Remember me
+                                </label>
+                                <button id="sign_in_button" type="submit" class="shadowed_button submit_button">Sign In</button>
+                            </form>
+                        </div>
+        
+                        <div id="signup_form" class="hide_form">
+                            <h1 class="authentication_title">Create your account</h1>
+                            <p class="form_message">Please fill the form to create an account.</p>
+                            <hr>
+                            <form class="authentication sign_up" action="">
+                                <label for="email"><b>Email</b></label>
+                                <input type="email" placeholder="Enter email" name="email">
+            
+                                <label for="password"><b>Password</b></label>
+                                <input type="password" placeholder="Enter password" name="password">
+            
+                                <label for="password-confirm"><b>Confirm password</b></label>
+                                <input type="password" placeholder="Confirm password" name="confirm_password">
+            
+                                <label for="remember">
+                                    <input type="checkbox" checked="checked">Remember me
+                                </label>
+                                <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                                <button id="sign_up_button" type="submit" class="shadowed_button submit_button">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
             </div>
-
-            <div class="form_wrapper container">
-
-                <div id="signin_form" class="">
-                    <h1 class="authentication_title">Sign in to your account</h1>
-                    <hr>
-                    <form class="authentication sign_up" action="">
-                        <label for="email"><b>Email</b></label>
-                        <input type="email" placeholder="Enter email" name="email">
-    
-                        <label for="password"><b>Password</b></label>
-                        <input type="password" placeholder="Enter password" name="password">
-
-                        <label for="remember">
-                            <input type="checkbox" checked="checked" name="remember">Remember me
-                        </label>
-                        <button id="sign_in_button" type="submit" class="shadowed_button submit_button">Sign In</button>
-                    </form>
+            
+            <footer>
+                <div class="footer_text">
+                    <p>Quick Credit &copy; 2019</p>
+                    <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
                 </div>
-
-                <div id="signup_form" class="hide_form">
-                    <h1 class="authentication_title">Create your account</h1>
-                    <p class="form_message">Please fill the form to create an account.</p>
-                    <hr>
-                    <form class="authentication sign_up" action="">
-                        <label for="email"><b>Email</b></label>
-                        <input type="email" placeholder="Enter email" name="email">
-    
-                        <label for="password"><b>Password</b></label>
-                        <input type="password" placeholder="Enter password" name="password">
-    
-                        <label for="password-confirm"><b>Confirm password</b></label>
-                        <input type="password" placeholder="Confirm password" name="confirm_password">
-    
-                        <label for="remember">
-                            <input type="checkbox" checked="checked">Remember me
-                        </label>
-                        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                        <button id="sign_up_button" type="submit" class="shadowed_button submit_button">Sign Up</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
+            </footer>
+        </div>
         <script src="./js/authentication.js"></script>        
     </body>
 </html>

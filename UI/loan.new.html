@@ -12,83 +12,87 @@
     </head>
 
     <body>
-        <header id="header">
-            <div class="nav_div">
-                <div id="branding">
-                    <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
-                </div>
-
-                <nav class="menu">
-                    <ul class="base_ul">
-                        <li>
-                            <a id="profile_dropdown" href="#" class="">
-                                <span class="micro_avatar_wrapper">
-                                    <img class="micro_avatar" src="./img/chidi.jpg" alt="">
-                                </span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 17 8.59"
-                                    class="icon">
-                                        <path
-                                            d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
-                                            fill="none"
-                                            stroke="#686b6e"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-miterlimit="10">
-                                        </path>
-                                </svg>
-                            </a>
-
-                            <ul id="sub_menu">
-                                <div class="submenu_username">
-                                    <a href="./dashboard.html">
-                                        <div>first name last name</div>
-                                    </a>
-                                </div>
-                                <hr class="submenu_hr">
+        <div class="page_wrapper">
+            <div class="page_section_one">
+                <header id="header">
+                    <div class="nav_div">
+                        <div id="branding">
+                            <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                        </div>
+        
+                        <nav class="menu">
+                            <ul class="base_ul">
                                 <li>
-                                    <a href="profile.edit.html">
-                                        <div class="sub_routes">Edit profile</div>
+                                    <a id="profile_dropdown" href="#" class="">
+                                        <span class="micro_avatar_wrapper">
+                                            <img class="micro_avatar" src="./img/chidi.jpg" alt="">
+                                        </span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 17 8.59"
+                                            class="icon">
+                                                <path
+                                                    d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
+                                                    fill="none"
+                                                    stroke="#686b6e"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-miterlimit="10">
+                                                </path>
+                                        </svg>
                                     </a>
-                                </li>
-                                <hr class="submenu_hr">
-                                <li>
-                                    <a href="authentication.html">
-                                        <div class="sub_routes">Logout</div>
-                                    </a>
+        
+                                    <ul id="sub_menu">
+                                        <div class="submenu_username">
+                                            <a href="./dashboard.html">
+                                                <div>first name last name</div>
+                                            </a>
+                                        </div>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="profile.edit.html">
+                                                <div class="sub_routes">Edit profile</div>
+                                            </a>
+                                        </li>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="authentication.html">
+                                                <div class="sub_routes">Logout</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-
-        <section class="loan_application">
-            <div class="container form_wrapper">
-                <form action="" method="POST">
-                    <h1>Apply for loan</h1>
-                    <hr>
-                    <label for="amount"><b>Amount</b></label>
-                    <input type="number" min="100000" max="1000000" placeholder="Enter loan amount" name="amount" required>
-    
-                    <label for="tenor"><b>Tenor</b></label>
-                    <input type="number" min="1" max="12" placeholder="Tenor" name="tenor" required>
-
-                    <input type="hidden" id="userid" name="userid" value="2">
-    
-                    <button type="submit" class="shadowed_button submit_button">Apply</button>
-                </form>
-            </div>
-        </section>
-
-        <footer>
-            <p>Quick Credit &copy; 2019</p>
-            <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
-        </footer>
+                        </nav>
+                    </div>
+                </header>
         
+                <section class="loan_application">
+                    <div class="container form_wrapper">
+                        <form action="" method="POST">
+                            <h1>Apply for loan</h1>
+                            <hr>
+                            <label for="amount"><b>Amount</b></label>
+                            <input type="number" min="100000" max="1000000" placeholder="Enter loan amount" name="amount" required>
+            
+                            <label for="tenor"><b>Tenor</b></label>
+                            <input type="number" min="1" max="12" placeholder="Tenor" name="tenor" required>
+        
+                            <input type="hidden" id="userid" name="userid" value="2">
+            
+                            <button type="submit" class="shadowed_button submit_button">Apply</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+    
+            <footer>
+                <div class="footer_text">
+                    <p>Quick Credit &copy; 2019</p>
+                    <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
+                </div>
+            </footer>
+        </div>
         <script src="./js/qcredit.js"></script>
-
     </body>
 </html>
