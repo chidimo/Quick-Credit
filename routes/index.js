@@ -43,13 +43,15 @@ router.post('/loans',
     LoansValidators.validateAmount,
     LoansValidators.validateTenor,
     LoansController.create_loan);
-router.patch('/loans/:id/approve', LoansController.approve_loan);
-router.patch('/loans/:id/reject', LoansController.reject_loan);
+router.patch('/loans/:id/approve', LoansController.approve_or_reject_loan);
+router.patch('/loans/:id/reject', LoansController.approve_or_reject_loan);
 router.get(
     '/loans/:id/repayments', LoansController.loan_repayment_history
 );
 router.post('/loans/:id/repayment',
     LoansValidators.validateRepayAmount,
     LoansController.post_repayment);
+router.get('/repayments', LoansController.get_all_repayments);
+router.get('/repayments/:id', LoansController.get_repayment);
 
 export default router;
