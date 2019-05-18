@@ -7,7 +7,7 @@ export const check_user_existence = async (model_instance, req, res) => {
     const { email } = req.body;
     try {
         const { rows } = await model_instance.select(
-            'id, email', `email='${email}'`);
+            'id, email', `WHERE email='${email}'`);
         const [ user, ] = rows;
         if (user) return user;
     }
@@ -32,7 +32,7 @@ export const get_user = async (model_instance, req, res, code) => {
         const { rows } = await model_instance.select(
             `id, email, password, firstname,
             lastname, phone, status, address`,
-            `email='${email}'`
+            `WHERE email='${email}'`
         );
         const [ user, ] = rows;
         if (!user) {

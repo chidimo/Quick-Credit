@@ -12,7 +12,7 @@ const UsersController = {
             const { rows } = await users_model.select(
                 `id, email, password, firstname,
                     lastname, phone, status, address`,
-                `id=${id}`
+                `WHERE id=${id}`
             );
             if (rows.length === 0) {
                 // user was not found
@@ -32,7 +32,7 @@ const UsersController = {
         try {
             await users_model.update(
                 'status=\'verified\'',
-                `id=${id}`
+                `WHERE id=${id}`
             );
             UsersController.get_user(req, res);
         }
@@ -48,7 +48,7 @@ const UsersController = {
                 data = await users_model.select(
                     `id, email, password, firstname,
                     lastname, phone, status, address`,
-                    `status='${status}'`
+                    `WHERE status='${status}'`
                 );
             }
             else {
@@ -72,7 +72,7 @@ const UsersController = {
                     lastname='${lastname}',
                     phone='${phone}',
                     address='{"home": "${home}", "office": "${office}"}'`,
-                `id=${id}`
+                `WHERE id=${id}`
             );
             UsersController.get_user(req, res);
         }

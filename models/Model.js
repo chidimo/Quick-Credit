@@ -28,13 +28,13 @@ class Model {
 
     async select(columns, clause) {
         let query = `SELECT ${columns} FROM ${this.table}`;
-        if (clause) query = `${query} WHERE ${clause}`;
+        if (clause) query = `${query} ${clause}`;
         dev_logger(`\nSELECT QUERY: ${query}\n`);
         return await this.pool.query(query);
     }
 
     async update(columns, clause) {
-        const query = `UPDATE ${this.table} SET ${columns} WHERE ${clause}`;
+        const query = `UPDATE ${this.table} SET ${columns} ${clause}`;
         dev_logger(`\nUPDATE QUERY: ${query}\n`);
         return await this.pool.query(query);
     }
