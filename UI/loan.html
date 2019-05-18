@@ -7,161 +7,159 @@
         <meta name="Author" content="Orji Chidi Matthew">
         <meta name="description" content="Easily accessible short term loans">
         <meta name="keywords", content="loan, cash, short term loan">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./css/style.css">
         <title>Quick Credit | Loan - Loan ID</title>
     </head>
 
     <body>
-        <header id="header">
-            <div class="nav_div">
-                <div id="branding">
-                    <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
-                </div>
-
-                <nav class="menu">
-                    <ul class="base_ul">
-                        <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
-
-                        <li>
-                            <a id="profile_dropdown" href="#" class="">
-                                <span class="micro_avatar_wrapper">
-                                    <img class="micro_avatar" src="./img/chidi.jpg" alt="">
-                                </span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 17 8.59"
-                                    class="icon">
-                                        <path
-                                            d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
-                                            fill="none"
-                                            stroke="#686b6e"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-miterlimit="10">
-                                        </path>
-                                </svg>
-                            </a>
-
-                            <ul id="sub_menu">
-                                <div class="submenu_username">
-                                    <a href="./dashboard.html">
-                                        <div>first name last name</div>
-                                    </a>
-                                </div>
-                                <hr class="submenu_hr">
+        <div class="page_wrapper">
+            <div class="page_section_one">
+                <header id="header">
+                    <div class="nav_div">
+                        <div id="branding">
+                            <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                        </div>
+        
+                        <nav class="menu">
+                            <ul class="base_ul">
+                                <li><a href="loan.new.html"><button class="button_1 apply_for_loan">Apply for loan</button></a></li>
+        
                                 <li>
-                                    <a href="profile.edit.html">
-                                        <div class="sub_routes">Edit profile</div>
+                                    <a id="profile_dropdown" href="#" class="">
+                                        <span class="micro_avatar_wrapper">
+                                            <img class="micro_avatar" src="./img/chidi.jpg" alt="">
+                                        </span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 17 8.59"
+                                            class="icon">
+                                                <path
+                                                    d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
+                                                    fill="none"
+                                                    stroke="#686b6e"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-miterlimit="10">
+                                                </path>
+                                        </svg>
                                     </a>
-                                </li>
-                                <hr class="submenu_hr">
-                                <li>
-                                    <a href="authentication.html">
-                                        <div class="sub_routes">Logout</div>
-                                    </a>
+        
+                                    <ul id="sub_menu">
+                                        <div class="submenu_username">
+                                            <a href="./dashboard.html">
+                                                <div>chidi orji matthew</div>
+                                            </a>
+                                        </div>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="profile.edit.html">
+                                                <div class="sub_routes">Edit profile</div>
+                                            </a>
+                                        </li>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="authentication.html">
+                                                <div class="sub_routes">Logout</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+                        </nav>
+
+                    </div>
+                </header>
+                
+                <section id="main_loan">
+                    <div class="container">
         
-        <section id="main_loan">
-            <div class="container">
+                        <!--show the checkmark only if the load has been repaid-->
+                        <h2 class="page_heading">Loan | 1</h2>
+        
+                        <hr class="section_divider">
 
-                <!--show the checkmark only if the load has been repaid-->
-                <h2 class="page_heading">Loan | <code>123456789</code> <span style="color:green">&#x2714</span></h2>
+                        <div class="admin_actions_buttons">
+                            <!--Approve and reject buttons will be visible only if the loan status is pending-->
+                            <button id="approve_loan_application" class="button_1 dim approve shadow">
+                                Approve
+                            </button>
+        
+                            <button id="reject_loan_application" class="button_1 dim reject shadow">
+                                Reject
+                            </button>
+        
+                            <!--This button will only be visible for open loans-->
+                            <button id="post_payment_to_loan" class="button_1 dim shadow"
+                                onclick="document.getElementById('loan_payment_modal').style.display='block'">
+                                Post payment
+                            </button>
+                        </div>
 
-                <div class="admin_actions_buttons">
-                    <!--Approve and reject buttons will be visible only if the loan status is pending-->
-                    <button
-                        id="approve_loan_application"
-                        class="button_1 shadowed_button approve"
-                    >
-                        Approve
-                    </button>
-
-                    <button
-                        id="reject_loan_application"
-                        class="button_1 shadowed_button reject"
-                    >
-                        Reject
-                    </button>
-
-                    <!--This button will only be visible for open loans-->
-                    <button
-                        id="post_payment_to_loan"
-                        class="button_1 shadowed_button"
-                        onclick="document.getElementById('loan_payment_modal').style.display='block'"
-                    >
-                        Post payment
-                    </button>
-                </div>
-
-                <div class="loan_card card">
-                    <div class="loan_left_grid">
-                        <p class="amount">500,000</p>
-                        <p class="status">Approved</p>
+                        <hr class="section_divider">
+        
+                        <div class="loan_card card">
+                            <div class="loan_left_grid">
+                                <p class="amount">500,000</p>
+                                <p class="status">Approved</p>
+                            </div>
+        
+                            <hr class="card_divider">
+        
+                            <div class="loan_right_grid">
+                                <p class="interest">Interest: 25,000</p>
+                                <p class="tenor">Tenor: 12 months</p>
+                                <p class="installments">Installments: 43,750</p>
+                                <p class="balance">Balance: 481,250</p>
+                            </div>
+                        </div>
+        
+                        <div class="user_card card">
+                            <div class="user_photo">
+                                <img src="./img/chidi.jpg" alt="">
+                            </div>
+                            <hr class="card_divider">
+        
+                            <div class="user_info">
+                                <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
+                                <p>email@address.com</p>
+                                <p>+2341234567890</p>
+                            </div>
+                        </div>
                     </div>
+                </section>
 
-                    <hr class="card_divider">
-
-                    <div class="loan_right_grid">
-                        <p class="interest">Interest: 25,000</p>
-                        <p class="tenor">Tenor: 12 months</p>
-                        <p class="installments">Installments: 43,750</p>
-                        <p class="balance">Balance: 481,250</p>
-                    </div>
-                </div>
-
-                <div class="user_card card">
-                    <div class="user_photo">
-                        <img src="./img/chidi.jpg" alt="">
-                    </div>
-                    <hr class="card_divider">
-
-                    <div class="user_info">
-                        <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
-                        <p>email@address.com</p>
-                        <p>+2341234567890</p>
-                    </div>
-                </div>
-
-                <div class="user_address card">
-                    <p>21 Olugbani street, Ikotun, Lagos.</p>
-                    <p>21 Olugbani street, Ikotun, Lagos.</p>
+                <div id="loan_payment_modal" class="modal">
+                    <span class="close" onclick="document.getElementById('loan_payment_modal').style.display='none'">&times;</span>
+                    <form action="" class="modal_content">
+                        <div class="container">
+                            <h3>Post payment to loan <code>123456789</code></h3>
+                            <hr>
+                            <label for="payment_amount"><b>Amount</b></label>
+                            <input class="modal_input" type="number" min="1" placeholder="Enter payment amount" name="payment_amount" required>
+                            <input type="hidden" id="adminid" name="adminid" value="4">
+        
+                            <div class="clearfix">
+                                <button
+                                    onclick="document.getElementById('loan_payment_modal').style.display='none'"
+                                    class="button_1 dim cancel_button">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="button_1 dim save_profile_button">Post payment</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </section>
-
-        <div id="loan_payment_modal" class="modal">
-            <span class="close" onclick="document.getElementById('loan_payment_modal').style.display='none'">&times;</span>
-            <form action="" class="modal_content">
-                <div class="container">
-                    <h3>Post payment to loan <code>123456789</code></h3>
-                    <hr>
-                    <label for="payment_amount"><b>Amount</b></label>
-                    <input class="modal_input" type="number" min="1" placeholder="Enter payment amount" name="payment_amount" required>
-                    <input type="hidden" id="adminid" name="adminid" value="4">
-
-                    <div class="clearfix">
-                        <button
-                            onclick="document.getElementById('loan_payment_modal').style.display='none'"
-                            class="button_1 shadowed_button cancel_button">
-                            Cancel
-                        </button>
-                        <button type="submit" class="button_1 shadowed_button save_profile_button">Post payment</button>
-                    </div>
+            
+            <footer>
+                <div class="footer_text">
+                    <p>Quick Credit &copy; 2019</p>
+                    <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
                 </div>
-            </form>
+            </footer>
         </div>
-
-        <footer>
-            <p>Quick Credit &copy; 2019</p>
-            <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
-        </footer>
-        
         <script src="./js/loan.js"></script>
     </body>
 </html>

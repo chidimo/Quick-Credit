@@ -7,97 +7,103 @@
         <meta name="Author" content="Orji Chidi Matthew">
         <meta name="description" content="Easily accessible short term loans">
         <meta name="keywords", content="loan, cash, short term loan">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./css/style.css">
         <title>Quick Credit | Dashboard</title>
     </head>
 
     <body>
-        <header id="header">
-            <div class="nav_div">
-                <div id="branding">
-                    <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
-                </div>
-
-                <nav class="menu">
-                    <ul class="base_ul">
-                        <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
-
-                        <li>
-                            <a id="profile_dropdown" href="#" class="">
-                                <span class="micro_avatar_wrapper">
-                                    <img class="micro_avatar" src="./img/chidi.jpg" alt="">
-                                </span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 17 8.59"
-                                    class="icon">
-                                        <path
-                                            d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
-                                            fill="none"
-                                            stroke="#686b6e"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-miterlimit="10">
-                                        </path>
-                                </svg>
-                            </a>
-
-                            <ul id="sub_menu">
-                                <div class="submenu_username">
-                                    <a href="./dashboard.html">
-                                        <div>first name last name</div>
-                                    </a>
-                                </div>
-                                <hr class="submenu_hr">
+        <div class="page_wrapper">
+            <div class="page_section_one">
+                <header id="header">
+                    <div class="nav_div">
+                        <div id="branding">
+                            <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                        </div>
+        
+                        <nav class="menu">
+                            <ul class="base_ul">
+                                <li><a href="loan.new.html"><button class="button_1 apply_for_loan">Apply for loan</button></a></li>
+        
                                 <li>
-                                    <a href="profile.edit.html">
-                                        <div class="sub_routes">Edit profile</div>
+                                    <a id="profile_dropdown" href="#" class="">
+                                        <span class="micro_avatar_wrapper">
+                                            <img class="micro_avatar" src="./img/chidi.jpg" alt="">
+                                        </span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 17 8.59"
+                                            class="icon">
+                                                <path
+                                                    d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
+                                                    fill="none"
+                                                    stroke="#686b6e"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-miterlimit="10">
+                                                </path>
+                                        </svg>
                                     </a>
-                                </li>
-                                <hr class="submenu_hr">
-                                <li>
-                                    <a href="authentication.html">
-                                        <div class="sub_routes">Logout</div>
-                                    </a>
+        
+                                    <ul id="sub_menu">
+                                        <div class="submenu_username">
+                                            <a href="./dashboard.html">
+                                                <div>chidi orji matthew</div>
+                                            </a>
+                                        </div>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="profile.edit.html">
+                                                <div class="sub_routes">Edit profile</div>
+                                            </a>
+                                        </li>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="authentication.html">
+                                                <div class="sub_routes">Logout</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-
-        <section class="profile_edit">
-            <div class="container form_wrapper">
-                <form action="" method="POST">
-                    <h1>Edit your profile</h1>
-                    <hr>
-                    <label for="first_name"><b>First Name</b></label>
-                    <input type="text" placeholder="First Name" name="first_name" required>
-    
-                    <label for="last_name"><b>Last Name</b></label>
-                    <input type="text" placeholder="Last Name" name="last_name" required>
-    
-                    <label for="phone_number"><b>Phone Number</b></label>
-                    <input type="tel" placeholder="Phone Number" name="phone_number" required>
-    
-                    <label for="home_address"><b>Home Address</b></label>
-                    <textarea type="text" placeholder="Home Address" name="home_address"></textarea>
-    
-                    <label for="office_address"><b>Office Address</b></label>
-                    <textarea type="text" placeholder="Home Address" name="office_address"></textarea>
-    
-                    <button type="submit" class="shadowed_button submit_button">Save Profile</button>
-                </form>
-            </div>
-        </sectio>
-
-        <footer>
-            <p>Quick Credit &copy; 2019</p>
-            <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
-        </footer>
+                        </nav>
+                    </div>
+                </header>
         
+                <section class="profile_edit">
+                    <div class="container form_wrapper">
+                        <form action="" method="POST">
+                            <h1>Edit your profile</h1>
+                            <hr>
+                            <label for="first_name"><b>First Name</b></label>
+                            <input type="text" value="Chidi" placeholder="First Name" name="first_name" required>
+            
+                            <label for="last_name"><b>Last Name</b></label>
+                            <input type="text" value="Orji" placeholder="Last Name" name="last_name" required>
+            
+                            <label for="phone_number"><b>Phone Number</b></label>
+                            <input type="tel" value="+2349036650603" placeholder="Phone Number" name="phone_number" required>
+            
+                            <label for="home_address"><b>Home Address</b></label>
+                            <textarea type="text" placeholder="Home Address" name="home_address"></textarea>
+            
+                            <label for="office_address"><b>Office Address</b></label>
+                            <textarea type="text" placeholder="Home Address" name="office_address"></textarea>
+            
+                            <button type="submit" class="dim submit_button">Save Profile</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            
+            <footer>
+                <div class="footer_text">
+                    <p>Quick Credit &copy; 2019</p>
+                    <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
+                </div>
+            </footer>
+        </div>
         <script src="./js/qcredit.js"></script>
-
     </body>
 </html>

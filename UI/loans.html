@@ -7,169 +7,174 @@
         <meta name="Author" content="Orji Chidi Matthew">
         <meta name="description" content="Easily accessible short term loans">
         <meta name="keywords", content="loan, cash, short term loan">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./css/style.css">
         <title>Quick Credit | Loans</title>
     </head>
 
     <body>
-        <header id="header">
-            <div class="nav_div">
-                <div id="branding">
-                    <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
-                </div>
-
-                <nav class="menu">
-                    <ul class="base_ul">
-                        <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
-
-                        <li>
-                            <a id="profile_dropdown" href="#" class="">
-                                <span class="micro_avatar_wrapper">
-                                    <img class="micro_avatar" src="./img/chidi.jpg" alt="">
-                                </span>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 17 8.59"
-                                    class="icon">
-                                        <path
-                                            d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
-                                            fill="none"
-                                            stroke="#686b6e"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-miterlimit="10">
-                                        </path>
-                                </svg>
-                            </a>
-
-                            <ul id="sub_menu">
-                                <div class="submenu_username">
-                                    <a href="./dashboard.html">
-                                        <div>first name last name</div>
-                                    </a>
-                                </div>
-                                <hr class="submenu_hr">
+        <div class="page_wrapper">
+            <div class="page_section_one">
+                <header id="header">
+                    <div class="nav_div">
+                        <div id="branding">
+                            <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                        </div>
+        
+                        <nav class="menu">
+                            <ul class="base_ul">
+                                <li><a href="loan.new.html"><buttoN class="button_1 apply_for_loan">Apply for loan</button></a></li>
+        
                                 <li>
-                                    <a href="profile.edit.html">
-                                        <div class="sub_routes">Edit profile</div>
+                                    <a id="profile_dropdown" href="#" class="">
+                                        <span class="micro_avatar_wrapper">
+                                            <img class="micro_avatar" src="./img/chidi.jpg" alt="">
+                                        </span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 17 8.59"
+                                            class="icon">
+                                                <path
+                                                    d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
+                                                    fill="none"
+                                                    stroke="#686b6e"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-miterlimit="10">
+                                                </path>
+                                        </svg>
                                     </a>
-                                </li>
-                                <hr class="submenu_hr">
-                                <li>
-                                    <a href="authentication.html">
-                                        <div class="sub_routes">Logout</div>
-                                    </a>
+        
+                                    <ul id="sub_menu">
+                                        <div class="submenu_username">
+                                            <a href="./dashboard.html">
+                                                <div>chidi orji matthew</div>
+                                            </a>
+                                        </div>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="profile.edit.html">
+                                                <div class="sub_routes">Edit profile</div>
+                                            </a>
+                                        </li>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="authentication.html">
+                                                <div class="sub_routes">Logout</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+                        </nav>
+                    </div>
+                </header>
+                
+                <section id="main_loans">
+                    <div class="container">
         
-        <section id="main_users">
-            <div class="container">
+                        <h2 id="page_heading">Loans</h2>
 
-                <h2 id="page_heading">Loans</h2>
-
-                <div class="admin_actions_buttons">
-                    <button
-                        class="button_1 shadowed_button"
-                    >
-                        Show all loans
-                    </button>
-
-                    <button
-                        class="button_1 shadowed_button"
-                    >
-                        Show open loans
-                    </button>
-
-                    <button
-                        class="button_1 shadowed_button"
-                    >
-                        Show closed loans
-                    </button>
-                </div>
-
-                <div class="table_wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S/N</th>
-                                <th>User</th>
-                                <th>Apply Date</th>
-                                <th>Status</th>
-                                <th>Amount</th>
-                                <th>Tenor</th>
-                                <th>Interest</th>
-                                <th>Repaid</th>
-                                <th>Installments</th>
-                                <th>Balance</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <a href="./loan.html">
-                                        <div class="item_link">1</div>
-                                    </a>
-                                </td>
-                                <td>email@address.com</td>
-                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                <td>Pending</td>
-                                <td>100,000</td>
-                                <td>12</td>
-                                <td>5,000</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-    
-                            <tr>
-                                <td>
-                                    <a href="./loan.html">
-                                        <div class="item_link">2</div>
-                                    </a>
-                                </td>
-                                <td>email@address.com</td>
-                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                <td style="color:green">Approved</td>
-                                <td>50,000</td>
-                                <td>12</td>
-                                <td>2,500</td>
-                                <td>No</td>
-                                <td>4,375</td>
-                                <td>50,000</td>
-                            </tr>
-    
-                            <tr>
-                                <td>
-                                    <a href="./loan.html">
-                                        <div class="item_link">3</div>
-                                    </a>
-                                </td>
-                                <td>email@address.com</td>
-                                <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                <td style="color:red">Rejected</td>
-                                <td>80,000</td>
-                                <td>8</td>
-                                <td>4,000</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                        </tbod>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p>Quick Credit &copy; 2019</p>
-            <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
-        </footer>
+                        <hr class="section_divider">
         
+                        <div class="admin_actions_buttons">
+                            <button class="button_1 dim shadow">
+                                All loans
+                            </button>
+
+                            <button class="button_1 dim shadow">
+                                Open loans
+                            </button>
+        
+                            <button class="button_1 dim shadow">
+                                Closed loans
+                            </button>
+                        </div>
+
+                        <hr class="section_divider">
+        
+                        <div class="table_wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>User</th>
+                                        <th>Apply Date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                        <th>Tenor</th>
+                                        <th>Interest</th>
+                                        <th>Repaid</th>
+                                        <th>Installments</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+        
+                                <tbody>
+                                    <tr>
+                                        <td><a href="./loan.html">1</a></td>
+                                        <td><a href="./loan.html">email@address.com</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td><a href="./loan.html">Pending</a></td>
+                                        <td><a href="./loan.html">100,000</a></td>
+                                        <td><a href="./loan.html">12</a></td>
+                                        <td><a href="./loan.html">5,000</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                    </tr>
+            
+                                    <tr>
+                                        <td><a href="./loan.html">2</a></td>
+                                        <td><a href="./loan.html">email@address.com</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td class="approved_loan"><a href="./loan.html">Approved</a></td>
+                                        <td><a href="./loan.html">50,000</a></td>
+                                        <td><a href="./loan.html">12</a></td>
+                                        <td><a href="./loan.html">2,500</a></td>
+                                        <td><a href="./loan.html">No</a></td>
+                                        <td><a href="./loan.html">4,375</a></td>
+                                        <td><a href="./loan.html">50,000</a></td>
+                                    </tr>
+            
+                                    <tr>
+                                        <td><a href="./loan.html">3</a></td>
+                                        <td><a href="./loan.html">email@address.com</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td class="rejected_loan"><a href="./loan.html">Rejected</a></td>
+                                        <td><a href="./loan.html">80,000</a></td>
+                                        <td><a href="./loan.html">8</a></td>
+                                        <td><a href="./loan.html">4,000</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                    </tr>
+            
+                                    <tr>
+                                        <td><a href="./loan.html">4</a></td>
+                                        <td><a href="./loan.html">email@address.com</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td class="rejected_loan"><a href="./loan.html">Rejected</a></td>
+                                        <td><a href="./loan.html">80,000</a></td>
+                                        <td><a href="./loan.html">8</a></td>
+                                        <td><a href="./loan.html">4,000</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                        <td><a href="./loan.html">-</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <footer>
+                <div class="footer_text">
+                    <p>Quick Credit &copy; 2019</p>
+                    <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
+                </div>
+            </footer>
+        </div>
     </body>
 </html>
