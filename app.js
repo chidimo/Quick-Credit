@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import dotenv from 'dotenv';
 import validator from 'express-validator';
+import cors from 'cors';
 
 import indexRouter from './routes/index';
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(validator());
+app.use(cors());
 
 app.use('/', indexRouter);
 
