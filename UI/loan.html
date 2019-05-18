@@ -24,7 +24,7 @@
         
                         <nav class="menu">
                             <ul class="base_ul">
-                                <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
+                                <li><a href="loan.new.html"><button class="button_1 apply_for_loan">Apply for loan</button></a></li>
         
                                 <li>
                                     <a id="profile_dropdown" href="#" class="">
@@ -75,33 +75,28 @@
                     <div class="container">
         
                         <!--show the checkmark only if the load has been repaid-->
-                        <h2 class="page_heading">Loan | <code>123456789</code> <span style="color:green">&#x2714</span></h2>
+                        <h2 class="page_heading">Loan | 1</h2>
         
+                        <hr class="section_divider">
+
                         <div class="admin_actions_buttons">
                             <!--Approve and reject buttons will be visible only if the loan status is pending-->
-                            <button
-                                id="approve_loan_application"
-                                class="button_1 shadowed_button approve"
-                            >
+                            <button id="approve_loan_application" class="button_1 dim approve shadow">
                                 Approve
                             </button>
         
-                            <button
-                                id="reject_loan_application"
-                                class="button_1 shadowed_button reject"
-                            >
+                            <button id="reject_loan_application" class="button_1 dim reject shadow">
                                 Reject
                             </button>
         
                             <!--This button will only be visible for open loans-->
-                            <button
-                                id="post_payment_to_loan"
-                                class="button_1 shadowed_button"
-                                onclick="document.getElementById('loan_payment_modal').style.display='block'"
-                            >
+                            <button id="post_payment_to_loan" class="button_1 dim shadow"
+                                onclick="document.getElementById('loan_payment_modal').style.display='block'">
                                 Post payment
                             </button>
                         </div>
+
+                        <hr class="section_divider">
         
                         <div class="loan_card card">
                             <div class="loan_left_grid">
@@ -131,11 +126,6 @@
                                 <p>+2341234567890</p>
                             </div>
                         </div>
-        
-                        <div class="user_address card">
-                            <p>21 Olugbani street, Ikotun, Lagos.</p>
-                            <p>21 Olugbani street, Ikotun, Lagos.</p>
-                        </div>
                     </div>
                 </section>
 
@@ -152,10 +142,10 @@
                             <div class="clearfix">
                                 <button
                                     onclick="document.getElementById('loan_payment_modal').style.display='none'"
-                                    class="button_1 shadowed_button cancel_button">
+                                    class="button_1 dim cancel_button">
                                     Cancel
                                 </button>
-                                <button type="submit" class="button_1 shadowed_button save_profile_button">Post payment</button>
+                                <button type="submit" class="button_1 dim save_profile_button">Post payment</button>
                             </div>
                         </div>
                     </form>

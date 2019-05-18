@@ -24,7 +24,7 @@
         
                         <nav class="menu">
                             <ul class="base_ul">
-                                <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
+                                <li><a href="loan.new.html"><button class="button_1 apply_for_loan">Apply for loan</button></a></li>
         
                                 <li>
                                     <a id="profile_dropdown" href="#" class="">
@@ -71,24 +71,39 @@
                     </div>
                 </header>
                 
-                <section id="dashboard">
+                <section id="admin_dashboard">
                     <div class="container">
                         <h2 id="page_heading">
-                            Orji Chidi <span class="verified_user">Admin</span>
+                            Admin - Orji Chidi</span>
                         </h2>
+
+                        <hr class="section_divider">
         
-                        <div class="user_card card">
-                            <div class="user_photo">
-                                <img src="./img/chidi.jpg" alt="">
+                        <div class="admin_top_div">
+                            <div class="user_card card">
+                                <div class="user_photo">
+                                    <img src="./img/chidi.jpg" alt="">
+                                </div>
+                                <hr class="card_divider">
+                
+                                <div class="user_info">
+                                    <h3>Orji Chidi <span class="verified_user">&#x2714</span></h3>
+                                    <p>email@address.com</p>
+                                    <p>+2341234567890</p>
+                                </div>
                             </div>
-                            <hr class="card_divider">
-            
-                            <div class="user_info">
-                                <h3>Orji Chidi <span class="verified_user">&#x2714</span></h3>
-                                <p>email@address.com</p>
-                                <p>+2341234567890</p>
+
+                            <div class="admin_nav_buttons">
+                                <a href="./loans.html">
+                                    <button class="button_1 dim">Loans</button>
+                                </a>
+                                <a href="./users.html">
+                                    <button class="button_1 dim">Users</button>
+                                </a>
                             </div>
                         </div>
+
+                        <hr class="section_divider">
         
                         <h3>Recent Loans</h3>
                         <div class="table_wrapper">
@@ -126,7 +141,6 @@
                                 </tbod>
                             </table>
                         </div>
-                        <p><a href="loans.html" class="see_more">See All Loans</a></p>
         
                         <h3>Recent Users</h3>
                         <div class="table_wrapper">
@@ -160,7 +174,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p><a href="users.html" class="see_more">See All Users</a></p>
                     </div>
                 </section>
     

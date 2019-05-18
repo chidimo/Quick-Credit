@@ -24,7 +24,7 @@
         
                         <nav class="menu">
                             <ul class="base_ul">
-                                <li><a href="loan.new.html"><button id="sign_in" class="button_1">Apply for loan</button></a></li>
+                                <li><a href="loan.new.html"><button class="button_1 apply_for_loan">Apply for loan</button></a></li>
         
                                 <li>
                                     <a id="profile_dropdown" href="#" class="">
@@ -74,24 +74,36 @@
                 <section id="dashboard">
                     <div class="container">
                         <h2 class="page_heading">Orji Chidi</h2>
+
+                        <hr class="section_divider">
         
-                        <div class="user_card card">
-                            <div class="user_photo">
-                                <img src="./img/chidi.jpg" alt="">
+                        <div class="user_information">
+                            <div class="user_card card">
+                                <div class="user_photo">
+                                    <img
+                                        title="Click to change"
+                                        id="profile_pix"
+                                        src="./img/chidi.jpg"
+                                        alt="Profile picture"
+                                    >
+                                    <input type="file" id="img_uploader" name="img_uploader" accept="image/*" />
+                                </div>
+                                <hr class="card_divider">
+            
+                                <div class="user_info">
+                                    <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
+                                    <p>email@address.com</p>
+                                    <p>+2341234567890</p>
+                                </div>
                             </div>
-                            <hr class="card_divider">
-        
-                            <div class="user_info">
-                                <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
-                                <p>email@address.com</p>
-                                <p>+2341234567890</p>
+            
+                            <div class="user_address card">
+                                <p><span class="addresses">Home</span>: 21 Olugbani street, Off Governor road, By Bayota motel, Ikotun Egbe, Lagos</p>
+                                <p><span class="addresses">Office</>:</span> Andela EPIC Towers, 235 Ikorodu Road, By Niger Insurance House</p>
                             </div>
                         </div>
-        
-                        <div class="user_address card">
-                            <p>21 Olugbani street, Ikotun, Lagos</p>
-                            <p>21 Olugbani street, Ikotun, Lagos</p>
-                        </div>
+
+                        <hr class="section_divider">
             
                         <h3>Loans</h3>
                         <div class="table_wrapper">
@@ -123,7 +135,7 @@
                                     <tr>
                                         <td><a href="./loan.html">3</a></td>
                                         <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
-                                        <td style="color:red"><a href="./loan.html">Rejected</a></td>
+                                        <td class="rejected_loan"><a href="./loan.html">Rejected</a></td>
                                         <td><a href="./loan.html"> - </a></td>
                                     </tr>
                                 </tbody>
@@ -140,6 +152,7 @@
                 </div>
             </footer>
         </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="./js/dashboard.js"></script>
     </body>
 </html>

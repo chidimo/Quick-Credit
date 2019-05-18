@@ -2,12 +2,9 @@ body {
     font-family: 'Open Sans', sans-serif;
     padding: 0;
     margin: 0;
-    background: #E8E8E8;
+    background: #e8e8e8;
     color: #333A56;
-}
-
-h1, h2, h3, h4, h5, h6, thead > tr > th {
-    font-family: 'Roboto Slab', serif;
+    /* font-size: 16px; */
 }
 
 .page_wrapper {
@@ -32,7 +29,6 @@ h1, h2, h3, h4, h5, h6, thead > tr > th {
 input {
     padding: 15px;
     border:none;
-    border-radius: 3px;
     background:#f1f1f1;
     margin-bottom: 10px;
 }
@@ -45,7 +41,6 @@ input:focus {
 textarea {
     padding: 15px;
     border:none;
-    border-radius: 3px;
     background:#f1f1f1;
     margin-bottom: 10px;
 }
@@ -65,10 +60,9 @@ button {
     height: 35px;
     color: #ffffff;
     background: #333A56;
-    border: 1px solid #F7F5E6;
+    border: 0;
     cursor: pointer;
     font-size: 18px;
-    border-radius: 3px;
 }
 
 hr {
@@ -76,8 +70,18 @@ hr {
     opacity: 0.3;
 }
 
-.shadowed_button:hover {
-    opacity: 0.9;
+button.shadow {
+    box-shadow: 5px 5px 15px rgb(51, 58, 86, 0.5)
+}
+
+button.dim:hover {
+    opacity: 0.8;
+}
+
+button.apply_for_loan,
+button.get_started
+{
+    border: 1px solid #FFFFFF;
 }
 
 /* forms */
@@ -86,8 +90,7 @@ hr {
     margin-left: auto;
     margin-right: auto;
     padding: 0 30px 30px 30px;
-    background: #ffffff;
-    border-radius: 5px;
+    background: #FFFFFF;
     box-shadow: 5px 5px 15px rgb(51, 58, 86, 0.5);
 }
 
@@ -136,16 +139,6 @@ td {
     padding: 5px;
 }
 
-td div.item_link {
-    color: #ffffff;
-    background: #52658F;
-    text-decoration: none;
-    width: 25px;
-    border-radius: 50%;
-    height: 25px;
-    margin: auto;
-}
-
 thead tr {
     background: #333A56;
     color: #ffffff;
@@ -167,7 +160,6 @@ table tr td a {
     width: 100%;
     padding: 15px 0;
     color: #333A56;
-    font-weight: 600;
 }
 
 tbody tr:hover {
@@ -182,12 +174,14 @@ td.approved_loan a,
 td.verified_user a
 {
     color: green;
+    font-weight: bold;
 }
 
 td.unverified_user a,
 td.rejected_loan a
 {
     color: red;
+    font-weight: bold;
 }
 
 /* Header */
@@ -262,7 +256,7 @@ ul.base_ul {
 #sub_menu {
 	width: 250%;
     position: absolute;
-	top: 110%;
+	top: 105%;
     left: -75px;
     padding: 0;
 	z-index: -1;
@@ -270,9 +264,7 @@ ul.base_ul {
 	transition: opacity linear 0.15s;
 	box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
     background: #F7F5E6;
-    border-radius: 5px;
     color: #333A56;
-    font-weight: bold;
     text-align: center;
 }
 
@@ -354,7 +346,6 @@ ul.base_ul {
     text-align: left;
     padding: 30px 20px;
     font-size: 24px;
-    font-weight: bold;
 }
 
 .info_section li {
@@ -370,6 +361,45 @@ footer {
     color: #ffffff;
     padding: 20px;
     margin-top: 20px;
+}
+
+@media (max-width: 1500px) {
+    
+    /* dashboard, user */
+    div.user_information {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    div.user_address,
+    div.user_card{
+        width: 100%;
+    }
+
+    /* admin */
+
+    div.admin_top_div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    div.admin_nav_buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0;
+        width: 100%;
+        margin: auto;
+    }
+
+    div.card {
+        width: 98%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (max-width: 768px) {
@@ -419,7 +449,6 @@ footer {
         width: 100%;
     }
 
-    div.user_card,
     div.loan_card
     {
         margin-right: auto;
@@ -427,22 +456,15 @@ footer {
 }
 
 @media (max-width: 450px) {
-
     /* loan */
     div.loan_card {
         display: flex;
         flex-direction: column;
     }
 
-    div.loan_right_grid {
+    div.loan_card div {
         margin: 0;
         text-align: center;
-    }
-
-    .user_photo,
-    hr.card_divider
-    {
-        display: none;
     }
 }
 
@@ -464,11 +486,8 @@ footer {
     margin-top: 30px;
     display: grid;
     max-width: 650px;
-    border-radius: 5px;
     grid-template-columns: 50% 50%;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    background: #f1f1f1;
+    background: #F1F1F1;
     padding-top: 0;
 }
 
@@ -479,7 +498,6 @@ footer {
 }
 
 .selected {
-    /* border-bottom: 1px solid rgb(51, 58, 86, 0.3); */
     background: #FFFFFF;
     color:#333A56;
     font-size: 18px;
@@ -498,15 +516,14 @@ footer {
 
 .card {
     padding: 10px;
-    max-width: 500px;
+    width: 450px;
     margin-bottom: 15px;
     background-color: #FFF;
-    border-radius: 10px;
-    box-shadow: 1px 3px ghostwhite;
+    box-shadow: 5px 5px 15px rgb(51, 58, 86, 0.5);
 }
 
 .user_card {
-    margin-right: auto;
+    /* margin-right: auto; */
     display: grid;
     grid-row-gap: 50px;
     grid-template-columns: 30% 1% 68%;
@@ -528,13 +545,49 @@ footer {
 }
 
 .user_address {
-    margin-right: auto;
+    margin-left: auto;
+    margin-right: 15px;
 }
 
-.admin_actions_buttons {
-    margin-left: auto;
-    margin-top: auto;
+span.addresses {
+    font-weight: bold;
+}
+
+input[id=img_uploader] {
+    display: none;
+}
+
+.user_information {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+/* admin */
+
+.admin_top_div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.admin_nav_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 0 5px;
+    width: calc(95% - 450px);
+}
+
+.admin_nav_buttons button {
+    width: 100%;
+    border: 1px solid #FFFFFF;
     margin-bottom: 10px;
+}
+
+hr.section_divider {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .modal {
@@ -556,7 +609,7 @@ footer {
     right: 35px;
     top: 15px;
     font-size: 40px;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #f1f1f1;
 }
 
@@ -594,6 +647,13 @@ footer {
 }
 
 /* Loan */
+
+.admin_actions_buttons {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
 .approve {
     background: #008000;
 }
@@ -606,7 +666,7 @@ footer {
     display: grid;
     grid-row-gap: 50px;
     margin-right: auto;
-    font-weight: bold;
+    /* font-weight: bold; */
     grid-template-columns: 30% 1% 68%;
 }
 
