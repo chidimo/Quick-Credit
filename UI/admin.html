@@ -7,6 +7,8 @@
         <meta name="Author" content="Orji Chidi Matthew">
         <meta name="description" content="Easily accessible short term loans">
         <meta name="keywords", content="loan, cash, short term loan">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./css/style.css">
         <title>Quick Credit | Admin Dashboard</title>
     </head>
@@ -70,9 +72,9 @@
                 </header>
                 
                 <section id="dashboard">
-                    <div  class="container">
+                    <div class="container">
                         <h2 id="page_heading">
-                            Orji Chidi <span style="color:green">Admin</span>
+                            Orji Chidi <span class="verified_user">Admin</span>
                         </h2>
         
                         <div class="user_card card">
@@ -82,7 +84,7 @@
                             <hr class="card_divider">
             
                             <div class="user_info">
-                                <h3>Orji Chidi <span style="color:green">&#x2714</span></h3>
+                                <h3>Orji Chidi <span class="verified_user">&#x2714</span></h3>
                                 <p>email@address.com</p>
                                 <p>+2341234567890</p>
                             </div>
@@ -102,36 +104,24 @@
         
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            <a href="./loan.html">
-                                                <div class="item_link">1</div>
-                                            </a>
-                                        </td>
-                                        <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                        <td>Pending</td>
-                                        <td>nil</td>
+                                        <td><a href="./loan.html">1</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td><a href="./loan.html">Pending</a></td>
+                                        <td><a href="./loan.html">nil</a></td>
                                     </tr>
             
                                     <tr>
-                                        <td>
-                                            <a href="./loan.html">
-                                                <div class="item_link">2</div>
-                                            </a>
-                                        </td>
-                                        <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                        <td style="color:green">Approved</td>
-                                        <td>50,000</td>
+                                        <td><a href="./loan.html">2</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td class="approved_loan"><a href="./loan.html">Approved</a></td>
+                                        <td><a href="./loan.html">50,000</a></td>
                                     </tr>
             
                                     <tr>
-                                        <td>
-                                            <a href="./loan.html">
-                                                <div class="item_link">3</div>
-                                            </a>
-                                        </td>
-                                        <td><time datetime="2019-01-01 08:00">01-01-2019</time></td>
-                                        <td style="color:red">Rejected</td>
-                                        <td>nil</td>
+                                        <td><a href="./loan.html">3</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td class="rejected_loan"><a href="./loan.html">Rejected</a></td>
+                                        <td><a href="./loan.html">nil</a></td>
                                     </tr>
                                 </tbod>
                             </table>
@@ -151,40 +141,28 @@
         
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            <a href="./user.html">
-                                                <div class="item_link">1</div>
-                                            </a>
-                                        </td>
-                                        <td>Jackie Chan</td>
-                                        <td style="color:green">Verified</td>
+                                        <td><a href="./user.html">1</a></td>
+                                        <td><a href="./user.html">Jackie Chan</a></td>
+                                        <td class="verified_user"><a href="./user.html">Verified</a></td>
                                     </tr>
             
                                     <tr>
-                                        <td>
-                                            <a href="./user.html">
-                                                <div class="item_link">2</div>
-                                            </a>
-                                        </td>
-                                        <td>Marcus Rashford</td>
-                                        <td style="color:green">Verified</td>
+                                        <td><a href="./user.html">2</a></td>
+                                        <td><a href="./user.html">Marcus Rashford</a></td>
+                                        <td class="verified_user"><a href="./user.html">Verified</a></td>
                                     </tr>
             
                                     <tr>
-                                        <td>
-                                            <a href="./user.html">
-                                                <div class="item_link">3</div>
-                                            </a>
-                                        </td>
-                                        <td>Jose Mourinho</td>
-                                        <td style="color:red">Not Verified</td>
+                                        <td><a href="./user.html">3</a></td>
+                                        <td><a href="./user.html">Jose Mourinho</a></td>
+                                        <td class="unverified_user"><a href="./user.html">Not Verified</a></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <p><a href="users.html" class="see_more">See All Users</a></p>
+                    </div>
                 </section>
-            </div>
     
             <footer>
                 <div class="footer_text">

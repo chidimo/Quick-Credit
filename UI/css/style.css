@@ -1,9 +1,13 @@
 body {
-    font: 16px/1.5 Arial, Helvetica sans-serif;
+    font-family: 'Open Sans', sans-serif;
     padding: 0;
     margin: 0;
     background: #E8E8E8;
     color: #333A56;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Slab', serif;
 }
 
 .page_wrapper {
@@ -63,8 +67,7 @@ button {
     background: #333A56;
     border: 1px solid #F7F5E6;
     cursor: pointer;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 18px;
     border-radius: 3px;
 }
 
@@ -124,10 +127,6 @@ table {
     border: 1px solid #cccccc;
 }
 
-tr {
-    border-bottom: 1px solid #cccccc;
-}
-
 th {
     white-space: nowrap;
     padding: 7px;
@@ -152,7 +151,7 @@ thead tr {
     color: #ffffff;
 }
 
-tr:nth-of-type(2) {
+tbody tr:nth-of-type(odd) {
     background: #ffffff;
 }
 
@@ -160,12 +159,35 @@ td a {
     text-decoration: none;
 }
 
-td div {
-    width: 100px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: auto;
+/* style tables */
+
+table tr td a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 15px 0;
+    color: #333A56;
+    font-weight: 600;
+}
+
+tbody tr:hover {
+    border: 1px solid #333A56;
+}
+
+table tr td {
+    padding: 0;
+}
+
+td.approved_loan a,
+td.verified_user a
+{
+    color: green;
+}
+
+td.unverified_user a,
+td.rejected_loan a
+{
+    color: red;
 }
 
 /* Header */
@@ -240,8 +262,8 @@ ul.base_ul {
 #sub_menu {
 	width: 250%;
     position: absolute;
-	top: 100%;
-    left: -150px;
+	top: 110%;
+    left: -75px;
     padding: 0;
 	z-index: -1;
 	opacity: 0;
