@@ -10,8 +10,10 @@ const server = supertest.agent(app);
 
 describe('/loans', () => {
     const dump = 'psql -h localhost -d testdb -U postgres -f test/testdb.sql';
-    // const drop = 'psql -h localhost -U postgres -c "drop database testdb"';    
+    const clear = 'psql -h localhost -d testdb -U postgres -c "delete from loans;delete from repayments"';
+
     before(done => {
+
         exec(dump, err => {
             if (err) {
                 test_logger(`dump error: ${ err }`);
@@ -21,16 +23,16 @@ describe('/loans', () => {
         });
     });
    
-    // after(done => {
-    //     test_logger('After hook start');
-    //     exec(drop, err => {
-    //         if (err) {
-    //             test_logger(`Fatal drop error ${err}`);
-    //         }
-    //     });
-    //     test_logger('****Database DROPPED successfully.****');
-    //     done();
-    // });
+    after(done => {
+        test_logger('After hook start');
+        exec(clear, err => {
+            if (err) {
+                test_logger(`Error clearing db ${err}`);
+            }
+        });
+        test_logger('****Database cleared successfully.****');
+        done();
+    });
 
     describe('/loans: Get all loans', () => {
         it('should be return a list of all loans', done => {

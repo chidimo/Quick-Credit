@@ -5,16 +5,13 @@
 import supertest from 'supertest';
 import app from '../app';
 import { exec } from 'child_process';
-import jwt from 'jsonwebtoken';
-
-import Settings from '../settings';
 import { test_logger } from '../utils/loggers';
 
 const server = supertest.agent(app);
 
 describe('/users', () => {
-    const dump = 'psql -h localhost -d testdb -U postgres -f test/dump.sql';
-    const drop = 'psql -h localhost -U postgres -c "drop database testdb"';
+    const dump = 'psql -h localhost -d testdb -U postgres -f test/testdb.sql';
+    const clear = 'psql -h localhost -d testdb -U postgres -c "delete from users"';
 
     before(done => {
         exec(dump, err => {
@@ -28,12 +25,12 @@ describe('/users', () => {
    
     after(done => {
         test_logger('After hook start');
-        exec(drop, err => {
+        exec(clear, err => {
             if (err) {
-                test_logger(`Fatal drop error ${err}`);
+                test_logger(`Error clearing db ${err}`);
             }
         });
-        test_logger('****Database DROPPED successfully.****');
+        test_logger('****Database cleared successfully.****');
         done();
     });
 
@@ -53,24 +50,37 @@ describe('/users', () => {
             });
 
             it('should register and return user', done => {
-                const email = 'valid@address.com';
+                const data = {
+                    email: 'valid@address.com', password: 'password',
+                    confirm_password: 'password', firstname: 'chidi',
+                    lastname: 'orjinta'
+                };
                 server
                     .post('/auth/signup')
-                    .send({ email, password: 'password', 
-                        confirm_password: 'password' })
+                    .send(data)
                     .expect(200)
                     .end((err, res) => {
                         res.status.should.equal(201);
-                        res.body.data.should.have.property('email', `${email}`);
+                        res.body.data.should.have.property(
+                            'email', `${data.email}`);
+                        res.body.data.should.have.property(
+                            'firstname', `${data.firstname}`);
+                        res.body.data.should.have.property(
+                            'lastname', `${data.lastname}`);
+                        res.body.data.should.have.property('token');
                         done();
                     });
             });
                 
-            it("should return error if passwords don't match", done => {
+            it('should catch password mismatch error', done => {
+                const data = {
+                    email: 'valid@address.com', password: 'password',
+                    confirm_password: 'wrong', firstname: 'chidi',
+                    lastname: 'orjinta'
+                };
                 server
                     .post('/auth/signup')
-                    .send({ email: 'email@address.com', password: 'password',
-                        confirm_password: 'wrong' })
+                    .send(data)
                     .expect(200)
                     .end((err, res) => {
                         res.status.should.equal(422);
@@ -79,22 +89,49 @@ describe('/users', () => {
                         done();
                     });
             });
+                
+            it('should catch no firstname error', done => {
+                const data = {
+                    email: 'valid@address.com', password: 'password',
+                    confirm_password: 'password', lastname: 'orjinta'
+                };
+                server
+                    .post('/auth/signup')
+                    .send(data)
+                    .expect(200)
+                    .end((err, res) => {
+                        res.status.should.equal(422);
+                        res.body.errors[0].msg.should.equal(
+                            'First name is required');
+                        done();
+                    });
+            });
+                
+            it('should catch no lastname error', done => {
+                const data = {
+                    email: 'valid@address.com', password: 'password',
+                    confirm_password: 'password', firstname: 'chidi'
+                };
+                server
+                    .post('/auth/signup')
+                    .send(data)
+                    .expect(200)
+                    .end((err, res) => {
+                        res.status.should.equal(422);
+                        res.body.errors[0].msg.should.equal(
+                            'Last name is required');
+                        done();
+                    });
+            });
         });
     });
-            
+
     describe('/auth/signin', () => {
-                
         describe('POST /auth/signin', () => {
             it('should return registered user if found', done => {
                 const user = { email: 'a@b.com', password: 'password' };
-                const token = jwt.sign(
-                    { ...user, confirm_password: 'password' },
-                    Settings.jwtSecret,
-                    { expiresIn: '24h' }
-                );
                 server
                     .post('/auth/signin')
-                    .set('x-access-token', token)
                     .send(user)
                     .expect(200)
                     .end((err, res) => {
@@ -102,40 +139,6 @@ describe('/users', () => {
                         res.body.data.should.be.an.instanceOf(Object);
                         res.body.data.should.have.property(
                             'email', 'a@b.com');
-                        done();
-                    });
-            });
-                        
-            it('should return invalid token error', done => {
-                const user = { email: 'me@yahoo.com', password: 'password' };
-                server
-                    .post('/auth/signin')
-                    .send({ ...user, token: 'somerandomstring' })
-                    .expect(200)
-                    .end((err, res) => {
-                        res.status.should.equal(422);
-                        res.body.error.should.equal('Invalid token');
-                        done();
-                    });
-            });
-
-            // valid token, non-existent user. Is this a possible scenario?
-            it('should return error if user is not found', done => {
-                const user = { email: 'un@known.com', password: 'password' };
-                const token = jwt.sign(
-                    { ...user, confirm_password: 'password' },
-                    Settings.jwtSecret,
-                    { expiresIn: '24h' }
-                );
-                server
-                    .post('/auth/signin')
-                    .set('x-access-token', token)
-                    .send(user)
-                    .expect(200)
-                    .end((err, res) => {
-                        res.status.should.equal(404);
-                        res.body.error.should.equal(
-                            `User with email ${user.email} not found`);
                         done();
                     });
             });
