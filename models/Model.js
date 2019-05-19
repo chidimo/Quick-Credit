@@ -28,13 +28,24 @@ class Model {
 
     async select(columns, clause) {
         let query = `SELECT ${columns} FROM ${this.table}`;
-        if (clause) query = `${query} WHERE ${clause}`;
+        if (clause) query = `${query} ${clause}`;
         dev_logger(`\nSELECT QUERY: ${query}\n`);
         return await this.pool.query(query);
     }
 
     async update(columns, clause) {
-        const query = `UPDATE ${this.table} SET ${columns} WHERE ${clause}`;
+        const query = `UPDATE ${this.table} SET ${columns} ${clause}`;
+        dev_logger(`\nUPDATE QUERY: ${query}\n`);
+        return await this.pool.query(query);
+    }
+    
+    async incrementation_update(column, value, clause) {
+        // insitu increment of a particular value
+        const query = `
+            UPDATE ${this.table}
+            SET ${column}=${column} - ${value}
+            ${clause}
+        `;
         dev_logger(`\nUPDATE QUERY: ${query}\n`);
         return await this.pool.query(query);
     }
@@ -42,6 +53,16 @@ class Model {
     async insert(columns, values) {
         const query = `INSERT INTO ${this.table} ${columns} VALUES(${values})`;
         dev_logger(`\nINSERT QUERY: ${query}\n`);
+        return await this.pool.query(query);
+    }
+
+    async insert_with_return(columns, values) {
+        const query = `
+            INSERT INTO ${this.table} ${columns}
+            VALUES(${values})
+            RETURNING id
+        `;
+        dev_logger(`\nINSERT WITH RETURN QUERY: ${query}\n`);
         return await this.pool.query(query);
     }
     

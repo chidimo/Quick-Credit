@@ -1,12 +1,38 @@
 // should is not used directly in the file but is added as a mocha requirement
 
+import { exec } from 'child_process';
 import supertest from 'supertest';
 import assert from 'assert';
 import app from '../app';
+import { test_logger } from '../utils/loggers';
 
 const server = supertest.agent(app);
 
 describe('/loans', () => {
+    const dump = 'psql -h localhost -d testdb -U postgres -f test/testdb.sql';
+    const clear = 'psql -h localhost -d testdb -U postgres -c "delete from loans;delete from repayments"';
+
+    before(done => {
+
+        exec(dump, err => {
+            if (err) {
+                test_logger(`dump error: ${ err }`);
+            }
+            test_logger('****Database populated successfully.****');
+            done();
+        });
+    });
+   
+    after(done => {
+        test_logger('After hook start');
+        exec(clear, err => {
+            if (err) {
+                test_logger(`Error clearing db ${err}`);
+            }
+        });
+        test_logger('****Database cleared successfully.****');
+        done();
+    });
 
     describe('/loans: Get all loans', () => {
         it('should be return a list of all loans', done => {
@@ -17,55 +43,21 @@ describe('/loans', () => {
                     res.status.should.equal(200);
                     res.body.data.should.be.an.instanceOf(Array);
                     for (const each of res.body.data) {
-                        assert(each.should.be.an.instanceOf(Object));
+                        each.should.have.property('id');
+                        each.should.have.property('userid');
+                        each.should.have.property('createdon');
+                        each.should.have.property('status');
+                        each.should.have.property('amount');
+                        each.should.have.property('tenor');
+                        each.should.have.property('repaid');
+                        each.should.have.property('interest');
+                        each.should.have.property('balance');
+                        each.should.have.property('paymentinstallment');
                     }
                     done();
                 });
         });
-    });
-
-    describe('/loans: Get loan', () => {
-        it('should return correct data for existent loan', done => {
-            server
-                .get('/loans/123456789')
-                .expect(200)
-                .end((err, res) => {
-                    res.status.should.equal(200);
-                    res.body.data.should.be.an.instanceOf(Object);
-                    done();
-                });
-        });
-    
-        it('should return error message for non-existent loan', done => {
-            server
-                .get('/loans/12345')
-                .expect(200)
-                .end((err, res) => {
-                    res.status.should.equal(404);
-                    res.body.error.should.equal('Loan with id 12345 not found');
-                    assert(res.body.error === 'Loan with id 12345 not found');
-                    done();
-                });
-        });
-    });
-    
-    describe('/loans: Get all loans by their repayment status', () => {
-        it('should return all loans which have NOT been repaid', done => {
-            server
-                .get('/loans')
-                .query({ status: 'approved', repaid: false })
-                .expect(200)
-                .end((err, res) => {
-                    res.status.should.equal(200);
-                    res.body.data.should.be.an.instanceOf(Array);
-                    for (const loan of res.body.data) {
-                        assert(loan.status === 'approved');
-                        assert(loan.repaid === false);
-                    }
-                    done();
-                });
-        });
-        
+                
         it('should return all loans which have BEEN repaid', done => {
             server
                 .get('/loans')
@@ -81,28 +73,89 @@ describe('/loans', () => {
                     done();
                 });
         });
+
+        it('should return all loans which have NOT been repaid', done => {
+            server
+                .get('/loans')
+                .query({ status: 'approved', repaid: false })
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(200);
+                    res.body.data.should.be.an.instanceOf(Array);
+                    for (const loan of res.body.data) {
+                        assert(loan.status === 'approved');
+                        assert(loan.repaid === false);
+                    }
+                    done();
+                });
+        });
+    });
+
+    describe('/loans: Get loan', () => {
+        it('should return correct data for existent loan', done => {
+            server
+                .get('/loans/1')
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(200);
+                    res.body.data.should.be.an.instanceOf(Object);
+                    res.body.data.should.have.property('id');
+                    res.body.data.should.have.property('userid');
+                    res.body.data.should.have.property('createdon');
+                    res.body.data.should.have.property('status');
+                    res.body.data.should.have.property('amount');
+                    res.body.data.should.have.property('tenor');
+                    res.body.data.should.have.property('repaid');
+                    res.body.data.should.have.property('interest');
+                    res.body.data.should.have.property('balance');
+                    res.body.data.should.have.property('paymentinstallment');
+                    done();
+                });
+        });
+    
+        it('should return error message for non-existent loan', done => {
+            const id = 12345;
+            server
+                .get(`/loans/${id}`)
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(404);
+                    res.body.error.should.equal(
+                        `Loan with id ${id} does not exist`);
+                    done();
+                });
+        });
     });
     
     describe('/loans: Create a loan', () => {
         it('should create and return a new loan', done => {
+            const data = { userid: 12, amount: 50000, tenor: 12 };
             server
                 .post('/loans')
-                .send({ email: 'user@email.com', amount: 50000, tenor: 12 })
+                .send(data)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.be.equal(201);
                     res.body.data.should.be.an.instanceOf(Object);
+                    res.body.data.should.have.property('userid', data.userid);
+                    res.body.data.should.have.property('createdon');
                     res.body.data.should.have.property('status', 'pending');
-                    res.body.data.should.have.property('paymentInstallment', 4375);
+                    res.body.data.should.have.property('repaid', false);
+                    res.body.data.should.have.property('amount', data.amount);
+                    res.body.data.should.have.property('tenor', data.tenor);
                     res.body.data.should.have.property('interest', 2500);
+                    res.body.data.should.have.property('balance', 50000);
+                    res.body.data.should.have.property(
+                        'paymentinstallment', 4375);
                     done();
                 });
         });
         
         it('should return errors for large tenor', done => {
+            const data = { userid: '25', amount: 50000, tenor: 13 };
             server
                 .post('/loans')
-                .send({ email: 'user@email.com', amount: 50000, tenor: 13 })
+                .send(data)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.be.equal(422);
@@ -115,9 +168,10 @@ describe('/loans', () => {
         });
             
         it('should return errors for large amount', done => {
+            const data = { userid: 30, amount: 5000000, tenor: 10 };
             server
                 .post('/loans')
-                .send({ email: 'user@email.com', amount: 5000000, tenor: 10 })
+                .send(data)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.be.equal(422);
@@ -129,11 +183,11 @@ describe('/loans', () => {
                 });
         });
     });
-        
+
     describe('/loans: Approve or reject a loan application', () => {
         it('should set status to approved', done => {
             server
-                .patch('/loans/123456789/approve')
+                .patch('/loans/5/approve')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -144,7 +198,7 @@ describe('/loans', () => {
         
         it('should set status to rejected', done => {
             server
-                .patch('/loans/123456789/reject')
+                .patch('/loans/6/reject')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -157,13 +211,13 @@ describe('/loans', () => {
     describe('/loans: View loan repayment history', () => {
         it('should return array of loan repayments given a loan Id', done => {
             server
-                .get('/loans/123456789/repayments')
+                .get('/loans/2/repayments')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
                     res.body.data.should.be.an.instanceOf(Array);
                     for (const payment of res.body.data) {
-                        payment.loanId.should.equal('123456789');
+                        payment.loanid.should.equal(2);
                     }
                     done();
                 });
@@ -172,29 +226,56 @@ describe('/loans', () => {
     
     describe('/loans: Create loan repayment', () => {
         it('should create and return a repayment', done => {
+            const data = { amount: 4375, adminid: 3 };
             server
-                .post('/loans/123456789/repayment')
-                .send({ amount: 4375 })
+                .post('/loans/4/repayment')
+                .send(data)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(201);
                     res.body.data.should.be.an.instanceOf(Object);
-                    res.body.data.should.have.property('loanId', '123456789');
+                    res.body.data.should.have.property('loanid', 4);
+                    res.body.data.should.have.property('adminid', 3);
                     res.body.data.should.have.property('amount', 4375);
+                    res.body.data.should.have.property('createdon');
                     done();
                 });
         });
-        
-        it('should return error if amount is not a number', done => {
+    });
+
+    describe('/repayments', () => {
+        it('should return all repayments', done => {
             server
-                .post('/loans/123456789/repayment')
-                .send({ amount: '4375+' })
+                .get('/repayments')
                 .expect(200)
                 .end((err, res) => {
-                    res.status.should.equal(422);
-                    res.body.errors[0].msg.should.equal(
-                        'Repayment amount must be a number'
-                    );
+                    res.status.should.equal(200);
+                    for (const each of res.body.data) {
+                        each.should.have.property('id');
+                        each.should.have.property('loanid');
+                        each.should.have.property('createdon');
+                        each.should.have.property('adminid');
+                        each.should.have.property('amount');
+                    }
+                    done();
+                });
+        });
+    });
+
+    describe('GET /repayments', () => {
+        it('should return a single repayment', done => {
+            const id = 5;
+            server
+                .get(`/repayments/${id}`)
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(200);
+                    res.body.data.should.be.an.instanceOf(Object);
+                    res.body.data.should.have.property('id', id);
+                    res.body.data.should.have.property('loanid');
+                    res.body.data.should.have.property('adminid');
+                    res.body.data.should.have.property('createdon');
+                    res.body.data.should.have.property('amount');
                     done();
                 });
         });

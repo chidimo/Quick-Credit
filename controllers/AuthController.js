@@ -1,29 +1,39 @@
 import Model from '../models/Model';
-// import { dev_logger } from '../utils/loggers';
 import 
 { 
-    check_user_existence, create_user, get_user
+    check_user_existence,
+    get_user,
+    add_user_to_db
 } from './helpers/AuthController';
+// import { dev_logger } from '../utils/loggers';
 
 const users_model = new Model('users');
 
 const AuthController = {
     signup: async (req, res) => {
         const { email } = req.body;
-        const user = await check_user_existence(
-            users_model, req, res);
+        const user_exists = await check_user_existence(
+            users_model, email, res);
 
-        if (user) {
+        if (user_exists) {
             return res
                 .status(404)
                 .json({ error: `User with email ${email} already exists` });
         }
-        await create_user(users_model, req, res);
-        return get_user(users_model, req, res, 201);
+        const { rows } = await add_user_to_db(users_model, req, res);
+        const [ { id }, ] = rows;
+        const clause = `WHERE id=${id}`;
+        const err_msg = `User with id ${id} does not exist.`;
+        const user = await get_user(users_model, res, clause, err_msg);
+        return res.status(201).json({ data: { ...user, token: req.token }})
     },
     
     signin: async (req, res) => {
-        get_user(users_model, req, res, 200);
+        const { email } = req.body;
+        const clause = `WHERE email='${email}'`;
+        const err_msg = `User with email ${email} does not exist.`;
+        const user = await get_user(users_model, res, clause, err_msg);
+        return res.status(200).json({ data: { ...user, token: req.token }})
     },
 };
 

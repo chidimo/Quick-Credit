@@ -3,6 +3,16 @@ import { sanitizeBody } from 'express-validator/filter';
 import validate_error_or_next from './validate_error_or_next';
 
 const UsersValidators = {
+    validateNames: [
+        body('firstname')
+            .not().isEmpty().withMessage('First name is required'),
+        body('lastname')
+            .not().isEmpty().withMessage('Last name is required'),
+        sanitizeBody('firstname').trim().escape(),
+        sanitizeBody('lastname').trim().escape()
+        
+    ],
+    
     emailValidator: [
         body('email')
             .isEmail()

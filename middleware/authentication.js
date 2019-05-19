@@ -3,10 +3,9 @@ import Settings from '../settings';
 
 const AuthenticationMiddleware = {
     generateToken: (req, res, next) => {
+        const payload = { email: req.body.email, password: req.body.password };
         req.token = jwt.sign(
-            req.body,
-            Settings.jwtSecret,
-            { expiresIn: '24h' }
+            payload, Settings.jwtSecret, { expiresIn: '24h' }
         );
         return next();
     },

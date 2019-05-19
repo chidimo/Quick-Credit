@@ -1,87 +1,102 @@
-import loans from '../utils/sample.loans';
-import repayments from '../utils/sample.repayments';
+import Model from '../models/Model';
+import { InternalServerError } from '../utils/errorHandlers';
+import { dev_logger } from '../utils/loggers';
+
+import
+{ 
+    add_loan_to_db,
+    get_loan_by_id,
+    loan_repayment_history,
+    check_loan_existence,
+    add_repayment_to_db,
+    get_repayment_by_id,
+    update_loan_status,
+    update_loan_balance
+} from './helpers/LoansController';
+
+const loans_model = new Model('loans');
+const repayments_model = new Model('repayments');
 
 const LoansController = {
-    get_all_loans: (req, res) => {
+    get_all_loans: async (req, res) => {
         const { status, repaid } = req.query;
-        const boolean_repaid = (req.query.repaid === 'true');
-        
-        // if both status and repaid is unspecified
-        if ((status !== undefined) && (repaid !== undefined)) {
-            const data = loans.filter(loan => (
-                loan.status === status && loan.repaid === boolean_repaid
-            ));
-            res.status(200).json({ data });
-        }
-        else {
-            const data = [];
-            loans.map(loan => data.push(loan));
-            res.status(200).json({ data });
-        }
-    },
-        
-    get_loan: (req, res) => {
-        const { id } = req.params;
-        const data = loans.filter(loan => (loan.id === id));
-        if (data.length === 0) {
-            res.status(404).json({ error: `Loan with id ${id} not found` });
-        }
-        else res.status(200).json({ data });
-    },
-
-    create_loan: (req, res) => {
-        const { email, amount, tenor } = req.body;
-        const interest = 0.05 * amount;
-        const paymentInstallment = (amount + interest) / tenor;
-        const balance = amount - 0;
-
-        res.status(201).json({
-            data: {
-                loanId: '',
-                status: 'pending',
-                email,
-                amount,
-                tenor,
-                interest,
-                paymentInstallment,
-                balance
+        dev_logger(`rep ${repaid}, ${typeof repaid}`);
+        try {
+            let data;
+            if (status && repaid) {
+                data = await loans_model.select(
+                    `id, userid, createdon, status, repaid,
+                    amount, tenor, interest, balance, paymentinstallment`,
+                    `WHERE status='${status}' AND repaid='${repaid}'`
+                );
             }
-        });
-    },
-        
-    approve_loan: (req, res) => {
-        const { id } = req.params;
-        const loan = loans.find(loan => (loan.id === id));
-        loan.status = 'approved';
-        res.status(200).json({ data: loan });
-    },
-    
-    reject_loan: (req, res) => {
-        const { id } = req.params;
-        const loan = loans.find(loan => (loan.id === id));
-        loan.status = 'rejected';
-        res.status(200).json({ data: loan });
-    },
-    
-    loan_repayment_history: (req, res) => {
-        const { id } = req.params;
-        const data = repayments.filter(payment => (payment.loanId === id));
-        res.status(200).json({ data });
+            else {
+                data = await loans_model.select(
+                    `id, userid, createdon, status, repaid,
+                    amount, tenor, interest, balance, paymentinstallment`,
+                );
+            }
+            return res.status(200).json({ data: data.rows });
+        }
+        catch (e) { return InternalServerError(res, e); }
     },
 
-    post_repayment: (req, res) => {
+    get_loan: async (req, res) => {
         const { id } = req.params;
-        const { amount } = req.body;
-        const repay = {
-            id: '',
-            createdOn: new Date(),
-            loanId: id,
-            amount,
-        };
-            // update loan balance
-        const loan = loans.find(loan => (loan.id === id));
-        loan.balance = loan.balance + amount;
-        res.status(201).json({ data: repay });
+        return get_loan_by_id(loans_model, id, res, 200);
+    },
+
+    create_loan: async (req, res) => {
+        const { rows } = await add_loan_to_db(loans_model, req, res);
+        const [ { id }, ] = rows;
+        return get_loan_by_id(loans_model, id, res, 201);
+    },
+
+    approve_or_reject_loan: async (req, res) => {
+        const { id } = req.params;
+        let status;
+        if (req.url.includes('approve')) { status = 'approved';}
+        if (req.url.includes('reject')) { status = 'rejected';}
+
+        req.status = status;
+        try {
+            await update_loan_status(loans_model, req, res);
+            return get_loan_by_id(loans_model, id, res, 200);
+        }
+        catch (e) { return InternalServerError(res, e); }
+    },
+
+    loan_repayment_history: async (req, res) => {
+        try {
+            const loan = await check_loan_existence(loans_model, req, res);
+            if (loan) {
+                return await loan_repayment_history(repayments_model, req, res);
+            }
+        }
+        catch (e) { return InternalServerError(res, e); }
+    },
+
+    post_repayment: async (req, res) => {
+        const { rows } = await add_repayment_to_db(repayments_model, req, res);
+        const [ { id }, ] = rows;
+        await update_loan_balance(loans_model, req, res);
+        return await get_repayment_by_id(repayments_model, id, res, 201);
+    },
+
+    get_repayment: async (req, res) => {
+        const { id } = req.params;
+        dev_logger(`id ******** ${id}`)
+        return get_repayment_by_id(repayments_model, id, res, 200);
+    },
+
+    get_all_repayments: async (req, res) => {
+        try {
+            const data = await repayments_model.select(
+                'id, loanid, adminid, createdon, amount',
+            );
+            return res.status(200).json({ data: data.rows });
+        }
+        catch (e) { return InternalServerError(res, e); }
     },
 };
 

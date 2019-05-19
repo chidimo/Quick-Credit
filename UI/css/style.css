@@ -2,7 +2,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     padding: 0;
     margin: 0;
-    background: #e8e8e8;
+    background: #E8E8E8;
     color: #333A56;
     /* font-size: 16px; */
 }
@@ -78,9 +78,7 @@ button.dim:hover {
     opacity: 0.8;
 }
 
-button.apply_for_loan,
-button.get_started
-{
+button.bordered {
     border: 1px solid #FFFFFF;
 }
 
@@ -254,18 +252,19 @@ ul.base_ul {
 }
 
 #sub_menu {
-	width: 250%;
-  position: absolute;
-  top: 105%;
-  left: -75px;
-  padding: 0;
+    width: 230%;
+    position: absolute;
+    top: 105%;
+    left: -75px;
+    padding: 0;
 	z-index: -1;
 	opacity: 0;
 	transition: opacity linear 0.15s;
-	box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
-  background: #F7F5E6;
-  color: #333A56;
-  text-align: center;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
+    background: #F7F5E6;
+    color: #333A56;
+    text-align: center;
+    overflow: hidden;
 }
 
 .submenu_username {
@@ -452,6 +451,10 @@ footer {
     div.loan_card
     {
         margin-right: auto;
+    }
+            
+    ul#sub_menu {
+        width: 200%;
     }
 }
 
