@@ -24,19 +24,22 @@ yarn add -D @babel/plugin-transform-runtime
 
 
 ```sql
-CREATE TABLE users (
+UPDATE users SET email='a@b.com' WHERE id=1
+ALTER TABLE users
+ADD COLUMN photo VARCHAR NULL
+
+CREATE TABLE IF NOT EXISTS users (
 	id SERIAL PRIMARY KEY,
 	email VARCHAR NOT NULL UNIQUE,
     password VARCHAR NOT NULL,
     firstname VARCHAR DEFAULT '',
     lastname VARCHAR DEFAULT '',
     phone VARCHAR DEFAULT '',
+    photo VARCHAR NULL,
     address jsonb DEFAULT '{"home": "", "office": ""}',
     status VARCHAR DEFAULT 'unverified',
     isAdmin BOOLEAN DEFAULT false
 );
-
-UPDATE users SET email='a@b.com' WHERE id=1
 
 INSERT INTO users(email, password, firstname, lastname, phone, address)
 VALUES ('a@b.com', 'password', 'first', 'men', '080121515', '{"home": "iyaba", "office": "ring road"}'),
@@ -50,7 +53,7 @@ VALUES ('a@b.com', 'password', 'first', 'men', '080121515', '{"home": "iyaba", "
        ('an@dela.ng', 'password', 'and', 'ela', '08012345678', '{"home": "ikorodu","office": "lagos"}'),
        ('soft@ware.eng', 'password', 'soft', 'eng', '08012345678', '{"home": "remote","office": "on-site"}');
 
-CREATE TABLE loans (
+CREATE TABLE IF NOT EXISTS loans (
 	id SERIAL PRIMARY KEY,
 	userid INT NOT NULL,
     createdon TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
@@ -77,21 +80,21 @@ VALUES (1, 'approved', false, 50000, 12, 2500, 36999.35, 4375),
        (9, 'rejected', false, 190000, 12, 9500, 19000, 16625),
        (10, 'pending', false, 1000000, 12, 50000, 0, 87500);
 
-CREATE TABLE repayments (
+CREATE TABLE IF NOT EXISTS repayments (
     id SERIAL PRIMARY KEY,
     loanid INT NOT NULL,
     adminid INT NOT NULL,
     createdon TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-    amount FLOAT NOT NULL,
+    amount FLOAT NOT NULL
 )
 
 INSERT INTO repayments(loanid, adminid, amount)
 VALUES (1, 3, 4375),
       (1, 3, 4375),
-      (2, 1, 4375),
+      (2, 1, 26250),
       (1, 2, 4375),
       (3, 4, 2875),
-      (5, 8, 4375),
+      (5, 8, 10500),
       (4, 3, 4375),
       (8, 1, 4375),
       (8, 4, 4375),
