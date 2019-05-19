@@ -10,7 +10,7 @@ export const check_user_existence = async (model_instance, email, res) => {
         
         if (user) return user;
     }
-    catch (e) { return InternalServerError(null, res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const add_user_to_db = async (model_instance, req, res) => {
@@ -24,7 +24,7 @@ export const add_user_to_db = async (model_instance, req, res) => {
             '${hashedPassword}'`
         );                    
     }
-    catch (e) { return InternalServerError(req, res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const get_user = async (model_instance, res, clause, err_msg) => {
@@ -39,5 +39,5 @@ export const get_user = async (model_instance, res, clause, err_msg) => {
         });
         return rows[0];
     }
-    catch (e) { return InternalServerError(null, res, e); }
+    catch (e) { return InternalServerError(res, e); }
 };

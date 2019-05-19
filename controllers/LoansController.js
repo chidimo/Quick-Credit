@@ -38,7 +38,7 @@ const LoansController = {
             }
             return res.status(200).json({ data: data.rows });
         }
-        catch (e) { return InternalServerError(req, res, e); }
+        catch (e) { return InternalServerError(res, e); }
     },
 
     get_loan: async (req, res) => {
@@ -63,7 +63,7 @@ const LoansController = {
             await update_loan_status(loans_model, req, res);
             return get_loan_by_id(loans_model, id, res, 200);
         }
-        catch (e) { return InternalServerError(req, res, e); }
+        catch (e) { return InternalServerError(res, e); }
     },
 
     loan_repayment_history: async (req, res) => {
@@ -73,7 +73,7 @@ const LoansController = {
                 return await loan_repayment_history(repayments_model, req, res);
             }
         }
-        catch (e) { return InternalServerError(req, res, e); }
+        catch (e) { return InternalServerError(res, e); }
     },
 
     post_repayment: async (req, res) => {
@@ -96,7 +96,7 @@ const LoansController = {
             );
             return res.status(200).json({ data: data.rows });
         }
-        catch (e) { return InternalServerError(req, res, e); }
+        catch (e) { return InternalServerError(res, e); }
     },
 };
 

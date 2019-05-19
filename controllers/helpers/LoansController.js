@@ -9,7 +9,7 @@ export const check_loan_existence = async (model_instance, req, res) => {
         const [ loan, ] = rows;
         if (loan) return loan;
     }
-    catch (e) { return InternalServerError(req, res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const add_loan_to_db = async (model_instance, req, res) => {
@@ -24,7 +24,7 @@ export const add_loan_to_db = async (model_instance, req, res) => {
             `'${userid}', '${amount}', '${tenor}', '${interest}', '${balance}',
             '${paymentinstallment}'`);        
     }
-    catch (e) { return InternalServerError(req, res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const update_loan_status = async (model_instance, req, res) => {
@@ -33,7 +33,7 @@ export const update_loan_status = async (model_instance, req, res) => {
         await model_instance.update(
             `status='${req.status}'`, `WHERE id=${id}`);
     }
-    catch (e) { return InternalServerError(req, res, e); }
+    catch (e) { return InternalServerError(res, e); }
 };
 
 export const update_loan_balance = async (model_instance, req, res) => {
@@ -43,7 +43,7 @@ export const update_loan_balance = async (model_instance, req, res) => {
         await model_instance.incrementation_update(
             'balance', `${amount}`, `WHERE id=${id}`);
     }
-    catch (e) { return InternalServerError(req, res, e); }
+    catch (e) { return InternalServerError(res, e); }
 };
 
 export const get_loan_by_id = async (model_instance, id, res, code) => {
@@ -74,7 +74,7 @@ export const loan_repayment_history = async (model_instance, req, res) => {
         );
         return res.status(200).json({ data: rows });
     }
-    catch (e) { return InternalServerError(req, res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const add_repayment_to_db = async (model_instance, req, res) => {
@@ -85,7 +85,7 @@ export const add_repayment_to_db = async (model_instance, req, res) => {
             '(loanid, adminid, amount)',
             `'${id}', '${adminid}', '${amount}'`);                    
     }
-    catch (e) { return InternalServerError(req, res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const get_repayment_by_id = async (model_instance, id, res, code) => {

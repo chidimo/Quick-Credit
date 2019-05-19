@@ -23,7 +23,7 @@ const UsersController = {
             return res.status(200).json({ data: rows[0] });
         }
         catch (e) {
-            return InternalServerError(req, res, e);
+            return InternalServerError(res, e);
         }
     },
 
@@ -36,7 +36,7 @@ const UsersController = {
             );
             UsersController.get_user(req, res);
         }
-        catch (e) { return InternalServerError(req, res, e); }
+        catch (e) { return InternalServerError(res, e); }
     
     },
 
@@ -59,7 +59,7 @@ const UsersController = {
             }
             return res.status(200).json({ data: data.rows });
         }
-        catch (e) { return InternalServerError(req, res, e); }
+        catch (e) { return InternalServerError(res, e); }
     },
 
     update_user: async (req, res) => {
@@ -77,7 +77,7 @@ const UsersController = {
             UsersController.get_user(req, res);
         }
         catch (e) {
-            return InternalServerError(req, res, e);
+            return InternalServerError(res, e);
         }
     }
 };
