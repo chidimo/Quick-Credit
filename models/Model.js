@@ -62,7 +62,7 @@ class Model {
             VALUES(${values})
             RETURNING id
         `;
-        dev_logger(`\nINSERT INCREMENT QUERY: ${query}\n`);
+        dev_logger(`\nINSERT WITH RETURN QUERY: ${query}\n`);
         return await this.pool.query(query);
     }
     
