@@ -1,43 +1,29 @@
 import Model from '../models/Model';
 import { InternalServerError } from '../utils/errorHandlers';
-// import { dev_logger } from '../utils/loggers';
+import { get_user_clause } from './helpers/AuthController';
+import {
+    aws_signed_url,
+    update_user_photo_url
+} from './helpers/UsersController';
 
 const users_model = new Model('users');
 
 const UsersController = {
-
     get_user: async (req, res) => {
         const { id } = req.params;
-        try {
-            const { rows } = await users_model.select(
-                `id, email, password, firstname,
-                    lastname, phone, status, address`,
-                `WHERE id=${id}`
-            );
-            if (rows.length === 0) {
-                // user was not found
-                return res.status(404).json({
-                    error: `User with id ${id} not found`
-                });
-            }
-            return res.status(200).json({ data: rows[0] });
-        }
-        catch (e) {
-            return InternalServerError(res, e);
-        }
+        const clause = `WHERE id=${id}`;
+        const err_msg = `User with id ${id} not found`;
+        const user = await get_user_clause(users_model, res, clause, err_msg);
+        return res.status(200).json({ data: user });
     },
 
     verify_user: async (req, res) => {
         const { id } = req.params;
-        try {
-            await users_model.update(
-                'status=\'verified\'',
-                `WHERE id=${id}`
-            );
-            UsersController.get_user(req, res);
-        }
-        catch (e) { return InternalServerError(res, e); }
-    
+        const clause = `WHERE id=${id}`;
+        const err_msg = `User with id ${id} not found`;
+        await users_model.update('status=\'verified\'', clause);
+        const user = await get_user_clause(users_model, res, clause, err_msg);
+        return res.status(200).json({ data: user });
     },
 
     get_users: async (req, res) => {
@@ -54,7 +40,7 @@ const UsersController = {
             else {
                 data = await users_model.select(
                     `id, email, password, firstname,
-                        lastname, phone, status, address`,
+                    lastname, phone, status, address`,
                 );
             }
             return res.status(200).json({ data: data.rows });
@@ -62,19 +48,21 @@ const UsersController = {
         catch (e) { return InternalServerError(res, e); }
     },
 
-    update_user: async (req, res) => {
+    update_user_profile: async (req, res) => {
         const { id } = req.params;
         const { firstname, lastname, phone, home, office } = req.body;
-
+        const clause = `WHERE id=${id}`;
+        const err_msg = `User with id ${id} not found`;
         try {
             await users_model.update(
-                `firstname='${firstname}',
-                    lastname='${lastname}',
-                    phone='${phone}',
-                    address='{"home": "${home}", "office": "${office}"}'`,
-                `WHERE id=${id}`
+                `firstname='${firstname}', lastname='${lastname}', 
+                phone='${phone}', 
+                address='{"home": "${home}", "office": "${office}"}'`,
+                clause
             );
-            UsersController.get_user(req, res);
+            const user = await get_user_clause(
+                users_model, res, clause, err_msg);
+            return res.status(200).json({ data: user });
         }
         catch (e) {
             return InternalServerError(res, e);
