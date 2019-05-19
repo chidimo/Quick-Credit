@@ -465,6 +465,10 @@ footer {
         flex-direction: column;
     }
 
+    hr.card_divider {
+        display:none;
+    }
+    
     div.loan_card div {
         margin: 0;
         text-align: center;
@@ -526,20 +530,41 @@ footer {
 }
 
 .user_card {
-    /* margin-right: auto; */
     display: grid;
     grid-row-gap: 50px;
     grid-template-columns: 30% 1% 68%;
-}
-
-.user_photo {
-    margin: auto;
 }
 
 .user_photo img {
     border-radius: 50%;
     height: 100px;
     width: 100px;
+    overflow: hidden;
+}
+
+.fa-check-circle {
+    color: green;
+}
+
+#profile_pix {
+    width:90%;
+    height:90%;
+    stroke: #F0F0F0;
+    stroke-width: 3px;
+    fill: none;
+}
+
+.user_photo {
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 120px;
+    height: 120px;
+    background-size:100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
 }
 

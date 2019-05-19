@@ -4,6 +4,8 @@ import { dev_logger } from './utils/loggers';
 dotenv.config();
 
 const Settings = {
+    jwtSecret: process.env.JWT_SECRET,
+    s3_bucket: 'quick-credit',
     dbSettings: () => {
         let databaseName;
         switch (process.env.NODE_ENV.trim()) {
@@ -27,7 +29,13 @@ const Settings = {
         };
         return db_settings;
     },
-    jwtSecret: process.env.JWT_SECRET,
+    AWS_settings: {
+        accessKeyId: process.env.accessKeyId,
+        secretAccessKey: process.env.secretAccessKey,
+        endpoint: 's3.eu-west-2.amazonaws.com',
+        region: 'eu-west-2',
+        signatureVersion: 'v4'
+    }
 };
 
 dev_logger(Settings);

@@ -50,3 +50,7 @@ API documentation is available at <https://qcredit.docs.apiary.io/>
 ## Author
 
 Chidi Orji (orjichidi95@gmail.com)
+
+## Credits
+
+1. `SVG` icon from [FontAwesome](https://fontawesome.com/license)

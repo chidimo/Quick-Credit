@@ -31,7 +31,13 @@ router.get('/users/:id', UsersController.get_user);
 router.get('/users?status=verified', UsersController.get_users);
 router.patch('/users/:id/update',
     UsersValidators.updateProfileValidator,
-    UsersController.update_user
+    UsersController.update_user_profile
+);
+router.get('/users/:id/photo/upload/', 
+    UsersController.get_aws_signed_url
+);
+router.patch('/users/:id/photo/update',
+    UsersController.update_photo_url
 );
 
 router.get('/loans', LoansController.get_all_loans);

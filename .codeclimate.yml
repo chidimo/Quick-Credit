@@ -5,6 +5,7 @@ plugins:
     enabled: true
   eslint:
     enabled: true
+    channel: eslint-5
 checks:
   argument-count:
     config:
