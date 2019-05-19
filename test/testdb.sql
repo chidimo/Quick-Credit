@@ -5,7 +5,7 @@
 -- Dumped from database version 11.1
 -- Dumped by pg_dump version 11.2
 
--- Started on 2019-05-18 19:32:43
+-- Started on 2019-05-20 00:03:09
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -22,7 +22,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 199 (class 1259 OID 215497)
+-- TOC entry 199 (class 1259 OID 223830)
 -- Name: loans; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -43,7 +43,7 @@ CREATE TABLE public.loans (
 ALTER TABLE public.loans OWNER TO postgres;
 
 --
--- TOC entry 198 (class 1259 OID 215495)
+-- TOC entry 198 (class 1259 OID 223828)
 -- Name: loans_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -68,7 +68,7 @@ ALTER SEQUENCE public.loans_id_seq OWNED BY public.loans.id;
 
 
 --
--- TOC entry 201 (class 1259 OID 215511)
+-- TOC entry 201 (class 1259 OID 223844)
 -- Name: repayments; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -84,7 +84,7 @@ CREATE TABLE public.repayments (
 ALTER TABLE public.repayments OWNER TO postgres;
 
 --
--- TOC entry 200 (class 1259 OID 215509)
+-- TOC entry 200 (class 1259 OID 223842)
 -- Name: repayments_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -109,7 +109,7 @@ ALTER SEQUENCE public.repayments_id_seq OWNED BY public.repayments.id;
 
 
 --
--- TOC entry 197 (class 1259 OID 215478)
+-- TOC entry 197 (class 1259 OID 223810)
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -130,7 +130,7 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 196 (class 1259 OID 215476)
+-- TOC entry 196 (class 1259 OID 223808)
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -155,7 +155,7 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- TOC entry 2706 (class 2604 OID 215500)
+-- TOC entry 2706 (class 2604 OID 223833)
 -- Name: loans id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -163,7 +163,7 @@ ALTER TABLE ONLY public.loans ALTER COLUMN id SET DEFAULT nextval('public.loans_
 
 
 --
--- TOC entry 2710 (class 2604 OID 215514)
+-- TOC entry 2710 (class 2604 OID 223847)
 -- Name: repayments id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -171,7 +171,7 @@ ALTER TABLE ONLY public.repayments ALTER COLUMN id SET DEFAULT nextval('public.r
 
 
 --
--- TOC entry 2699 (class 2604 OID 215481)
+-- TOC entry 2699 (class 2604 OID 223813)
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -179,47 +179,47 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
--- TOC entry 2844 (class 0 OID 215497)
+-- TOC entry 2844 (class 0 OID 223830)
 -- Dependencies: 199
 -- Data for Name: loans; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.loans (id, userid, createdon, status, repaid, amount, tenor, interest, balance, paymentinstallment) FROM stdin;
-1	1	2019-05-18 18:31:51.055864+00	approved	f	50000	12	2500	36999.3499999999985	4375
-2	2	2019-05-18 18:31:51.055864+00	approved	t	100000	12	5000	0	8750
-3	3	2019-05-18 18:31:51.055864+00	approved	f	200000	8	10000	200000	26250
-4	4	2019-05-18 18:31:51.055864+00	approved	f	25000	12	1250	24500	2187.5
-5	5	2019-05-18 18:31:51.055864+00	approved	f	45000	6	2250	26250	7875
-6	6	2019-05-18 18:31:51.055864+00	pending	f	80000	12	4000	8000	7000
-7	7	2019-05-18 18:31:51.055864+00	rejected	f	60000	6	3000	6000	10500
-8	8	2019-05-18 18:31:51.055864+00	approved	f	125000	12	6250	20000	10937.5
-9	9	2019-05-18 18:31:51.055864+00	rejected	f	190000	12	9500	19000	16625
-10	10	2019-05-18 18:31:51.055864+00	pending	f	1000000	12	50000	0	87500
+1	1	2019-05-19 23:02:36.095378+00	approved	f	50000	12	2500	36999.3499999999985	4375
+2	2	2019-05-19 23:02:36.095378+00	approved	t	100000	12	5000	0	8750
+3	3	2019-05-19 23:02:36.095378+00	approved	f	200000	8	10000	200000	26250
+4	4	2019-05-19 23:02:36.095378+00	approved	f	25000	12	1250	24500	2187.5
+5	5	2019-05-19 23:02:36.095378+00	approved	f	45000	6	2250	26250	7875
+6	6	2019-05-19 23:02:36.095378+00	pending	f	80000	12	4000	8000	7000
+7	7	2019-05-19 23:02:36.095378+00	rejected	f	60000	6	3000	6000	10500
+8	8	2019-05-19 23:02:36.095378+00	approved	f	125000	12	6250	20000	10937.5
+9	9	2019-05-19 23:02:36.095378+00	rejected	f	190000	12	9500	19000	16625
+10	10	2019-05-19 23:02:36.095378+00	pending	f	1000000	12	50000	0	87500
 \.
 
 
 --
--- TOC entry 2846 (class 0 OID 215511)
+-- TOC entry 2846 (class 0 OID 223844)
 -- Dependencies: 201
 -- Data for Name: repayments; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.repayments (id, loanid, adminid, createdon, amount) FROM stdin;
-1	1	3	2019-05-18 18:32:18.347716+00	4375
-2	1	3	2019-05-18 18:32:18.347716+00	4375
-3	2	1	2019-05-18 18:32:18.347716+00	26250
-4	1	2	2019-05-18 18:32:18.347716+00	4375
-5	3	4	2019-05-18 18:32:18.347716+00	2875
-6	5	8	2019-05-18 18:32:18.347716+00	10500
-7	4	3	2019-05-18 18:32:18.347716+00	4375
-8	8	1	2019-05-18 18:32:18.347716+00	4375
-9	8	4	2019-05-18 18:32:18.347716+00	4375
-10	10	8	2019-05-18 18:32:18.347716+00	4375
+1	1	3	2019-05-19 23:02:53.805177+00	4375
+2	1	3	2019-05-19 23:02:53.805177+00	4375
+3	2	1	2019-05-19 23:02:53.805177+00	26250
+4	1	2	2019-05-19 23:02:53.805177+00	4375
+5	3	4	2019-05-19 23:02:53.805177+00	2875
+6	5	8	2019-05-19 23:02:53.805177+00	10500
+7	4	3	2019-05-19 23:02:53.805177+00	4375
+8	8	1	2019-05-19 23:02:53.805177+00	4375
+9	8	4	2019-05-19 23:02:53.805177+00	4375
+10	10	8	2019-05-19 23:02:53.805177+00	4375
 \.
 
 
 --
--- TOC entry 2842 (class 0 OID 215478)
+-- TOC entry 2842 (class 0 OID 223810)
 -- Dependencies: 197
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -266,7 +266,7 @@ SELECT pg_catalog.setval('public.users_id_seq', 10, true);
 
 
 --
--- TOC entry 2717 (class 2606 OID 215508)
+-- TOC entry 2717 (class 2606 OID 223841)
 -- Name: loans loans_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -275,7 +275,7 @@ ALTER TABLE ONLY public.loans
 
 
 --
--- TOC entry 2719 (class 2606 OID 215517)
+-- TOC entry 2719 (class 2606 OID 223850)
 -- Name: repayments repayments_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -284,7 +284,7 @@ ALTER TABLE ONLY public.repayments
 
 
 --
--- TOC entry 2713 (class 2606 OID 215494)
+-- TOC entry 2713 (class 2606 OID 223826)
 -- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -293,7 +293,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 2715 (class 2606 OID 215492)
+-- TOC entry 2715 (class 2606 OID 223824)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -301,7 +301,7 @@ ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
--- Completed on 2019-05-18 19:32:44
+-- Completed on 2019-05-20 00:03:09
 
 --
 -- PostgreSQL database dump complete

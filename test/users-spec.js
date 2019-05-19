@@ -24,7 +24,6 @@ describe('/users', () => {
     });
    
     after(done => {
-        test_logger('After hook start');
         exec(clear, err => {
             if (err) {
                 test_logger(`Error clearing db ${err}`);
@@ -157,19 +156,6 @@ describe('/users', () => {
                     done();
                 });
         });
-        
-        it('should return error if user is not found', done => {
-            const id = 45;
-            server
-                .patch(`/users/${id}/verify`)
-                .expect(200)
-                .end((err, res) => {
-                    res.status.should.equal(404);
-                    res.body.error.should.be.equal(
-                        `User with id ${id} not found`);
-                    done();
-                });
-        });
     });
     
     describe('GET /users?status=', () => {
@@ -286,6 +272,37 @@ describe('/users', () => {
                     res.body.errors[0].msg.should.equal(
                         'Wrong number format: E.G. 07012345678'
                     );
+                    done();
+                });
+        });
+    });
+
+    describe('PATCH /users/:id/photo/update/', () => {
+        it('should update user photo and return user', done => {
+            const body = { photo_url: 'https://amazon.com/whatever' };
+            server
+                .patch('/users/4/photo/update')
+                .send(body)
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(200);
+                    res.body.data.photo.should.equal(body.photo_url);
+                    done();
+                });
+        });
+    });
+
+    describe('GET /users/:id/photo/upload/', () => {
+        it('should return a presigned url', done => {
+            const id = 4;
+            const filetype = 'image/png';
+            server
+                .get(`/users/${id}/photo/upload/`)
+                .send({ filetype })
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(200);
+                    res.body.should.have.property('signed_url');
                     done();
                 });
         });
