@@ -38,15 +38,12 @@ export const add_user_to_db = async (model_instance, req, res) => {
     catch (e) { return InternalServerError(res, e);}
 };
 
-export const get_user_clause = async (model_instance, res, clause, err_msg) => {
+export const get_existing_user = async (model_instance, res, clause) => {
     try {
         const { rows } = await model_instance.select(
             'id, email, firstname, photo, lastname, phone, status, address',
             clause
         );
-        if (rows.length === 0) return res.status(404).json({ 
-            error: err_msg
-        });
         return rows[0];
     }
     catch (e) { return InternalServerError(res, e); }

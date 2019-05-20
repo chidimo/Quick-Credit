@@ -170,6 +170,17 @@ describe('/users', () => {
                     done();
                 });
         });
+        it('should not verify non-existent user', done => {
+            const id = 100;
+            server
+                .patch(`/users/${id}/verify`)
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(404);
+                    res.body.error.should.equal(`User with id ${id} not found`);
+                    done();
+                });
+        });
     });
     
     describe('GET /users?status=', () => {

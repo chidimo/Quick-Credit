@@ -42,16 +42,16 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 INSERT INTO users(email, password, firstname, lastname, phone, address)
-VALUES ('a@b.com', 'password', 'first', 'men', '080121515', '{"home": "iyaba", "office": "ring road"}'),
-       ('c@d.go', 'password', 'name', 'cat', '08151584151', '{"home": "london", "office": "NYC"}'),
-       ('me@yahoo.com', 'password', 'tayo', 'dele', '08012345678', '{"home": "ijebu","office": "ijegun"}'),
-       ('abc@gmail.com', 'password', 'what', 'is', '08012345678','{"home": "must","office": "not"}'),
-       ('name@chat.co', 'password', 'niger', 'tornadoes', '08012345678', '{"home": "niger","office": "niger"}'),
-       ('bcc@gmail.com', 'password', 'bcc', 'lions', '08012345678', '{"home": "gboko","office": "gboko"}'),
-       ('bbc@bbc.uk', 'password', 'bbc', 'broadcast', '08012345678', '{"home": "london","office": "uk"}'),
-       ('c@g.move', 'password', 'abc', 'def', '08012345678', '{"home": "shop","office": "home"}'),
-       ('an@dela.ng', 'password', 'and', 'ela', '08012345678', '{"home": "ikorodu","office": "lagos"}'),
-       ('soft@ware.eng', 'password', 'soft', 'eng', '08012345678', '{"home": "remote","office": "on-site"}');
+VALUES ('a@b.com', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'first', 'men', '080121515', '{"home": "iyaba", "office": "ring road"}'),
+       ('c@d.go', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'name', 'cat', '08151584151', '{"home": "london", "office": "NYC"}'),
+       ('me@yahoo.com', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'tayo', 'dele', '08012345678', '{"home": "ijebu","office": "ijegun"}'),
+       ('abc@gmail.com', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'what', 'is', '08012345678','{"home": "must","office": "not"}'),
+       ('name@chat.co', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'niger', 'tornadoes', '08012345678', '{"home": "niger","office": "niger"}'),
+       ('bcc@gmail.com', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'bcc', 'lions', '08012345678', '{"home": "gboko","office": "gboko"}'),
+       ('bbc@bbc.uk', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'bbc', 'broadcast', '08012345678', '{"home": "london","office": "uk"}'),
+       ('c@g.move', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'abc', 'def', '08012345678', '{"home": "shop","office": "home"}'),
+       ('an@dela.ng', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'and', 'ela', '08012345678', '{"home": "ikorodu","office": "lagos"}'),
+       ('soft@ware.eng', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O', 'soft', 'eng', '08012345678', '{"home": "remote","office": "on-site"}');
 
 CREATE TABLE IF NOT EXISTS loans (
 	id SERIAL PRIMARY KEY,
@@ -182,4 +182,20 @@ Warm tones
 ```
 router.get('/repayments', LoansController.get_all_repayments
 );
+```
+
+## Connecting to heroku
+
+<https://stackoverflow.com/questions/20775490/how-to-create-or-manage-heroku-postgres-database-instance#23333798>
+
+postgres://fgpyagsuzwxcnb:e08fb62b310448400dc8d4b61366191a58876dd4a81861b5125344852492c872@ec2-54-83-36-37.compute-1.amazonaws.com:5432/dfjtmn74eqgvn7
+postgres://username:password@localhost/myrailsdb
+
+```cmd
+heroku pg:credentials:url DATABASE
+
+psql -h ec2-54-83-36-37.compute-1.amazonaws.com -U fgpyagsuzwxcnb -d dfjtmn74eqgvn7
+
+copy and past password, then enter
+
 ```

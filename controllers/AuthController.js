@@ -2,7 +2,7 @@ import Model from '../models/Model';
 import 
 { 
     check_user_exists,
-    get_user_clause,
+    get_existing_user,
     add_user_to_db,
     check_password
 } from './helpers/AuthController';
@@ -25,7 +25,7 @@ const AuthController = {
         const [ { id }, ] = rows;
         const clause = `WHERE id=${id}`;
         const err_msg = `User with id ${id} does not exist.`;
-        const user = await get_user_clause(users_model, res, clause, err_msg);
+        const user = await get_existing_user(users_model, res, clause, err_msg);
         return res.status(201).json({ data: { ...user, token: req.token } });
     },
 
@@ -36,7 +36,7 @@ const AuthController = {
         // check user exists
         const match = await check_password(users_model, email, password, res);
         if (match) {
-            const user = await get_user_clause(
+            const user = await get_existing_user(
                 users_model, res, clause, err_msg);
             return res
                 .status(200).json({ data: { ...user, token: req.token } });
