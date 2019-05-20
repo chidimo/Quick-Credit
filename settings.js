@@ -7,8 +7,21 @@ const Settings = {
     jwtSecret: process.env.JWT_SECRET,
     s3_bucket: 'quick-credit',
     dbSettings: () => {
+        let databaseName;
+        switch (process.env.NODE_ENV.trim()) {
+        case 'development':
+            databaseName = 'quick_credit';
+            break;
+        case 'test':
+            databaseName = 'testdb';
+            break;
+        case 'production':
+            databaseName = 'quick_credit';
+            break;
+        }
+
         const db_settings = {
-            dbName: process.env.DBNAME.trim(),
+            databaseName,
             dbHost: process.env.PGHOST.trim(),
             dbUser: process.env.PGUSER.trim(),
             dbPort: process.env.PGPORT,
