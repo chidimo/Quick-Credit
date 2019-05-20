@@ -14,7 +14,7 @@ const AuthController = {
     signup: async (req, res) => {
         const { email } = req.body;
         const user_exists = await check_user_exists(
-            users_model, email, res);
+            users_model, `WHERE email='${email}'`, res);
 
         if (user_exists) {
             return res
