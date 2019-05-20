@@ -3,6 +3,7 @@ env:
   global:
     - CC_TEST_REPORTER_ID=03990f10d1bc434a08af1af70b30627f5333955eb21bf21c3b45eade086b92b5
     - NODE_ENV=test
+    - DBNAME=testdb
     - PGPASSWORD=
     - PGPORT=5433
     - PGUSER=postgres
