@@ -17,7 +17,7 @@ const update_profile_pix = file => {
         reader.readAsDataURL(file);
     }
     else {
-        profile_pix.src = 'https://s3.eu-west-2.amazonaws.com/quick-credit/profile_photos/4';
+        profile_pix.src = 'https://s3.eu-west-2.amazonaws.com/quick-credit/profile_photos/1';
     }
 };
 
