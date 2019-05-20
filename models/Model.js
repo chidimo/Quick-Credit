@@ -10,7 +10,7 @@ const config = {
     user: Settings.dbSettings().dbUser,
     host: Settings.dbSettings().dbHost,
     port: Settings.dbSettings().dbPort,
-    database: Settings.dbSettings().dbName,
+    database: Settings.dbSettings().databaseName,
     password: Settings.dbSettings().dbPassword
 };
 
