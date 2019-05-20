@@ -2,13 +2,24 @@ import bcrypt from 'bcrypt';
 
 import { InternalServerError } from '../../utils/errorHandlers';
 
-export const check_user_existence = async (model_instance, email, res) => {
+export const check_user_exists = async (model_instance, clause, res) => {
     try {
         const { rows } = await model_instance.select(
-            'id, email', `WHERE email='${email}'`);
+            'id, email', clause);
         const [ user, ] = rows;
-        
-        if (user) return user;
+        if (user) return true;
+        return false;
+    }
+    catch (e) { return InternalServerError(res, e);}
+};
+
+export const check_password = async (model_instance, email, password, res) => {
+    try {
+        const { rows } = await model_instance.select(
+            'id, email, password', `WHERE email='${email}'`);
+        const [ user, ] = rows;
+        if (bcrypt.compareSync(password, user.password)) return true;
+        return false;
     }
     catch (e) { return InternalServerError(res, e);}
 };
@@ -27,15 +38,12 @@ export const add_user_to_db = async (model_instance, req, res) => {
     catch (e) { return InternalServerError(res, e);}
 };
 
-export const get_user_clause = async (model_instance, res, clause, err_msg) => {
+export const get_existing_user = async (model_instance, res, clause) => {
     try {
         const { rows } = await model_instance.select(
             'id, email, firstname, photo, lastname, phone, status, address',
             clause
         );
-        if (rows.length === 0) return res.status(404).json({ 
-            error: err_msg
-        });
         return rows[0];
     }
     catch (e) { return InternalServerError(res, e); }
