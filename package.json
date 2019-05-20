@@ -15,7 +15,7 @@
         "start": "set NODE_ENV=production&node --require @babel/register ./bin/www ",
         "devstart": "set NODE_ENV=development&set DEBUG=dev&nodemon --exec babel-node ./bin/www",
         "lint": "./node_modules/.bin/eslint ./",
-        "test": "set NODE_ENV=test&set DEBUG=test&nyc --reporter=html --reporter=text mocha -r @babel/register -r should",
+        "test": "set NODE_ENV=test&set DEBUG=test&set DBNMAE=testdb&nyc --reporter=html --reporter=text mocha -r @babel/register -r should",
         "cover": "nyc report --reporter=text-lcov | coveralls",
         "coverage": "nyc report --reporter=text-lcov | coveralls && rm -rf ./.nyc_output && rm -rf coverage/"
     },

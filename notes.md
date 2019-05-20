@@ -183,3 +183,9 @@ Warm tones
 router.get('/repayments', LoansController.get_all_repayments
 );
 ```
+
+## Heroku postgres DATABASE_URL
+
+postgres://fgpyagsuzwxcnb:e08fb62b310448400dc8d4b61366191a58876dd4a81861b5125344852492c872@ec2-54-83-36-37.compute-1.amazonaws.com:5432/dfjtmn74eqgvn7
+
+postgres://username:password@localhost/<db-name>
