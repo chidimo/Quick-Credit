@@ -2,13 +2,24 @@ import bcrypt from 'bcrypt';
 
 import { InternalServerError } from '../../utils/errorHandlers';
 
-export const check_user_existence = async (model_instance, email, res) => {
+export const check_user_exists = async (model_instance, email, res) => {
     try {
         const { rows } = await model_instance.select(
             'id, email', `WHERE email='${email}'`);
         const [ user, ] = rows;
         
         if (user) return user;
+    }
+    catch (e) { return InternalServerError(res, e);}
+};
+
+export const check_password = async (model_instance, email, password, res) => {
+    try {
+        const { rows } = await model_instance.select(
+            'id, email, password', `WHERE email='${email}'`);
+        const [ user, ] = rows;
+        if (bcrypt.compareSync(password, user.password)) return true;
+        return false;
     }
     catch (e) { return InternalServerError(res, e);}
 };

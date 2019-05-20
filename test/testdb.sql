@@ -225,16 +225,16 @@ COPY public.repayments (id, loanid, adminid, createdon, amount) FROM stdin;
 --
 
 COPY public.users (id, email, password, firstname, lastname, phone, photo, address, status, isadmin) FROM stdin;
-1	a@b.com	password	first	men	080121515	\N	{"home": "iyaba", "office": "ring road"}	unverified	f
-2	c@d.go	password	name	cat	08151584151	\N	{"home": "london", "office": "NYC"}	unverified	f
-3	me@yahoo.com	password	tayo	dele	08012345678	\N	{"home": "ijebu", "office": "ijegun"}	unverified	f
+1	a@b.com	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	first	men	080121515	\N	{"home": "iyaba", "office": "ring road"}	unverified	f
+2	c@d.go	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	name	cat	08151584151	\N	{"home": "london", "office": "NYC"}	unverified	f
+3	me@yahoo.com	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	tayo	dele	08012345678	\N	{"home": "ijebu", "office": "ijegun"}	unverified	f
 4	abc@gmail.com	password	what	is	08012345678	\N	{"home": "must", "office": "not"}	unverified	f
-5	name@chat.co	password	niger	tornadoes	08012345678	\N	{"home": "niger", "office": "niger"}	unverified	f
-6	bcc@gmail.com	password	bcc	lions	08012345678	\N	{"home": "gboko", "office": "gboko"}	unverified	f
-7	bbc@bbc.uk	password	bbc	broadcast	08012345678	\N	{"home": "london", "office": "uk"}	unverified	f
-8	c@g.move	password	abc	def	08012345678	\N	{"home": "shop", "office": "home"}	unverified	f
-9	an@dela.ng	password	and	ela	08012345678	\N	{"home": "ikorodu", "office": "lagos"}	unverified	f
-10	soft@ware.eng	password	soft	eng	08012345678	\N	{"home": "remote", "office": "on-site"}	unverified	f
+5	name@chat.co	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	niger	tornadoes	08012345678	\N	{"home": "niger", "office": "niger"}	unverified	f
+6	bcc@gmail.com	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	bcc	lions	08012345678	\N	{"home": "gboko", "office": "gboko"}	unverified	f
+7	bbc@bbc.uk	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	bbc	broadcast	08012345678	\N	{"home": "london", "office": "uk"}	unverified	f
+8	c@g.move	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	abc	def	08012345678	\N	{"home": "shop", "office": "home"}	unverified	f
+9	an@dela.ng	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	and	ela	08012345678	\N	{"home": "ikorodu", "office": "lagos"}	unverified	f
+10	soft@ware.eng	$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O	soft	eng	08012345678	\N	{"home": "remote", "office": "on-site"}	unverified	f
 \.
 
 

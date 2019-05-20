@@ -141,6 +141,20 @@ describe('/users', () => {
                         done();
                     });
             });
+
+            
+            it('should return error for wrong password', done => {
+                const user = { email: 'a@b.com', password: 'wrongpassword' };
+                server
+                    .post('/auth/signin')
+                    .send(user)
+                    .expect(200)
+                    .end((err, res) => {
+                        res.status.should.equal(404);
+                        res.body.error.should.equal('Incorrect password');
+                        done();
+                    });
+            });
         });
     });
 
@@ -169,7 +183,6 @@ describe('/users', () => {
                     for (const each of res.body.data) {
                         each.should.have.property('id');
                         each.should.have.property('email');
-                        each.should.have.property('password');
                         each.should.have.property('firstname');
                         each.should.have.property('lastname');
                         each.should.have.property('phone');

@@ -36,15 +36,13 @@ const UsersController = {
             let data;
             if (status) {
                 data = await users_model.select(
-                    `id, email, password, firstname,
-                    lastname, phone, status, address`,
+                    'id, email, firstname, lastname, phone, status, address',
                     `WHERE status='${status}'`
                 );
             }
             else {
                 data = await users_model.select(
-                    `id, email, password, firstname,
-                    lastname, phone, status, address`,
+                    'id, email, firstname, lastname, phone, status, address',
                 );
             }
             return res.status(200).json({ data: data.rows });
