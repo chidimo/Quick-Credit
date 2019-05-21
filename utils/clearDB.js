@@ -1,20 +1,5 @@
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
-
-import Settings from '../settings';
+import pool from '../models/pool';
 import { dev_logger } from './loggers';
-
-dotenv.config();
-
-const config = {
-    user: Settings.dbSettings().dbUser,
-    host: Settings.dbSettings().dbHost,
-    port: Settings.dbSettings().dbPort,
-    database: Settings.dbSettings().dbName,
-    password: Settings.dbSettings().dbPassword
-};
-
-const pool = new Pool(config);
 
 const dropUsers = `
     DROP TABLE users

@@ -1,22 +1,8 @@
 import bcrypt from 'bcrypt';
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
-
-import Settings from '../settings';
+import pool from '../models/pool';
 import { dev_logger, test_logger } from './loggers';
 
-dotenv.config();
-
-const config = {
-    user: Settings.dbSettings().dbUser,
-    host: Settings.dbSettings().dbHost,
-    port: Settings.dbSettings().dbPort,
-    database: Settings.dbSettings().dbName,
-    password: Settings.dbSettings().dbPassword
-};
-
 const hashPassword = password => (bcrypt.hashSync(password, 8));
-const pool = new Pool(config);
 
 const createUserTable = `
     CREATE TABLE IF NOT EXISTS users (

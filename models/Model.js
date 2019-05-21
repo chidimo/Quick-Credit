@@ -1,25 +1,10 @@
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
-
-import Settings from '../settings';
-import { dev_logger, test_logger } from '../utils/loggers';
-
-dotenv.config();
-
-const config = {
-    user: Settings.dbSettings().dbUser,
-    host: Settings.dbSettings().dbHost,
-    port: Settings.dbSettings().dbPort,
-    database: Settings.dbSettings().dbName,
-    password: Settings.dbSettings().dbPassword
-};
-
-test_logger(`test db config ${JSON.stringify(config)}`);
+import { dev_logger } from '../utils/loggers';
+import pool from './pool';
 
 class Model {
     constructor(table) {
         this.table = table;
-        this.pool = new Pool(config);
+        this.pool = pool;
         this.pool.on('error', (err, client) => {
             dev_logger(`****Unexpected error on idle client, ${err}`);
             process.exit(-1);
@@ -49,12 +34,6 @@ class Model {
         dev_logger(`\nUPDATE QUERY: ${query}\n`);
         return await this.pool.query(query);
     }
-
-    // async insert(columns, values) {
-    //     const query = `INSERT INTO ${this.table} ${columns} VALUES(${values})`;
-    //     dev_logger(`\nINSERT QUERY: ${query}\n`);
-    //     return await this.pool.query(query);
-    // }
 
     async insert_with_return(columns, values) {
         const query = `
