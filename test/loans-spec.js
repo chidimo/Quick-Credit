@@ -1,39 +1,25 @@
 // should is not used directly in the file but is added as a mocha requirement
 
-import { exec } from 'child_process';
+
 import supertest from 'supertest';
 import assert from 'assert';
 import app from '../app';
+
 import { test_logger } from '../utils/loggers';
+import createDB from '../utils/createDB';
+import clearDB from '../utils/clearDB';
 
 const server = supertest.agent(app);
 
 describe('/loans', () => {
-    const dump = 'psql -h localhost -d testdb -U postgres -f test/testdb.sql';
-    const connect = 'psql -h localhost -d testdb -U postgres -c';
-    const query = 'delete from loans;delete from repayments';
-    const clear = `${connect} "${query}"`;
-
-    before(done => {
-
-        exec(dump, err => {
-            if (err) {
-                test_logger(`dump error: ${ err }`);
-            }
-            test_logger('****Database populated successfully.****');
-            done();
-        });
+    before(async () => {
+        test_logger('Creating DB in loans-spec');
+        await createDB();
     });
-   
-    after(done => {
-        test_logger('After hook start');
-        exec(clear, err => {
-            if (err) {
-                test_logger(`Error clearing db ${err}`);
-            }
-        });
-        test_logger('****Database cleared successfully.****');
-        done();
+
+    after(async () => {
+        test_logger('Clearing DB in loans-spec');
+        await clearDB();
     });
 
     describe('/loans: Get all loans', () => {

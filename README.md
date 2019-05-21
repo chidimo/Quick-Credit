@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.com/chidimo/Quick-Credit.svg?branch=develop)](https://travis-ci.com/chidimo/Quick-Credit)
 [![Coverage Status](https://coveralls.io/repos/github/chidimo/Quick-Credit/badge.svg?branch=develop)](https://coveralls.io/github/chidimo/Quick-Credit?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/38d7483bb05e2777f391/maintainability)](https://codeclimate.com/github/chidimo/Quick-Credit/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/38d7483bb05e2777f391/test_coverage)](https://codeclimate.com/github/chidimo/Quick-Credit/test_coverage)
 
 ## Website
 

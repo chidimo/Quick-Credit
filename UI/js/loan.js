@@ -5,31 +5,30 @@ const reject_loan_application = document.getElementById(
     'reject_loan_application'
 );
 
+const promptUser = (text, defaultText, msg) => {
+    const cont = prompt(text, defaultText);
+    if (cont !== null) {
+        alert(msg);
+    }
+};
+
 approve_loan_application.addEventListener('click', e => {
     e.preventDefault();
-    const cont = prompt(
+    promptUser(
         'Confirm loan approval',
-        'Click okay to approve this loan request');
-    
-    if (cont !== null) {
-        alert('Loan application was approved');
-        // send email notification
-    }
-
+        'Click okay to approve this loan request',
+        'Loan application was approved'
+    );
     return;
 });
 
 reject_loan_application.addEventListener('click', e => {
     e.preventDefault();
-    const cont = prompt(
+    promptUser(
         'Confirm loan rejection',
-        'Click okay to reject this loan request');
-    
-    if (cont !== null) {
-        alert('Loan application was rejected');
-        // send email notification
-    }
-
+        'Click okay to reject this loan request',
+        'Loan application was rejected'
+    );
     return;
 });
 
