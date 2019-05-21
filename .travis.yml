@@ -1,7 +1,7 @@
 language: node_js
 env:
   global:
-    - CC_TEST_REPORTER_ID=03990f10d1bc434a08af1af70b30627f5333955eb21bf21c3b45eade086b92b5
+    - CC_TEST_REPORTER_ID=f9b005dd05d6cf7849f22ee7d91f197a81979d400077e3d9f9fcc6de3c4159da
     - NODE_ENV=test
     - DBNAME=testdb
     - PGPASSWORD=
@@ -18,6 +18,11 @@ addons:
     - postgresql-client-10
 before_script:
   - psql -c 'create database testdb;' -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 before_install:
   - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
   - sudo service postgresql restart

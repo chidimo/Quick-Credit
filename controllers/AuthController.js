@@ -6,7 +6,6 @@ import
     add_user_to_db,
     check_password
 } from './helpers/AuthController';
-// import { dev_logger } from '../utils/loggers';
 
 const users_model = new Model('users');
 
@@ -32,12 +31,17 @@ const AuthController = {
     signin: async (req, res) => {
         const { email, password } = req.body;
         const clause = `WHERE email='${email}'`;
-        const err_msg = `User with email ${email} does not exist.`;
-        // check user exists
+        const user_exists = await check_user_exists(
+            users_model, `WHERE email='${email}'`, res
+        );
+        if (!user_exists) {
+            return res.status(404)
+                .json({ error: `User with email ${email} does not exist.` });
+        }
         const match = await check_password(users_model, email, password, res);
         if (match) {
             const user = await get_existing_user(
-                users_model, res, clause, err_msg);
+                users_model, res, clause);
             return res
                 .status(200).json({ data: { ...user, token: req.token } });
         }

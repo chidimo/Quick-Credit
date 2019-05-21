@@ -11,26 +11,33 @@ const UsersController = {
     get_user: async (req, res) => {
         const { id } = req.params;
         const clause = `WHERE id=${id}`;
-        const exists = await check_user_exists(users_model, clause, res);
-        if (exists) {
-            const user = await get_existing_user(users_model, res, clause);
-            return res.status(200).json({ data: user });
+        try {
+            const exists = await check_user_exists(users_model, clause, res);
+            if (exists) {
+                const user = await get_existing_user(users_model, res, clause);
+                return res.status(200).json({ data: user });
+            }
+            return res.status(404)
+                .json({ error: `User with id ${id} not found` });
         }
-        return res.status(404)
-            .json({ error: `User with id ${id} not found` });
+        catch (e) { return; }
     },
 
     verify_user: async (req, res) => {
         const { id } = req.params;
         const clause = `WHERE id=${id}`;
-        const exists = await check_user_exists(users_model, clause, res);
-        if (exists) {
-            await users_model.update('status=\'verified\'', clause);
-            const user = await get_existing_user(users_model, res, clause);
-            return res.status(200).json({ data: user });
+        try {
+
+            const exists = await check_user_exists(users_model, clause, res);
+            if (exists) {
+                await users_model.update('status=\'verified\'', clause);
+                const user = await get_existing_user(users_model, res, clause);
+                return res.status(200).json({ data: user });
+            }
+            return res.status(404)
+                .json({ error: `User with id ${id} not found` });
         }
-        return res.status(404)
-            .json({ error: `User with id ${id} not found` });
+        catch (e) { return; }
     },
 
     get_users: async (req, res) => {
@@ -50,26 +57,30 @@ const UsersController = {
             }
             return res.status(200).json({ data: data.rows });
         }
-        catch (e) { return InternalServerError(res, e); }
+        catch (e) { throw InternalServerError(res, e); }
     },
 
     update_user_profile: async (req, res) => {
         const { id } = req.params;
         const { firstname, lastname, phone, home, office } = req.body;
         const clause = `WHERE id=${id}`;
-        const exists = await check_user_exists(users_model, clause, res);
-        if (exists) {
-            await users_model.update(
-                `firstname='${firstname}', lastname='${lastname}', 
-                phone='${phone}', 
-                address='{"home": "${home}", "office": "${office}"}'`,
-                clause
-            );
-            const user = await get_existing_user(users_model, res, clause);
-            return res.status(200).json({ data: user });
+        try {
+
+            const exists = await check_user_exists(users_model, clause, res);
+            if (exists) {
+                await users_model.update(
+                    `firstname='${firstname}', lastname='${lastname}', 
+                    phone='${phone}', 
+                    address='{"home": "${home}", "office": "${office}"}'`,
+                    clause
+                );
+                const user = await get_existing_user(users_model, res, clause);
+                return res.status(200).json({ data: user });
+            }
+            return res.status(404)
+                .json({ error: `User with id ${id} not found` });
         }
-        return res.status(404)
-            .json({ error: `User with id ${id} not found` });
+        catch (e) { return; }
     },
 
     get_aws_signed_url: (req, res) => {
@@ -83,14 +94,18 @@ const UsersController = {
         const { id } = req.params;
         const { photo_url } = req.body;
         const clause = `WHERE id=${id}`;
-        const exists = await check_user_exists(users_model, clause, res);
-        if (exists) {
-            await users_model.update(`photo='${photo_url}'`, clause);
-            const user = await get_existing_user(users_model, res, clause);
-            return res.status(200).json({ data: user });
+        try {
+
+            const exists = await check_user_exists(users_model, clause, res);
+            if (exists) {
+                await users_model.update(`photo='${photo_url}'`, clause);
+                const user = await get_existing_user(users_model, res, clause);
+                return res.status(200).json({ data: user });
+            }
+            return res.status(404)
+                .json({ error: `User with id ${id} not found` });
         }
-        return res.status(404)
-            .json({ error: `User with id ${id} not found` });
+        catch (e) { return; }
 
     }
 };

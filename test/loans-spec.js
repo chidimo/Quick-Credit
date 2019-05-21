@@ -10,7 +10,9 @@ const server = supertest.agent(app);
 
 describe('/loans', () => {
     const dump = 'psql -h localhost -d testdb -U postgres -f test/testdb.sql';
-    const clear = 'psql -h localhost -d testdb -U postgres -c "delete from loans;delete from repayments"';
+    const connect = 'psql -h localhost -d testdb -U postgres -c';
+    const query = 'delete from loans;delete from repayments';
+    const clear = `${connect} "${query}"`;
 
     before(done => {
 
