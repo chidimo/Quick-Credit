@@ -6,7 +6,6 @@ import
     add_user_to_db,
     check_password
 } from './helpers/AuthController';
-// import { dev_logger } from '../utils/loggers';
 
 const users_model = new Model('users');
 

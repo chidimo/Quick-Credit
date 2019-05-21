@@ -50,11 +50,11 @@ class Model {
         return await this.pool.query(query);
     }
 
-    async insert(columns, values) {
-        const query = `INSERT INTO ${this.table} ${columns} VALUES(${values})`;
-        dev_logger(`\nINSERT QUERY: ${query}\n`);
-        return await this.pool.query(query);
-    }
+    // async insert(columns, values) {
+    //     const query = `INSERT INTO ${this.table} ${columns} VALUES(${values})`;
+    //     dev_logger(`\nINSERT QUERY: ${query}\n`);
+    //     return await this.pool.query(query);
+    // }
 
     async insert_with_return(columns, values) {
         const query = `

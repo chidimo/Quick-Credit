@@ -11,7 +11,9 @@ const server = supertest.agent(app);
 
 describe('/users', () => {
     const dump = 'psql -h localhost -d testdb -U postgres -f test/testdb.sql';
-    const clear = 'psql -h localhost -d testdb -U postgres -c "delete from users"';
+    const connect = 'psql -h localhost -d testdb -U postgres -c';
+    const query = 'delete from users';
+    const clear = `${connect} "${query}"`;
 
     before(done => {
         exec(dump, err => {
@@ -163,7 +165,8 @@ describe('/users', () => {
                     .expect(200)
                     .end((err, res) => {
                         res.status.should.equal(404);
-                        res.body.error.should.equal(`User with email ${user.email} does not exist.`);
+                        res.body.error.should.equal(
+                            `User with email ${user.email} does not exist.`);
                         done();
                     });
             });
@@ -262,6 +265,17 @@ describe('/users', () => {
                 .end((err, res) => {
                     res.status.should.equal(404);
                     res.body.error.should.equal('User with id 45 not found');
+                    done();
+                });
+        });
+
+        it('should return 500 internal server error', done => {
+            server
+                .get('/users/whatever')
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(500);
+                    res.body.message.should.equal('Internal server error');
                     done();
                 });
         });

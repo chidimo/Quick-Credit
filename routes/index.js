@@ -20,8 +20,8 @@ router.post('/auth/signup',
 );
 
 router.post('/auth/signin',
-    AuthenticationMiddleware.generateToken,
     UsersValidators.passwordValidator,
+    AuthenticationMiddleware.generateToken,
     AuthController.signin
 );
 

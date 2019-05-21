@@ -7,19 +7,36 @@ profile_pix.addEventListener('click', e => {
     img_uploader.click();
 });
 
-const update_profile_pix = file => {
-    const reader  = new FileReader();
-    reader.addEventListener('load', () => {
-        const { result } = reader;
-        profile_pix.src = result;
-    });
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-    else {
-        profile_pix.src = 'https://s3.eu-west-2.amazonaws.com/quick-credit/profile_photos/1';
-    }
-};
+const id = 1;
+const bucket = 'quick-credit';
+const folder = 'profile_photos';
+const endpoint = 's3.eu-west-2.amazonaws.com';
+// const base_url = 'https://qcredit.herokuapp.com';
+const base_url = 'http://localhost:3000';
+
+// const reload_pix = () => {
+//     const container = document.getElementById('photo_window');
+//     const content = container.innerHTML;
+//     container.innerHTML = content; 
+    
+//     // this line is to watch the result in console , you can remove it later	
+//     console.log('Refreshed'); 
+// };
+
+// const update_profile_pix = file => {
+//     const reader  = new FileReader();
+//     reader.addEventListener('load', () => {
+//         const { result } = reader;
+//         profile_pix.src = result;
+//     });
+//     if (file) {
+//         reader.readAsDataURL(file);
+//     }
+//     else {
+//         const src = `https://${endpoint}/quick-credit/profile_photos/${id}`;
+//         profile_pix.src = src;
+//     }
+// };
 
 img_uploader.onchange = async e => {
     e.preventDefault();
@@ -32,9 +49,6 @@ img_uploader.onchange = async e => {
         alert(`File is ${size_in_mb}MB. Allowed size is 1MB.`);
         return;
     }
-    // update_profile_pix(file);
-    const id = 4;
-
     // const filename = file.name;
     // const ext = filename.slice(filename.lastIndexOf('.') + 1);
     const signed_upload_url = await axios_get_signed_url(id, filetype);
@@ -42,9 +56,6 @@ img_uploader.onchange = async e => {
     const user = await update_photo_in_db(id, photo_aws_url);
     return user;
 };
-
-const base_url = 'https://qcredit.herokuapp.com';
-// const base_url = 'http://localhost:3000';
 
 // step 1: get a signed URL
 const axios_get_signed_url = async (id, filetype) => {
@@ -75,9 +86,6 @@ const upload_to_aws = async (id, file, signed_url) => {
     // eslint-disable-next-line no-undef
     const resp = await axios.put(signed_url, file, config);
     if (resp.status === 200) {
-        const endpoint = 's3.eu-west-2.amazonaws.com';
-        const bucket = 'quick-credit';
-        const folder = 'profile_photos';
         const aws_url = `https://${endpoint}/${bucket}/${folder}/${id}`;
         return aws_url;
     }

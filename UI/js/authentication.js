@@ -18,20 +18,24 @@ sign_up_button.addEventListener('click', e => {
     window.location = './dashboard.html';
 });
 
+const swap_classes = (dom_1, dom_2) => {
+    dom_1.classList.add('hide_form');
+    dom_2.classList.remove('hide_form');
+};
+
+const activate_form = (form_1, form_2) => {
+    form_1.classList.add('selected');
+    form_2.classList.remove('selected');
+};
+
 activate_signin.addEventListener('click', e => {
     e.preventDefault();
-    signup_form.classList.add('hide_form');
-    signin_form.classList.remove('hide_form');
-
-    activate_signin.classList.add('selected');
-    activate_signup.classList.remove('selected');
+    swap_classes(signup_form, signin_form);
+    activate_form(activate_signin, activate_signup);
 });
 
 activate_signup.addEventListener('click', e => {
     e.preventDefault();
-    signin_form.classList.add('hide_form');
-    signup_form.classList.remove('hide_form');
-
-    activate_signup.classList.add('selected');
-    activate_signin.classList.remove('selected');
+    swap_classes(signin_form, signup_form);
+    activate_form(activate_signup, activate_signin);
 });
