@@ -4,35 +4,22 @@
 
 import supertest from 'supertest';
 import app from '../app';
-import { exec } from 'child_process';
 import { test_logger } from '../utils/loggers';
+import createDB from '../utils/createDB';
+import clearDB from '../utils/clearDB';
 
 const server = supertest.agent(app);
 
 describe('/users', () => {
-    const dump = 'psql -h localhost -d testdb -U postgres -f test/testdb.sql';
-    const connect = 'psql -h localhost -d testdb -U postgres -c';
-    const query = 'delete from users';
-    const clear = `${connect} "${query}"`;
 
-    before(done => {
-        exec(dump, err => {
-            if (err) {
-                test_logger(`dump error: ${ err }`);
-            }
-            test_logger('****Database populated successfully.****');
-            done();
-        });
+    before(async () => {
+        test_logger('Creating DB in users-spec');
+        await createDB();
     });
-   
-    after(done => {
-        exec(clear, err => {
-            if (err) {
-                test_logger(`Error clearing db ${err}`);
-            }
-        });
-        test_logger('****Database cleared successfully.****');
-        done();
+
+    after(async () => {
+        test_logger('Clearing DB in users-spec');
+        await clearDB();
     });
 
     describe('/auth/signup', () => {
