@@ -33,6 +33,7 @@
         "@babel/runtime": "^7.4.4",
         "@sendgrid/mail": "^6.4.0",
         "aws-sdk": "^2.458.0",
+        "babel-plugin-istanbul": "^5.1.4",
         "bcrypt": "^3.0.6",
         "cookie-parser": "~1.4.3",
         "cors": "^2.8.5",
@@ -56,5 +57,9 @@
         "nyc": "^14.1.1",
         "should": "^13.2.3",
         "supertest": "^4.0.2"
+    },
+    "nyc": {
+        "sourceMap": false,
+        "instrument": false
     }
 }
