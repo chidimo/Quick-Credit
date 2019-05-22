@@ -15,7 +15,8 @@ const createUserTable = `
         photo VARCHAR NULL,
         address jsonb DEFAULT '{"home": "", "office": ""}',
         status VARCHAR DEFAULT 'unverified',
-        isAdmin BOOLEAN DEFAULT false
+        isadmin BOOLEAN DEFAULT false,
+        mailverified BOOLEAN DEFAULT false
     )
 `;
 
@@ -37,6 +38,7 @@ const createLoansTable = `
     CREATE TABLE IF NOT EXISTS loans (
         id SERIAL PRIMARY KEY,
         userid INT NOT NULL,
+        useremail VARCHAR NULL,
         createdon TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
         status VARCHAR DEFAULT 'pending',
         repaid BOOLEAN DEFAULT false,

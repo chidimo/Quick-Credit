@@ -26,6 +26,8 @@ router.post('/auth/signin',
 );
 
 router.patch('/users/:id/verify', UsersController.verify_user);
+router.get(
+    '/users/:id/account-confirmation', UsersController.confirm_account);
 router.get('/users', UsersController.get_users);
 router.get('/users/:id', UsersController.get_user);
 router.get('/users?status=verified', UsersController.get_users);
