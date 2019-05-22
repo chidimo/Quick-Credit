@@ -11,8 +11,8 @@ const id = 1;
 const bucket = 'quick-credit';
 const folder = 'profile_photos';
 const endpoint = 's3.eu-west-2.amazonaws.com';
-// const base_url = 'https://qcredit.herokuapp.com';
-const base_url = 'http://localhost:3000';
+const base_url = 'https://qcredit.herokuapp.com';
+// const base_url = 'http://localhost:3000';
 
 // const reload_pix = () => {
 //     const container = document.getElementById('photo_window');

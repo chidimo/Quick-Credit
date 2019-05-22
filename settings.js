@@ -4,7 +4,8 @@ import { dev_logger } from './utils/loggers';
 dotenv.config();
 
 const Settings = {
-    jwtSecret: process.env.JWT_SECRET,
+    sendgridKey: process.env.SENDGRIDKEY.trim(),
+    jwtSecret: process.env.JWT_SECRET.trim(),
     s3_bucket: 'quick-credit',
     dbSettings: () => {
         const db_settings = {

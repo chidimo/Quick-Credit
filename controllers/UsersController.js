@@ -1,13 +1,24 @@
 import Model from '../models/Model';
 import { InternalServerError } from '../utils/errorHandlers';
 import {
-    get_existing_user, check_user_exists
+    get_existing_user, check_user_exists, update_if_exists
 } from './helpers/AuthController';
 import { aws_signed_url, } from './helpers/UsersController';
 
 const users_model = new Model('users');
 
 const UsersController = {
+    confirm_account: async (req, res) => {
+        try {
+
+            const { id } = req.params;
+            const clause = `WHERE id=${req.params.id}`;
+            const column = 'mailverified=true';
+            update_if_exists(users_model, id, column, clause, res);
+        }
+        catch (e) { return; }
+    },
+
     get_user: async (req, res) => {
         const { id } = req.params;
         const clause = `WHERE id=${id}`;
@@ -26,34 +37,26 @@ const UsersController = {
     verify_user: async (req, res) => {
         const { id } = req.params;
         const clause = `WHERE id=${id}`;
+        const column = 'status=\'verified\'';
         try {
-
-            const exists = await check_user_exists(users_model, clause, res);
-            if (exists) {
-                await users_model.update('status=\'verified\'', clause);
-                const user = await get_existing_user(users_model, res, clause);
-                return res.status(200).json({ data: user });
-            }
-            return res.status(404)
-                .json({ error: `User with id ${id} not found` });
+            update_if_exists(users_model, id, column, clause, res);
         }
         catch (e) { return; }
     },
 
     get_users: async (req, res) => {
         const { status } = req.query;
+        const rows = `id, email, firstname, lastname, 
+            phone, status, address, mailverified`;
         try {
             let data;
             if (status) {
                 data = await users_model.select(
-                    'id, email, firstname, lastname, phone, status, address',
-                    `WHERE status='${status}'`
+                    rows, `WHERE status='${status}'`
                 );
             }
             else {
-                data = await users_model.select(
-                    'id, email, firstname, lastname, phone, status, address',
-                );
+                data = await users_model.select(rows);
             }
             return res.status(200).json({ data: data.rows });
         }

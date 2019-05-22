@@ -59,6 +59,25 @@ describe('/users', () => {
                         done();
                     });
             });
+
+            it('should indicate if user already exists', done => {
+                const email = 'a@b.com';
+                const data = {
+                    email, password: 'password',
+                    confirm_password: 'password', firstname: 'chidi',
+                    lastname: 'orjinta'
+                };
+                server
+                    .post('/auth/signup')
+                    .send(data)
+                    .expect(200)
+                    .end((err, res) => {
+                        res.status.should.equal(404);
+                        res.body.error.should.equal(
+                            `User with email ${email} already exists`);
+                        done();
+                    });
+            });
                 
             it('should catch password mismatch error', done => {
                 const data = {
@@ -111,6 +130,24 @@ describe('/users', () => {
                         done();
                     });
             });
+
+            describe('/users/:id/account-confirmation', () => {
+                it('should confirm a user account', done => {
+                    const id = 5;
+                    server
+                        .get(`/users/${id}/account-confirmation`)
+                        .expect(200)
+                        .end((err, res) => {
+                            res.status.should.equal(200);
+                            res.body.data.should.have.property(
+                                'mailverified', true);
+                            done();
+                        });
+                });
+            
+            });
+        
+
         });
     });
 
@@ -291,6 +328,24 @@ describe('/users', () => {
                         'home', 'new_home');
                     res.body.data.address.should.have.property(
                         'office', 'new_office');
+                    done();
+                });
+        });
+
+        it('should indicate if user is not found', done => {
+            const id = 100;
+            server
+                .patch(`/users/${100}/update`)
+                .send({ 
+                    firstname: 'new_firstname',
+                    lastname: 'new_lastname',
+                    phone: '07031234567',
+                    home: 'new_home',
+                    office: 'new_office' })
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(404);
+                    res.body.error.should.equal(`User with id ${id} not found`);
                     done();
                 });
         });

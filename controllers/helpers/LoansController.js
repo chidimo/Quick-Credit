@@ -1,5 +1,43 @@
+import titlecase from 'titlecase';
+
 import { InternalServerError } from '../../utils/errorHandlers';
-import { dev_logger } from '../../utils/loggers';
+import sendEmail from '../../utils/sendEmail';
+// import { dev_logger } from '../../utils/loggers';
+
+export const sendNewApplicationMessage = loan => {
+    const template_data = {
+        amount: loan.amount,
+        interest: loan.interest,
+        tenor: loan.tenor,
+        paymentinstallment: loan.paymentinstallment
+    };
+    const data = {
+        email: loan.useremail,
+        template_name: 'new_loan_application',
+    };
+    sendEmail(data, template_data);
+    return;
+};
+
+export const sendFollowUpMessage = (status, loan) => {
+    let message;
+    if (status === 'approved') {
+        message = 'Congratulations, your loan application was approved.';
+    }
+    else {
+        message = 'Sorry, your loan application was rejected.';
+    }
+    const template_data = {
+        status: titlecase(status),
+        message
+    };
+    const data = {
+        email: loan.useremail,
+        template_name: 'loan_status',
+    };
+    sendEmail(data, template_data);
+    return;
+};
 
 export const check_loan_existence = async (model_instance, req, res) => {
     const { id } = req.params;
@@ -13,16 +51,18 @@ export const check_loan_existence = async (model_instance, req, res) => {
 };
 
 export const add_loan_to_db = async (model_instance, req, res) => {
-    const { userid, amount, tenor } = req.body;
+    const { userid, useremail, amount, tenor } = req.body;
     const interest = 0.05 * amount;
     const paymentinstallment = (amount + interest) / tenor;
     const balance = amount - 0;
 
     try {
         return await model_instance.insert_with_return(
-            '(userid, amount, tenor, interest, balance, paymentinstallment)',
-            `'${userid}', '${amount}', '${tenor}', '${interest}', '${balance}',
-            '${paymentinstallment}'`);        
+            `(userid, useremail, amount, tenor, interest, 
+                balance, paymentinstallment)`,
+
+            `'${userid}', '${useremail}', '${amount}', '${tenor}', 
+            '${interest}', '${balance}', '${paymentinstallment}'`);        
     }
     catch (e) { throw InternalServerError(res, e);}
 };
@@ -46,21 +86,17 @@ export const update_loan_balance = async (model_instance, req, res) => {
     catch (e) { throw InternalServerError(res, e); }
 };
 
-export const get_loan_by_id = async (model_instance, id, res, code) => {
+export const get_loan_by_id = async (model_instance, id, res) => {
     try {
         const { rows } = await model_instance.select(
-            `id, userid, createdon, status, repaid, amount,
+            `id, userid, useremail, createdon, status, repaid, amount,
             tenor, interest, balance, paymentinstallment`,
             `WHERE id=${id}`
         );
-        if (rows.length === 0) return res.status(404).json({ 
-            error: `Loan with id ${id} does not exist`
-        });
-    
-        return res.status(code).json({ data: rows[0] });
+        return rows[0];
     }
     catch (e) {
-        throw InternalServerError(null, res, e);
+        throw InternalServerError(res, e);
     }
 };
 
@@ -88,19 +124,21 @@ export const add_repayment_to_db = async (model_instance, req, res) => {
     catch (e) { throw InternalServerError(res, e);}
 };
 
-export const get_repayment_by_id = async (model_instance, id, res, code) => {
+export const get_repayment_from_db = async (model_instance, id, res) => {
     try {
         const { rows } = await model_instance.select(
             'id, loanid, adminid, createdon, amount', `WHERE id=${id}`
         );
-        if (rows.length === 0) {
-            return res.status(404).json({
-                error: `Repayment with id ${id} not found`
-            });
-        }
-        return res.status(code).json({ data: rows[0] });
+        return rows[0];
     }
-    catch (e) {
-        throw InternalServerError(null, res, e);
+    catch (e) { throw InternalServerError(res, e); }
+};
+
+export const return_repay_or_error = async (model_instance, id, res, code) => {
+    const repay = await get_repayment_from_db(model_instance, id, res);
+    if (repay) {
+        return res.status(code).json({ data: repay });
     }
+    return res.status(404)
+        .json({ error: `Repayment with id ${id} not found` });
 };

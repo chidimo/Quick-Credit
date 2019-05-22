@@ -4,7 +4,8 @@ import
     check_user_exists,
     get_existing_user,
     add_user_to_db,
-    check_password
+    check_password,
+    sendSignUpMessage
 } from './helpers/AuthController';
 
 const users_model = new Model('users');
@@ -25,6 +26,7 @@ const AuthController = {
         const clause = `WHERE id=${id}`;
         const err_msg = `User with id ${id} does not exist.`;
         const user = await get_existing_user(users_model, res, clause, err_msg);
+        sendSignUpMessage(user, req);
         return res.status(201).json({ data: { ...user, token: req.token } });
     },
 

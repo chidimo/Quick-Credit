@@ -10,9 +10,11 @@ import
     loan_repayment_history,
     check_loan_existence,
     add_repayment_to_db,
-    get_repayment_by_id,
+    return_repay_or_error,
     update_loan_status,
-    update_loan_balance
+    update_loan_balance,
+    sendFollowUpMessage,
+    sendNewApplicationMessage
 } from './helpers/LoansController';
 
 const loans_model = new Model('loans');
@@ -21,21 +23,18 @@ const repayments_model = new Model('repayments');
 const LoansController = {
     get_all_loans: async (req, res) => {
         const { status, repaid } = req.query;
+        const rows = `id, userid, createdon, status, repaid, useremail,
+            amount, tenor, interest, balance, paymentinstallment`;
         dev_logger(`rep ${repaid}, ${typeof repaid}`);
         try {
             let data;
             if (status && repaid) {
-                data = await loans_model.select(
-                    `id, userid, createdon, status, repaid,
-                    amount, tenor, interest, balance, paymentinstallment`,
+                data = await loans_model.select(rows,
                     `WHERE status='${status}' AND repaid='${repaid}'`
                 );
             }
             else {
-                data = await loans_model.select(
-                    `id, userid, createdon, status, repaid,
-                    amount, tenor, interest, balance, paymentinstallment`,
-                );
+                data = await loans_model.select(rows);
             }
             return res.status(200).json({ data: data.rows });
         }
@@ -45,7 +44,12 @@ const LoansController = {
     get_loan: async (req, res) => {
         const { id } = req.params;
         try {
-            return get_loan_by_id(loans_model, id, res, 200);
+            const loan = await get_loan_by_id(loans_model, id, res);
+            if (loan) {
+                return res.status(200).json({ data: loan });
+            }
+            return res.status(404)
+                .json({ error: `Loan with id ${id} does not exist` });
         }
         catch (e) { return; }
     },
@@ -54,7 +58,9 @@ const LoansController = {
         try {
             const { rows } = await add_loan_to_db(loans_model, req, res);
             const [ { id }, ] = rows;
-            return get_loan_by_id(loans_model, id, res, 201);
+            const loan = await get_loan_by_id(loans_model, id, res, 201);
+            sendNewApplicationMessage(loan);
+            return res.status(201).json({ data: loan });
         }
         catch (e) { return; }
     },
@@ -67,8 +73,15 @@ const LoansController = {
 
         req.status = status;
         try {
-            await update_loan_status(loans_model, req, res);
-            return get_loan_by_id(loans_model, id, res, 200);
+            const loan = await check_loan_existence(loans_model, req, res);
+            if (loan) {
+                await update_loan_status(loans_model, req, res);
+                const loan = await get_loan_by_id(loans_model, id, res);
+                sendFollowUpMessage(status, loan);
+                return res.status(200).json({ data: loan });
+            }
+            return res.status(404)
+                .json({ error: `Loan with id ${id} does not exist.` });
         }
         catch (e) { throw InternalServerError(res, e); }
     },
@@ -90,7 +103,7 @@ const LoansController = {
             );
             const [ { id }, ] = rows;
             await update_loan_balance(loans_model, req, res);
-            return await get_repayment_by_id(repayments_model, id, res, 201);
+            return return_repay_or_error(repayments_model, id, res, 201);
         }
         catch (e) { return; }
     },
@@ -98,7 +111,7 @@ const LoansController = {
     get_repayment: async (req, res) => {
         const { id } = req.params;
         try {
-            return get_repayment_by_id(repayments_model, id, res, 200);
+            return return_repay_or_error(repayments_model, id, res, 200);
         }
         catch (e) { return; }
     },
@@ -113,5 +126,6 @@ const LoansController = {
         catch (e) { throw InternalServerError(res, e); }
     },
 };
+
 
 export default LoansController;
