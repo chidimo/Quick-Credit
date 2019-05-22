@@ -55,12 +55,10 @@ const UsersController = {
                     rows, `WHERE status='${status}'`
                 );
             }
-            else {
-                data = await users_model.select(rows);
-            }
+            else { data = await users_model.select(rows); }
             return res.status(200).json({ data: data.rows });
         }
-        catch (e) { throw InternalServerError(res, e); }
+        catch (e) { return InternalServerError(res, e); }
     },
 
     update_user_profile: async (req, res) => {

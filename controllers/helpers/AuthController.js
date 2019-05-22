@@ -30,7 +30,7 @@ export const check_user_exists = async (model_instance, clause, res) => {
         if (user) return true;
         return false;
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const check_password = async (model_instance, email, password, res) => {
@@ -41,7 +41,7 @@ export const check_password = async (model_instance, email, password, res) => {
         if (bcrypt.compareSync(password, user.password)) return true;
         return false;
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const add_user_to_db = async (model_instance, req, res) => {
@@ -55,7 +55,7 @@ export const add_user_to_db = async (model_instance, req, res) => {
             '${hashedPassword}'`
         );                    
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const get_existing_user = async (model_instance, res, clause) => {
@@ -68,7 +68,7 @@ export const get_existing_user = async (model_instance, res, clause) => {
         );
         return rows[0];
     }
-    catch (e) { throw InternalServerError(res, e); }
+    catch (e) { return InternalServerError(res, e); }
 };
 
 export const update_if_exists = async (model_instance, 

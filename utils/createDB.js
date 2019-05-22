@@ -17,7 +17,7 @@ const createUserTable = `
         status VARCHAR DEFAULT 'unverified',
         isadmin BOOLEAN DEFAULT false,
         mailverified BOOLEAN DEFAULT false
-    )
+    );
 `;
 
 const populateUserTable = `
