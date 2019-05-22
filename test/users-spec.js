@@ -74,7 +74,7 @@ describe('/users', () => {
                     .end((err, res) => {
                         res.status.should.equal(404);
                         res.body.error.should.equal(
-                            `User with email ${email} already exists`)
+                            `User with email ${email} already exists`);
                         done();
                     });
             });
@@ -333,7 +333,7 @@ describe('/users', () => {
         });
 
         it('should indicate if user is not found', done => {
-            const id = 100
+            const id = 100;
             server
                 .patch(`/users/${100}/update`)
                 .send({ 
@@ -345,7 +345,7 @@ describe('/users', () => {
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(404);
-                    res.body.error.should.equal(`User with id ${id} not found`)
+                    res.body.error.should.equal(`User with id ${id} not found`);
                     done();
                 });
         });

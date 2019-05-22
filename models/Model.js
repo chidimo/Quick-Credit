@@ -6,7 +6,10 @@ class Model {
         this.table = table;
         this.pool = pool;
         this.pool.on('error', (err, client) => {
-            dev_logger(`****Unexpected error on idle client, ${err}`);
+            if (err) {
+                dev_logger(`****Unexpected error on idle client, ${err}`);
+            }
+            dev_logger(`Client: ${client}`);
             process.exit(-1);
         });
     }

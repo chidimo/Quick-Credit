@@ -3,6 +3,7 @@ import titlecase from 'titlecase';
 
 import { InternalServerError } from '../../utils/errorHandlers';
 import sendEmail from '../../utils/sendEmail';
+import { async } from 'rxjs/internal/scheduler/async';
 
 export const sendSignUpMessage = (user, req) => {
     const path = `/users/${user.id}/account-confirmation`;
@@ -70,3 +71,18 @@ export const get_existing_user = async (model_instance, res, clause) => {
     catch (e) { throw InternalServerError(res, e); }
 };
 
+export const update_if_exists = async (model_instance, 
+    id, column, clause, res) => {
+
+    try {
+        const exists = await check_user_exists(model_instance, clause, res);
+        if (exists) {
+            await model_instance.update(column, clause);
+            const user = await get_existing_user(model_instance, res, clause);
+            return res.status(200).json({ data: user });
+        }
+        return res.status(404)
+            .json({ error: `User with id ${id} not found` });
+    }
+    catch (e) { return; }
+};
