@@ -6,8 +6,7 @@ import assert from 'assert';
 import app from '../app';
 
 import { test_logger } from '../utils/loggers';
-import createDB from '../utils/createDB';
-import clearDB from '../utils/clearDB';
+import { createDB, clearDB } from '../utils/localDbOps';
 
 const server = supertest.agent(app);
 
@@ -109,7 +108,7 @@ describe('/api/v1/loans', () => {
                 .end((err, res) => {
                     res.status.should.equal(404);
                     res.body.error.should.equal(
-                        `Loan with id ${id} does not exist`);
+                        `Loan with id ${id} not found`);
                     done();
                 });
         });
@@ -203,7 +202,7 @@ describe('/api/v1/loans', () => {
                 .end((err, res) => {
                     res.status.should.equal(404);
                     res.body.error.should.equal(
-                        `Loan with id ${id} does not exist.`);
+                        `Loan with id ${id} not found`);
                     done();
                 });
         });

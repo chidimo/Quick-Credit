@@ -17,7 +17,9 @@
         "lint": "./node_modules/.bin/eslint ./",
         "test": "set NODE_ENV=test&set DEBUG=test&set DBNAME=testdb&nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register -r should",
         "cover": "nyc report --reporter=text-lcov | coveralls",
-        "coverage": "nyc report --reporter=text-lcov | coveralls"
+        "coverage": "nyc report --reporter=text-lcov | coveralls",
+        "devtables": "set DEBUG=dev&set DBNAME=quick_credit&node --require @babel/register utils/createTables",
+        "herokutables": "node --require @babel/register utils/createTables"
     },
     "bugs": {
         "url": "https://github.com/chidimo/Quick-Credit/issues"

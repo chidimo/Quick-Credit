@@ -5,8 +5,7 @@
 import supertest from 'supertest';
 import app from '../app';
 import { test_logger } from '../utils/loggers';
-import createDB from '../utils/createDB';
-import clearDB from '../utils/clearDB';
+import { createDB, clearDB } from '../utils/localDbOps';
 
 const server = supertest.agent(app);
 
@@ -72,7 +71,7 @@ describe('/api/v1/users', () => {
                     .send(data)
                     .expect(200)
                     .end((err, res) => {
-                        res.status.should.equal(404);
+                        res.status.should.equal(409);
                         res.body.error.should.equal(
                             `User with email ${email} already exists`);
                         done();
@@ -187,7 +186,7 @@ describe('/api/v1/users', () => {
                     .end((err, res) => {
                         res.status.should.equal(404);
                         res.body.error.should.equal(
-                            `User with email ${user.email} does not exist.`);
+                            `User with email ${user.email} not found`);
                         done();
                     });
             });
@@ -195,7 +194,7 @@ describe('/api/v1/users', () => {
     });
 
     describe('POST /api/v1/users/:email/reset_password', () => {
-        it('should return error if user does not exist', done => {
+        it('should return error if user not found', done => {
             const email = 'unknown@email.com';
             server
                 .post(`/api/v1/users/${email}/reset_password`)
@@ -255,8 +254,8 @@ describe('/api/v1/users', () => {
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(422);
-                    console.log(res.body, '**************')
-                    res.body.errors[0].msg.should.equal('Password confirmation does not match password')
+                    res.body.errors[0].msg.should.equal(
+                        'Password confirmation does not match password');
                     done();
                 });
         });
@@ -274,8 +273,8 @@ describe('/api/v1/users', () => {
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(422);
-                    console.log(res.body, '**************')
-                    res.body.errors[0].msg.should.equal('Please enter a new password')
+                    res.body.errors[0].msg.should.equal(
+                        'Please enter a new password');
                     done();
                 });
         });
@@ -292,15 +291,14 @@ describe('/api/v1/users', () => {
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
-                    console.log('body, ', res.body);
                     res.status.should.equal(404);
-                    res.body.error.should.equal('You entered an incorrect password');
+                    res.body.error.should.equal(
+                        'You entered an incorrect password');
                     done();
                 });
         });
     });
     
-
     describe('PATCH /api/v1/users/:id/verify', () => {
         it('should verify user', done => {
             server
