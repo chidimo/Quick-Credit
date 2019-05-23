@@ -108,7 +108,7 @@ describe('/api/v1/loans', () => {
                 .end((err, res) => {
                     res.status.should.equal(404);
                     res.body.error.should.equal(
-                        `Loan with id ${id} does not exist`);
+                        `Loan with id ${id} not found`);
                     done();
                 });
         });
@@ -202,7 +202,7 @@ describe('/api/v1/loans', () => {
                 .end((err, res) => {
                     res.status.should.equal(404);
                     res.body.error.should.equal(
-                        `Loan with id ${id} does not exist.`);
+                        `Loan with id ${id} not found`);
                     done();
                 });
         });

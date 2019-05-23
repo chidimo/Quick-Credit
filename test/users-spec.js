@@ -71,7 +71,7 @@ describe('/api/v1/users', () => {
                     .send(data)
                     .expect(200)
                     .end((err, res) => {
-                        res.status.should.equal(404);
+                        res.status.should.equal(409);
                         res.body.error.should.equal(
                             `User with email ${email} already exists`);
                         done();
@@ -186,7 +186,7 @@ describe('/api/v1/users', () => {
                     .end((err, res) => {
                         res.status.should.equal(404);
                         res.body.error.should.equal(
-                            `User with email ${user.email} does not exist.`);
+                            `User with email ${user.email} not found`);
                         done();
                     });
             });
@@ -194,7 +194,7 @@ describe('/api/v1/users', () => {
     });
 
     describe('POST /api/v1/users/:email/reset_password', () => {
-        it('should return error if user does not exist', done => {
+        it('should return error if user not found', done => {
             const email = 'unknown@email.com';
             server
                 .post(`/api/v1/users/${email}/reset_password`)

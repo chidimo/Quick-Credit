@@ -18,13 +18,13 @@ const AuthController = {
 
         if (user_exists) {
             return res
-                .status(404)
+                .status(409)
                 .json({ error: `User with email ${email} already exists` });
         }
         const { rows } = await add_user_to_db(users_model, req, res);
         const [ { id }, ] = rows;
         const clause = `WHERE id=${id}`;
-        const err_msg = `User with id ${id} does not exist.`;
+        const err_msg = `User with id ${id} not found`;
         const user = await get_existing_user(users_model, res, clause, err_msg);
         sendSignUpMessage(user, req);
         return res.status(201).json({ data: { ...user, token: req.token } });
@@ -38,7 +38,7 @@ const AuthController = {
         );
         if (!user_exists) {
             return res.status(404)
-                .json({ error: `User with email ${email} does not exist.` });
+                .json({ error: `User with email ${email} not found` });
         }
         const match = await check_password(users_model, email, password, res);
         if (match) {

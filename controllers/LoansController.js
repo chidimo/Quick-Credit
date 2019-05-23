@@ -49,7 +49,7 @@ const LoansController = {
                 return res.status(200).json({ data: loan });
             }
             return res.status(404)
-                .json({ error: `Loan with id ${id} does not exist` });
+                .json({ error: `Loan with id ${id} not found` });
         }
         catch (e) { return; }
     },
@@ -81,7 +81,7 @@ const LoansController = {
                 return res.status(200).json({ data: loan });
             }
             return res.status(404)
-                .json({ error: `Loan with id ${id} does not exist.` });
+                .json({ error: `Loan with id ${id} not found` });
         }
         catch (e) { return InternalServerError(res, e); }
     },
@@ -95,7 +95,7 @@ const LoansController = {
                 return res.status(200).json({ data: repays });
             }
             return res.status(404)
-                .json({ error: `Loan with ${id} does not exist` });
+                .json({ error: `Loan with ${id} not found` });
         }
         catch (e) { return InternalServerError(res, e); }
     },
