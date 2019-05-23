@@ -39,13 +39,13 @@ export const sendFollowUpMessage = (status, loan) => {
     return;
 };
 
-export const check_loan_existence = async (model_instance, req, res) => {
-    const { id } = req.params;
+export const check_loan_existence = async (model_instance, id, res) => {
     try {
         const { rows } = await model_instance.select(
             'id, amount', `WHERE id=${id}`);
         const [ loan, ] = rows;
-        if (loan) return loan;
+        if (loan) return true;
+        return false;
     }
     catch (e) { return InternalServerError(res, e);}
 };
@@ -101,14 +101,13 @@ export const get_loan_by_id = async (model_instance, id, res) => {
 };
 
 // repayments
-export const loan_repayment_history = async (model_instance, req, res) => {
-    const { id } = req.params;
+export const repay_history = async (model_instance, id, res) => {
     try {
         const { rows } = await model_instance.select(
             'id, loanid, adminid, createdon, amount',
             `WHERE loanid=${Number(id)}`
         );
-        return res.status(200).json({ data: rows });
+        return rows;
     }
     catch (e) { return InternalServerError(res, e);}
 };

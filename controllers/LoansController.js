@@ -7,7 +7,7 @@ import
 { 
     add_loan_to_db,
     get_loan_by_id,
-    loan_repayment_history,
+    repay_history,
     check_loan_existence,
     add_repayment_to_db,
     return_repay_or_error,
@@ -73,7 +73,7 @@ const LoansController = {
 
         req.status = status;
         try {
-            const loan = await check_loan_existence(loans_model, req, res);
+            const loan = await check_loan_existence(loans_model, id, res);
             if (loan) {
                 await update_loan_status(loans_model, req, res);
                 const loan = await get_loan_by_id(loans_model, id, res);
@@ -87,11 +87,15 @@ const LoansController = {
     },
 
     loan_repayment_history: async (req, res) => {
+        const { id } = req.params;
         try {
-            const loan = await check_loan_existence(loans_model, req, res);
+            const loan = await check_loan_existence(loans_model, id, res);
             if (loan) {
-                return await loan_repayment_history(repayments_model, req, res);
+                const repays = await repay_history(repayments_model, id, res);
+                return res.status(200).json({ data: repays });
             }
+            return res.status(404)
+                .json({ error: `Loan with ${id} does not exist` });
         }
         catch (e) { return InternalServerError(res, e); }
     },

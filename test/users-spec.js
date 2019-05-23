@@ -254,8 +254,8 @@ describe('/api/v1/users', () => {
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(422);
-                    console.log(res.body, '**************')
-                    res.body.errors[0].msg.should.equal('Password confirmation does not match password')
+                    res.body.errors[0].msg.should.equal(
+                        'Password confirmation does not match password');
                     done();
                 });
         });
@@ -273,8 +273,8 @@ describe('/api/v1/users', () => {
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(422);
-                    console.log(res.body, '**************')
-                    res.body.errors[0].msg.should.equal('Please enter a new password')
+                    res.body.errors[0].msg.should.equal(
+                        'Please enter a new password');
                     done();
                 });
         });
@@ -291,15 +291,14 @@ describe('/api/v1/users', () => {
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
-                    console.log('body, ', res.body);
                     res.status.should.equal(404);
-                    res.body.error.should.equal('You entered an incorrect password');
+                    res.body.error.should.equal(
+                        'You entered an incorrect password');
                     done();
                 });
         });
     });
     
-
     describe('PATCH /api/v1/users/:id/verify', () => {
         it('should verify user', done => {
             server

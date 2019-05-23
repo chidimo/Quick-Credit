@@ -11,7 +11,7 @@ const AuthenticationMiddleware = {
     },
 
     verifyToken: (req, res, next) => {
-        if (Settings.skipTokenVerification) {
+        if (Settings.skipTokenVerification()) {
             return next();
         }
         const token = req.headers['x-access-token'];
