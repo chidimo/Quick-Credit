@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="Author" content="Orji Chidi Matthew">
+        <meta name="description" content="Easily accessible short term loans">
+        <meta name="keywords", content="loan, cash, short term loan">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/style.css">
+        <title>Quick Credit | User - Chidi Orji</title>
+    </head>
+
+    <body>
+        <div class="page_wrapper">
+            <div class="page_section_one">
+                <header id="header">
+                    <div class="nav_div">
+                        <div id="branding">
+                            <a id="brand_name" href="index.html"><h1>Quick Credit</h1></a>
+                        </div>
+        
+                        <nav class="menu">
+                            <ul class="base_ul">
+                                <li><a href="loan.new.html"><button class="button_1 bordered">Apply for loan</button></a></li>
+        
+                                <li>
+                                    <a id="profile_dropdown" href="#" class="">
+                                        <span class="micro_avatar_wrapper">
+                                            <img class="micro_avatar" src="https://s3.eu-west-2.amazonaws.com/quick-credit/profile_photos/1" alt="">
+                                        </span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 17 8.59"
+                                            class="icon">
+                                                <path
+                                                    d="M16.5.5L9.2 7.8a.99.99 0 0 1-1.39 0L.5.5"
+                                                    fill="none"
+                                                    stroke="#686b6e"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-miterlimit="10">
+                                                </path>
+                                        </svg>
+                                    </a>
+        
+                                    <ul id="sub_menu">
+                                        <div class="submenu_username">
+                                            <a href="./dashboard.html">
+                                                <div>chidi orji matthew</div>
+                                            </a>
+                                        </div>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="profile.edit.html">
+                                                <div class="sub_routes">Edit profile</div>
+                                            </a>
+                                        </li>
+                                        <hr class="submenu_hr">
+                                        <li>
+                                            <a href="authentication.html">
+                                                <div class="sub_routes">Logout</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+                
+                <section id="main_loan">
+                    <div class="container">
+                        <!--show the checkmark only if the load has been repaid-->
+                        <h2 id="page_heading">
+                            User | Chidi Orji <i class="fas fa-check-circle"></i>
+                        </h2>
+
+                        <hr class="section_divider">
+        
+                        <div class="admin_actions_buttons">
+                            <!--Each of these buttons will be available based on the user's verification status-->
+                            <button id="verify_user" class="button_1 dim shadow approve">
+                                Verify
+                            </button>
+        
+                            <button id="un_verify_user" class="button_1 dim shadow reject">
+                                Revoke verification
+                            </button>
+                        </div>
+
+                        <hr class="section_divider">
+        
+                        <div class="user_information">
+                            <div class="user_card card">
+                                <div class="user_photo">
+                                    <img
+                                        title="Click to change"
+                                        id="profile_pix"
+                                        src="https://s3.eu-west-2.amazonaws.com/quick-credit/profile_photos/1"
+                                        alt="Profile picture"
+                                    >
+                                    <input type="file" id="img_uploader" name="img_uploader" accept="image/*" />
+                                </div>
+                                <hr class="card_divider">
+            
+                                <div class="user_info">
+                                    <h3>Orji Chidi <i class="fas fa-check-circle"></i></h3>
+                                    <p>email@address.com</p>
+                                    <p>+2341234567890</p>
+                                </div>
+                            </div>
+            
+                            <div class="user_address card">
+                                <p><span class="addresses">Home</span>: 21 Olugbani street, Off Governor road, By Bayota motel, Ikotun Egbe, Lagos</p>
+                                <p><span class="addresses">Office</>:</span> Andela EPIC Towers, 235 Ikorodu Road, By Niger Insurance House</p>
+                            </div>
+                        </div>
+                    
+                        <h3>Chidi's Loans</h3>
+                        <div class="table_wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Application date</th>
+                                        <th>Status</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+        
+                                <tbody>
+                                    <tr>
+                                        <td><a href="./loan.html">1</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td><a href="./loan.html">Pending</a></td>
+                                        <td><a href="./loan.html">100,000</a></td>
+                                    </tr>
+            
+                                    <tr>
+                                        <td><a href="./loan.html">2</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td class="approved_loan"><a href="./loan.html">Approved</a></td>
+                                        <td><a href="./loan.html">50,000</a></td>
+                                    </tr>
+            
+                                    <tr>
+                                        <td><a href="./loan.html">3</a></td>
+                                        <td><a href="./loan.html"><time datetime="2019-01-01 08:00">01-01-2019</time></a></td>
+                                        <td class="rejected_loan"><a href="./loan.html">Rejected</a></td>
+                                        <td><a href="./loan.html">1,000,000</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+    
+            <footer>
+                <div class="footer_text">
+                    <p>Quick Credit &copy; 2019</p>
+                    <p>Contact us: +2349036650603 | orjichidi95@gmail.com</p>
+                </div>
+            </footer>
+        </div>
+        <script src="./js/user.js"></script>
+    </body>
+</html>

@@ -1,0 +1,712 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    background: #E8E8E8;
+    color: #333A56;
+    /* font-size: 16px; */
+}
+
+.page_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Global */
+.container {
+    width: 60%;
+    margin: auto;
+    overflow: hidden;
+    padding-top: 10px;
+}
+
+input {
+    padding: 15px;
+    border:none;
+    background:#f1f1f1;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+textarea {
+    padding: 15px;
+    border:none;
+    background:#f1f1f1;
+    margin-bottom: 10px;
+}
+
+textarea:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+button {
+    height: 35px;
+    color: #ffffff;
+    background: #333A56;
+    border: 0;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+hr {
+    color: #333A56;
+    opacity: 0.3;
+}
+
+button.shadow {
+    box-shadow: 5px 5px 15px rgb(51, 58, 86, 0.5)
+}
+
+button.dim:hover {
+    opacity: 0.8;
+}
+
+button.bordered {
+    border: 1px solid #FFFFFF;
+}
+
+/* forms */
+.form_wrapper {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 30px 30px 30px;
+    background: #FFFFFF;
+    box-shadow: 5px 5px 15px rgb(51, 58, 86, 0.5);
+}
+
+.form_wrapper input[type='email'],
+.form_wrapper input[type='number'],
+.form_wrapper input[type='text'],
+.form_wrapper input[type='tel'],
+.form_wrapper input[type='password'],
+.form_wrapper textarea
+{
+    display: inline-block;
+    width: 100%;
+}
+
+.form_wrapper h1,
+p.form_message
+{
+    text-align: center;
+}
+
+label {
+    margin-bottom: 5px;
+    margin-top: 20px;    
+    display: block;
+}
+
+/* tables */
+.table_wrapper {
+    overflow-x: auto;
+}
+
+table {
+    background: #e6e6e6;
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #cccccc;
+}
+
+th {
+    white-space: nowrap;
+    padding: 7px;
+}
+
+td {
+    padding: 5px;
+}
+
+thead tr {
+    background: #333A56;
+    color: #ffffff;
+}
+
+tbody tr:nth-of-type(odd) {
+    background: #ffffff;
+}
+
+td a {
+    text-decoration: none;
+}
+
+/* style tables */
+
+table tr td a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    padding: 15px 0;
+    color: #333A56;
+}
+
+tbody tr:hover {
+    border: 1px solid #333A56;
+}
+
+table tr td {
+    padding: 0;
+}
+
+td.approved_loan a,
+td.verified_user a
+{
+    color: green;
+    font-weight: bold;
+}
+
+td.unverified_user a,
+td.rejected_loan a
+{
+    color: red;
+    font-weight: bold;
+}
+
+/* Header */
+
+header {
+    color: #ffffff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    min-height: 70px;
+    background: #333A56;
+}
+
+header a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+header #branding h1 {
+    margin: 0;
+}
+
+header a.active {
+    font-weight: bold;
+}
+
+span.action_span {
+    cursor: pointer;
+}
+
+ul.base_ul {
+    display: flex;
+}
+
+.micro_avatar_wrapper {
+    display: inline-block;
+    width: 2.3em;
+    height: 2.3em;
+    position: relative;
+    vertical-align: middle;
+}
+
+.micro_avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.icon {
+    width: 20px;
+    display: inline-block;
+}
+
+.nav_div {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+}
+
+.menu > ul > li {
+    display: inline-block;
+    position: relative;
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    list-style: none;
+}
+
+#sub_menu {
+    width: 230%;
+    position: absolute;
+    top: 105%;
+    left: -75px;
+    padding: 0;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity linear 0.15s;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
+    background: #F7F5E6;
+    color: #333A56;
+    text-align: center;
+    overflow: hidden;
+}
+
+.submenu_username {
+    background-color: #cccccc;
+    padding: 10px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.submenu_username a {
+    text-transform: capitalize;
+    margin: 0;
+    font-size: 16px;
+}
+
+.sub_routes {
+    padding: 15px 5px;
+}
+
+.submenu_hr {
+    margin: 0;
+}
+
+#sub_menu a {
+    color: #333A56;
+}
+
+.menu li:hover #sub_menu {
+	z-index:1;
+	opacity:1;
+}
+
+/* Showcase */
+
+#showcase {
+    min-height: 400px;
+    text-align: center;
+    background: url('../img/architecture-bridge-buildings-374685.jpg') no-repeat 0 -500px;
+}
+
+#showcase h1 {
+    margin-top: 100px;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+#showcase p {
+    font-size: 18px;
+}
+
+#newsletter {
+    color: #ffffff;
+    padding: 15px;
+    background: #333A56
+}
+
+#newsletter h1 {
+    float: left;
+}
+
+#newsletter form {
+    float: right;
+    margin-top: 25px;
+}
+
+#newsletter input[type='email'] {
+    width: 250px;
+}
+
+#newsletter button.subscribe_button {
+    height: 44px;
+}
+
+/* Info section */
+.info_section {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    text-align: left;
+    padding: 30px 20px;
+    font-size: 24px;
+}
+
+.info_section li {
+    padding: 20px 10px;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #52658F;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1500px) {
+    
+    /* dashboard, user */
+    div.user_information {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    div.user_address,
+    div.user_card{
+        width: 100%;
+    }
+
+    /* admin */
+
+    div.admin_top_div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    div.admin_nav_buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0;
+        width: 100%;
+        margin: auto;
+    }
+
+    div.card {
+        width: 98%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .nav_div {
+        display: block;
+    }
+
+    nav {
+        padding: 5px 0;
+    }
+
+    nav > ul {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        justify-content: space-evenly;
+    }
+
+    .container, .nav_div {
+        width: 95%;
+    }
+
+    header #branding,
+    #newsletter h1,
+    #newsletter form
+    {
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    #newsletter input[type='email'] {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    #newsletter button {
+        display: block;
+        width: 100%;
+    }
+
+    form.modal_content {
+        width: 80%;
+    }
+
+    button.cancel_button, button.save_profile_button {
+        width: 100%;
+    }
+
+    div.loan_card
+    {
+        margin-right: auto;
+    }
+            
+    ul#sub_menu {
+        width: 200%;
+    }
+}
+
+@media (max-width: 450px) {
+    /* loan */
+    div.loan_card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    hr.card_divider {
+        display:none;
+    }
+    
+    div.loan_card div {
+        margin: 0;
+        text-align: center;
+    }
+}
+
+/* About */
+.profile_edit,
+.loan_application {
+    padding: 30px 20px;
+}
+
+/* authentication */
+
+.authentication_div {
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.4
+}
+
+#reg_form_toggle {
+    margin-top: 30px;
+    display: grid;
+    max-width: 650px;
+    grid-template-columns: 50% 50%;
+    background: #F1F1F1;
+    padding-top: 0;
+}
+
+#reg_form_toggle h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.selected {
+    background: #FFFFFF;
+    color:#333A56;
+    font-size: 18px;
+    opacity: 1;
+}
+
+.hide_form {
+    display: none;
+}
+
+.submit_button {
+    width: 100%;
+}
+
+/* Dashboard */
+
+.card {
+    padding: 10px;
+    width: 450px;
+    margin-bottom: 15px;
+    background-color: #FFF;
+    box-shadow: 5px 5px 15px rgb(51, 58, 86, 0.5);
+}
+
+.user_card {
+    display: grid;
+    grid-row-gap: 50px;
+    grid-template-columns: 30% 1% 68%;
+}
+
+.user_photo img {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+}
+
+.fa-check-circle {
+    color: green;
+}
+
+#profile_pix {
+    width:90%;
+    height:90%;
+    stroke: #F0F0F0;
+    stroke-width: 3px;
+    fill: none;
+}
+
+.user_photo {
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 120px;
+    height: 120px;
+    background-size:100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.user_info {
+    margin: auto auto auto 5px;    
+}
+
+.user_address {
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+span.addresses {
+    font-weight: bold;
+}
+
+input[id=img_uploader] {
+    display: none;
+}
+
+.user_information {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+/* admin */
+
+.admin_top_div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.admin_nav_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 0 5px;
+    width: calc(95% - 450px);
+}
+
+.admin_nav_buttons button {
+    width: 100%;
+    border: 1px solid #FFFFFF;
+    margin-bottom: 10px;
+}
+
+hr.section_divider {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    opacity: 0.97;
+    padding-top: 50px;
+    background-color: #474e5d;
+}
+
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    /* font-weight: bold; */
+    color: #f1f1f1;
+}
+
+.close:hover, .close:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+.modal_content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+.modal_input {
+    width: 100%;
+    display: inline-block;
+}
+
+.cancel_button {
+    background: red;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.cancel_button, .save_profile_button {
+    float: left;
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+/* Loan */
+
+.admin_actions_buttons {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.approve {
+    background: #008000;
+}
+
+.reject {
+    background: #ff0000;
+}
+
+.loan_card {
+    display: grid;
+    grid-row-gap: 50px;
+    margin-right: auto;
+    /* font-weight: bold; */
+    grid-template-columns: 30% 1% 68%;
+}
+
+.loan_left_grid {
+    font-size: 28px;
+    text-align: center;
+}
+
+.loan_left_grid p.status {
+    color: green;
+}
+
+.loan_right_grid {
+    margin: auto auto auto 5px;    
+}
