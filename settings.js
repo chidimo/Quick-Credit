@@ -25,6 +25,7 @@ const Settings = {
         signatureVersion: 'v4'
     },
     skipTokenVerification: () => (process.env.NODE_ENV === 'test'),
+    skipEmailSend: () => (process.env.NODE_ENV === 'test'),
 };
 
 dev_logger(Settings);

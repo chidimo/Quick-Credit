@@ -11,7 +11,7 @@ import clearDB from '../utils/clearDB';
 
 const server = supertest.agent(app);
 
-describe('/loans', () => {
+describe('/api/v1/loans', () => {
     before(async () => {
         test_logger('Creating DB in loans-spec');
         await createDB();
@@ -22,10 +22,10 @@ describe('/loans', () => {
         await clearDB();
     });
 
-    describe('/loans: Get all loans', () => {
+    describe('/api/v1/loans: Get all loans', () => {
         it('should be return a list of all loans', done => {
             server
-                .get('/loans')
+                .get('/api/v1/loans')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -48,7 +48,7 @@ describe('/loans', () => {
                 
         it('should return all loans which have BEEN repaid', done => {
             server
-                .get('/loans')
+                .get('/api/v1/loans')
                 .query({ status: 'approved', repaid: true })
                 .expect(200)
                 .end((err, res) => {
@@ -64,7 +64,7 @@ describe('/loans', () => {
 
         it('should return all loans which have NOT been repaid', done => {
             server
-                .get('/loans')
+                .get('/api/v1/loans')
                 .query({ status: 'approved', repaid: false })
                 .expect(200)
                 .end((err, res) => {
@@ -79,10 +79,10 @@ describe('/loans', () => {
         });
     });
 
-    describe('/loans: Get loan', () => {
+    describe('/api/v1/loans: Get loan', () => {
         it('should return correct data for existent loan', done => {
             server
-                .get('/loans/1')
+                .get('/api/v1/loans/1')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -104,7 +104,7 @@ describe('/loans', () => {
         it('should return error message for non-existent loan', done => {
             const id = 12345;
             server
-                .get(`/loans/${id}`)
+                .get(`/api/v1/loans/${id}`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(404);
@@ -115,11 +115,11 @@ describe('/loans', () => {
         });
     });
     
-    describe('/loans: Create a loan', () => {
+    describe('/api/v1/loans: Create a loan', () => {
         it('should create and return a new loan', done => {
             const data = { userid: 12, amount: 50000, tenor: 12 };
             server
-                .post('/loans')
+                .post('/api/v1/loans')
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -142,7 +142,7 @@ describe('/loans', () => {
         it('should return errors for large tenor', done => {
             const data = { userid: '25', amount: 50000, tenor: 13 };
             server
-                .post('/loans')
+                .post('/api/v1/loans')
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -158,7 +158,7 @@ describe('/loans', () => {
         it('should return errors for large amount', done => {
             const data = { userid: 30, amount: 5000000, tenor: 10 };
             server
-                .post('/loans')
+                .post('/api/v1/loans')
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -172,10 +172,10 @@ describe('/loans', () => {
         });
     });
 
-    describe('/loans: Approve or reject a loan application', () => {
+    describe('/api/v1/loans: Approve or reject a loan application', () => {
         it('should set status to approved', done => {
             server
-                .patch('/loans/5/approve')
+                .patch('/api/v1/loans/5/approve')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -186,7 +186,7 @@ describe('/loans', () => {
         
         it('should set status to rejected', done => {
             server
-                .patch('/loans/6/reject')
+                .patch('/api/v1/loans/6/reject')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -194,12 +194,25 @@ describe('/loans', () => {
                     done();
                 });
         });
+        
+        it('should return error if loan is not found', done => {
+            const id = 150;
+            server
+                .patch(`/api/v1/loans/${id}/reject`)
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(404);
+                    res.body.error.should.equal(
+                        `Loan with id ${id} does not exist.`);
+                    done();
+                });
+        });
     });
     
-    describe('/loans: View loan repayment history', () => {
+    describe('/api/v1/loans: View loan repayment history', () => {
         it('should return array of loan repayments given a loan Id', done => {
             server
-                .get('/loans/2/repayments')
+                .get('/api/v1/loans/2/repayments')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -212,11 +225,11 @@ describe('/loans', () => {
         });
     });
     
-    describe('/loans: Create loan repayment', () => {
+    describe('/api/v1/loans: Create loan repayment', () => {
         it('should create and return a repayment', done => {
             const data = { amount: 4375, adminid: 3 };
             server
-                .post('/loans/4/repayment')
+                .post('/api/v1/loans/4/repayment')
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -231,10 +244,10 @@ describe('/loans', () => {
         });
     });
 
-    describe('/repayments', () => {
+    describe('/api/v1/repayments', () => {
         it('should return all repayments', done => {
             server
-                .get('/repayments')
+                .get('/api/v1/repayments')
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -250,11 +263,11 @@ describe('/loans', () => {
         });
     });
 
-    describe('GET /repayments', () => {
+    describe('GET /api/v1/repayments', () => {
         it('should return a single repayment', done => {
             const id = 5;
             server
-                .get(`/repayments/${id}`)
+                .get(`/api/v1/repayments/${id}`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -264,6 +277,18 @@ describe('/loans', () => {
                     res.body.data.should.have.property('adminid');
                     res.body.data.should.have.property('createdon');
                     res.body.data.should.have.property('amount');
+                    done();
+                });
+        });
+        it('should return error if repayment is not found', done => {
+            const id = 150;
+            server
+                .get(`/api/v1/repayments/${id}`)
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(404);
+                    res.body.error.should.equal(
+                        `Repayment with id ${id} not found`);
                     done();
                 });
         });
