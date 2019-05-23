@@ -6,8 +6,7 @@ import assert from 'assert';
 import app from '../app';
 
 import { test_logger } from '../utils/loggers';
-import createDB from '../utils/createDB';
-import clearDB from '../utils/clearDB';
+import { createDB, clearDB } from '../utils/localDbOps';
 
 const server = supertest.agent(app);
 
