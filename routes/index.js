@@ -20,6 +20,7 @@ router.post('/auth/signup',
 );
 
 router.post('/auth/signin',
+    UsersValidators.emailValidator,
     UsersValidators.passwordValidator,
     AuthenticationMiddleware.generateToken,
     AuthController.signin
@@ -41,8 +42,14 @@ router.get('/users/:id/photo/upload/',
 router.patch('/users/:id/photo/update',
     UsersController.update_photo_url
 );
+router.post('/users/:email/reset_password',
+    UsersValidators.newPasswordValidator,
+    UsersController.reset_password    
+);
 
-router.get('/loans', LoansController.get_all_loans);
+router.get('/loans',
+    AuthenticationMiddleware.verifyToken,
+    LoansController.get_all_loans);
 router.get('/loans/:id', LoansController.get_loan);
 router.get(
     '/loans?status=approved&repaid=false', LoansController.get_all_loans);

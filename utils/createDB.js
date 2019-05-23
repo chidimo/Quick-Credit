@@ -1,8 +1,6 @@
-import bcrypt from 'bcrypt';
 import pool from '../models/pool';
 import { dev_logger, test_logger } from './loggers';
-
-const hashPassword = password => (bcrypt.hashSync(password, 8));
+import hashPassword from './hashPassword';
 
 const createUserTable = `
     CREATE TABLE IF NOT EXISTS users (
@@ -17,7 +15,7 @@ const createUserTable = `
         status VARCHAR DEFAULT 'unverified',
         isadmin BOOLEAN DEFAULT false,
         mailverified BOOLEAN DEFAULT false
-    )
+    );
 `;
 
 const populateUserTable = `

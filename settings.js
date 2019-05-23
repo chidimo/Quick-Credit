@@ -23,7 +23,9 @@ const Settings = {
         endpoint: 's3.eu-west-2.amazonaws.com',
         region: 'eu-west-2',
         signatureVersion: 'v4'
-    }
+    },
+    skipTokenVerification: () => (process.env.NODE_ENV === 'test'),
+    skipEmailSend: () => (process.env.NODE_ENV === 'test'),
 };
 
 dev_logger(Settings);

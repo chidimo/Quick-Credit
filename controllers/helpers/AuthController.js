@@ -3,7 +3,7 @@ import titlecase from 'titlecase';
 
 import { InternalServerError } from '../../utils/errorHandlers';
 import sendEmail from '../../utils/sendEmail';
-import { async } from 'rxjs/internal/scheduler/async';
+import hashPassword from '../../utils/hashPassword';
 
 export const sendSignUpMessage = (user, req) => {
     const path = `/users/${user.id}/account-confirmation`;
@@ -22,6 +22,18 @@ export const sendSignUpMessage = (user, req) => {
     return;
 };
 
+export const sendPassword = (email, new_password) => {
+    const template_data = {
+        new_password,
+    };
+    const data = {
+        email,
+        template_name: 'new_password',
+    };
+    sendEmail(data, template_data);
+    return;
+};
+
 export const check_user_exists = async (model_instance, clause, res) => {
     try {
         const { rows } = await model_instance.select(
@@ -30,7 +42,7 @@ export const check_user_exists = async (model_instance, clause, res) => {
         if (user) return true;
         return false;
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const check_password = async (model_instance, email, password, res) => {
@@ -41,21 +53,20 @@ export const check_password = async (model_instance, email, password, res) => {
         if (bcrypt.compareSync(password, user.password)) return true;
         return false;
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const add_user_to_db = async (model_instance, req, res) => {
     const { email, password, firstname, lastname } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 8);
 
     try {
         return await model_instance.insert_with_return(
             '(email, firstname, lastname, password)',
             `'${email}', '${firstname}', '${lastname}', 
-            '${hashedPassword}'`
+            '${hashPassword(password)}'`
         );                    
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const get_existing_user = async (model_instance, res, clause) => {
@@ -68,7 +79,7 @@ export const get_existing_user = async (model_instance, res, clause) => {
         );
         return rows[0];
     }
-    catch (e) { throw InternalServerError(res, e); }
+    catch (e) { return InternalServerError(res, e); }
 };
 
 export const update_if_exists = async (model_instance, 
@@ -85,4 +96,12 @@ export const update_if_exists = async (model_instance,
             .json({ error: `User with id ${id} not found` });
     }
     catch (e) { return; }
+};
+
+export const update_pass = async (model_instance, password, clause, res) => {
+    try {
+        await model_instance.update(
+            `password='${hashPassword(password)}'`, clause);
+    }
+    catch (e) { return InternalServerError(res, e); }
 };

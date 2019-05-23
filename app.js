@@ -18,9 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(validator());
-app.use(cors());
+app.use(cors('*'));
 
-app.use('/', indexRouter);
+app.use('/api/v1', indexRouter);
 
 // catch 404 and forward to error handler
 // app.use((req, res, next) => {

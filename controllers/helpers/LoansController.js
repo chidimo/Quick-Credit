@@ -47,7 +47,7 @@ export const check_loan_existence = async (model_instance, req, res) => {
         const [ loan, ] = rows;
         if (loan) return loan;
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const add_loan_to_db = async (model_instance, req, res) => {
@@ -64,7 +64,7 @@ export const add_loan_to_db = async (model_instance, req, res) => {
             `'${userid}', '${useremail}', '${amount}', '${tenor}', 
             '${interest}', '${balance}', '${paymentinstallment}'`);        
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const update_loan_status = async (model_instance, req, res) => {
@@ -73,7 +73,7 @@ export const update_loan_status = async (model_instance, req, res) => {
         await model_instance.update(
             `status='${req.status}'`, `WHERE id=${id}`);
     }
-    catch (e) { throw InternalServerError(res, e); }
+    catch (e) { return InternalServerError(res, e); }
 };
 
 export const update_loan_balance = async (model_instance, req, res) => {
@@ -83,7 +83,7 @@ export const update_loan_balance = async (model_instance, req, res) => {
         await model_instance.incrementation_update(
             'balance', `${amount}`, `WHERE id=${id}`);
     }
-    catch (e) { throw InternalServerError(res, e); }
+    catch (e) { return InternalServerError(res, e); }
 };
 
 export const get_loan_by_id = async (model_instance, id, res) => {
@@ -96,7 +96,7 @@ export const get_loan_by_id = async (model_instance, id, res) => {
         return rows[0];
     }
     catch (e) {
-        throw InternalServerError(res, e);
+        return InternalServerError(res, e);
     }
 };
 
@@ -110,7 +110,7 @@ export const loan_repayment_history = async (model_instance, req, res) => {
         );
         return res.status(200).json({ data: rows });
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const add_repayment_to_db = async (model_instance, req, res) => {
@@ -121,7 +121,7 @@ export const add_repayment_to_db = async (model_instance, req, res) => {
             '(loanid, adminid, amount)',
             `'${id}', '${adminid}', '${amount}'`);                    
     }
-    catch (e) { throw InternalServerError(res, e);}
+    catch (e) { return InternalServerError(res, e);}
 };
 
 export const get_repayment_from_db = async (model_instance, id, res) => {
@@ -131,7 +131,7 @@ export const get_repayment_from_db = async (model_instance, id, res) => {
         );
         return rows[0];
     }
-    catch (e) { throw InternalServerError(res, e); }
+    catch (e) { return InternalServerError(res, e); }
 };
 
 export const return_repay_or_error = async (model_instance, id, res, code) => {

@@ -10,17 +10,20 @@ const AuthenticationMiddleware = {
         return next();
     },
 
-    // verifyToken: (req, res, next) => {
-    //     const token = req.headers['x-access-token'];
-    //     try {
-    //         req.user = jwt.verify(token, Settings.jwtSecret);
-    //         req.token = token;
-    //         return next();
-    //     }
-    //     catch (e) {
-    //         return res.status(422).json({ error: 'Invalid token' });
-    //     }
-    // }
+    verifyToken: (req, res, next) => {
+        if (Settings.skipTokenVerification) {
+            return next();
+        }
+        const token = req.headers['x-access-token'];
+        try {
+            req.user = jwt.verify(token, Settings.jwtSecret);
+            req.token = token;
+            return next();
+        }
+        catch (e) {
+            return res.status(422).json({ error: 'Invalid token' });
+        }
+    }
 };
 
 export default AuthenticationMiddleware;
