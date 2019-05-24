@@ -71,7 +71,13 @@ const UsersController = {
             const { id } = req.params;
             const clause = `WHERE id=${req.params.id}`;
             const column = 'mailverified=true';
-            update_if_exists(users_model, id, column, clause, res);
+            const user = await update_if_exists(
+                users_model, id, column, clause, res);
+            if (user) {
+                return res.status(200).json({ data: user });
+            }
+            return res.status(404)
+                .json({ error: `User with id ${id} not found` });
         }
         catch (e) { return; }
     },
@@ -95,8 +101,15 @@ const UsersController = {
         const { id } = req.params;
         const clause = `WHERE id=${id}`;
         const column = 'status=\'verified\'';
+        // check requesting user's isAdmin status
         try {
-            update_if_exists(users_model, id, column, clause, res);
+            const user = await update_if_exists(
+                users_model, id, column, clause, res);
+            if (user) {
+                return res.status(200).json({ data: user });
+            }
+            return res.status(404)
+                .json({ error: `User with id ${id} not found` });
         }
         catch (e) { return; }
     },
@@ -122,6 +135,7 @@ const UsersController = {
         const { id } = req.params;
         const { firstname, lastname, phone, home, office } = req.body;
         const clause = `WHERE id=${id}`;
+        // check requesting user's identity
         try {
 
             const exists = await check_user_exists(users_model, clause, res);

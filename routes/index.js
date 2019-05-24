@@ -26,6 +26,16 @@ router.post('/auth/signin',
     AuthController.signin
 );
 
+router.get('/users',
+    AuthenticationMiddleware.verifyToken,
+    UsersController.get_users
+);
+
+router.get('/users/:id',
+    AuthenticationMiddleware.verifyToken,
+    UsersController.get_user
+);
+
 router.patch('/users/:id/verify',
     AuthenticationMiddleware.verifyToken,
     UsersController.verify_user
@@ -34,19 +44,14 @@ router.get('/users/:id/account-confirmation',
     AuthenticationMiddleware.verifyToken,
     UsersController.confirm_account
 );
-router.get('/users',
-    AuthenticationMiddleware.verifyToken,
-    UsersController.get_users
-);
-router.get('/users/:id',
-    AuthenticationMiddleware.verifyToken,
-    UsersController.get_user
-);
+
 router.get('/users?status=verified',
     AuthenticationMiddleware.verifyToken,
     UsersController.get_users
 );
+
 router.patch('/users/:id/update',
+    AuthenticationMiddleware.verifyToken,
     UsersValidators.updateProfileValidator,
     UsersController.update_user_profile
 );
@@ -54,10 +59,12 @@ router.get('/users/:id/photo/upload/',
     AuthenticationMiddleware.verifyToken,
     UsersController.get_aws_signed_url
 );
+
 router.patch('/users/:id/photo/update',
     AuthenticationMiddleware.verifyToken,
     UsersController.update_photo_url
 );
+
 router.post('/users/:email/reset_password',
     UsersValidators.newPasswordValidator,
     UsersController.reset_password    
