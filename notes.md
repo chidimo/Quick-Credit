@@ -56,6 +56,7 @@ VALUES ('a@b.com', '$2b$08$PyyTo.r0nPso8DHA0HfTs.lZSaGNA6J23V4eiw06rN8iWJin24f3O
 CREATE TABLE IF NOT EXISTS loans (
 	id SERIAL PRIMARY KEY,
 	userid INT NOT NULL,
+    useremail VARCHAR NULL,
     createdon TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR DEFAULT 'pending',
     repaid BOOLEAN DEFAULT false,
@@ -195,6 +196,8 @@ postgres://username:password@localhost/myrailsdb
 heroku pg:credentials:url DATABASE
 
 psql -h ec2-54-83-36-37.compute-1.amazonaws.com -U fgpyagsuzwxcnb -d dfjtmn74eqgvn7
+
+psql -h *** -U **** -d ***
 
 copy and past password, then enter
 

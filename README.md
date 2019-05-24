@@ -22,7 +22,7 @@ income earners.
 
 ## Demo
 
-<https://qcredit.herokuapp.com/>
+<https://qcredit.herokuapp.com/api/v1/>
 
 ## Installation
 
