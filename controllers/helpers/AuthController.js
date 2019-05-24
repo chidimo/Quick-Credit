@@ -7,7 +7,7 @@ import hashPassword from '../../utils/hashPassword';
 
 export const sendSignUpMessage = (user, req) => {
     const path = `/users/${user.id}/account-confirmation`;
-    const url = `${req.protocol}://${req.hostname}${path}`;
+    const url = `${req.protocol}://${req.hostname}/api/v1${path}`;
 
     const template_data = {
         firstname: titlecase(user.firstname),
