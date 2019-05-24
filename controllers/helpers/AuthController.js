@@ -90,10 +90,9 @@ export const update_if_exists = async (model_instance,
         if (exists) {
             await model_instance.update(column, clause);
             const user = await get_existing_user(model_instance, res, clause);
-            return res.status(200).json({ data: user });
+            return user;
         }
-        return res.status(404)
-            .json({ error: `User with id ${id} not found` });
+        return false;
     }
     catch (e) { return; }
 };
