@@ -42,3 +42,5 @@ exclude_patterns:
   - test/
   - public/
   - dist/
+  - legacyUI/
+  - UI/
