@@ -15,6 +15,13 @@ const AuthenticationMiddleware = {
             return next();
         }
         const token = req.headers['x-access-token'];
+        if (!token) {
+            const msg = 'Include a valid token in the x-access-token header';
+            return res.status(422).json({ 
+                error: 'No token provided',
+                msg 
+            });
+        }
         try {
             req.user = jwt.verify(token, Settings.jwtSecret);
             req.token = token;
