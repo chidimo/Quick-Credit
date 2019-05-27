@@ -39,8 +39,7 @@ describe('/api/v1/users', () => {
             it('should register and return user', done => {
                 const data = {
                     email: 'valid@address.com', password: 'password',
-                    confirm_password: 'password', firstname: 'chidi',
-                    lastname: 'orjinta'
+                    confirm_password: 'password'
                 };
                 server
                     .post('/api/v1/auth/signup')
@@ -50,10 +49,6 @@ describe('/api/v1/users', () => {
                         res.status.should.equal(201);
                         res.body.data.should.have.property(
                             'email', `${data.email}`);
-                        res.body.data.should.have.property(
-                            'firstname', `${data.firstname}`);
-                        res.body.data.should.have.property(
-                            'lastname', `${data.lastname}`);
                         res.body.data.should.have.property('token');
                         done();
                     });
@@ -92,40 +87,6 @@ describe('/api/v1/users', () => {
                         res.status.should.equal(422);
                         res.body.errors[0].msg.should.equal(
                             'Password confirmation does not match password');
-                        done();
-                    });
-            });
-                
-            it('should catch no firstname error', done => {
-                const data = {
-                    email: 'valid@address.com', password: 'password',
-                    confirm_password: 'password', lastname: 'orjinta'
-                };
-                server
-                    .post('/api/v1/auth/signup')
-                    .send(data)
-                    .expect(200)
-                    .end((err, res) => {
-                        res.status.should.equal(422);
-                        res.body.errors[0].msg.should.equal(
-                            'Firstname is required');
-                        done();
-                    });
-            });
-                
-            it('should catch no lastname error', done => {
-                const data = {
-                    email: 'valid@address.com', password: 'password',
-                    confirm_password: 'password', firstname: 'chidi'
-                };
-                server
-                    .post('/api/v1/auth/signup')
-                    .send(data)
-                    .expect(200)
-                    .end((err, res) => {
-                        res.status.should.equal(422);
-                        res.body.errors[0].msg.should.equal(
-                            'Lastname is required');
                         done();
                     });
             });

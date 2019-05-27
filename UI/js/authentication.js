@@ -71,7 +71,7 @@ signup_form.addEventListener('click', e => {
     const firstname = document.getElementById('first_name').value;
     const lastname = document.getElementById('last_name').value;
 
-    const body = { email, password, confirm_password, firstname, lastname };
+    const body = { email, password, confirm_password };
 
     const options = {
         method: 'POST',

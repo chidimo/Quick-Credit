@@ -21,13 +21,18 @@ const AuthController = {
                 .status(409)
                 .json({ error: `User with email ${email} already exists` });
         }
-        const { rows } = await add_user_to_db(users_model, req, res);
-        const [ { id }, ] = rows;
-        const clause = `WHERE id=${id}`;
-        const err_msg = `User with id ${id} not found`;
-        const user = await get_existing_user(users_model, res, clause, err_msg);
-        sendSignUpMessage(user, req);
-        return res.status(201).json({ data: { ...user, token: req.token } });
+        try {
+            const { rows } = await add_user_to_db(users_model, req, res);
+            const [ { id }, ] = rows;
+            const clause = `WHERE id=${id}`;
+            const err_msg = `User with id ${id} not found`;
+            const user = await get_existing_user(
+                users_model, res, clause, err_msg);
+            sendSignUpMessage(user, req);
+            return res.status(201)
+                .json({ data: { ...user, token: req.token } });
+        }
+        catch (e) { return; }
     },
 
     signin: async (req, res) => {
