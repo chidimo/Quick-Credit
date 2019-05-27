@@ -57,13 +57,11 @@ export const check_password = async (model_instance, email, password, res) => {
 };
 
 export const add_user_to_db = async (model_instance, req, res) => {
-    const { email, password, firstname, lastname } = req.body;
+    const { email, password } = req.body;
 
     try {
         return await model_instance.insert_with_return(
-            '(email, firstname, lastname, password)',
-            `'${email}', '${firstname}', '${lastname}', 
-            '${hashPassword(password)}'`
+            '(email, password)', `'${email}', '${hashPassword(password)}'`
         );                    
     }
     catch (e) { return InternalServerError(res, e);}

@@ -19,13 +19,6 @@ const validate_name = field => (
 );
 
 const UsersValidators = {
-    validateNames: [
-        validate_name('firstname'),
-        validate_name('lastname'),
-        sanitizeBody('firstname').trim().escape(),
-        sanitizeBody('lastname').trim().escape()
-    ],
-    
     emailValidator: [
         body('email')
             .isEmail()

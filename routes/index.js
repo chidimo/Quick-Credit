@@ -13,7 +13,6 @@ const router = express.Router();
 router.post('/auth/signup',
     UsersValidators.emailValidator,
     UsersValidators.passwordValidator,
-    UsersValidators.validateNames,
     UsersValidators.confirmPasswordValidator,
     AuthenticationMiddleware.generateToken,
     AuthController.signup
