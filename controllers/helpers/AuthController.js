@@ -6,7 +6,7 @@ import sendEmail from '../../utils/sendEmail';
 import hashPassword from '../../utils/hashPassword';
 
 export const sendSignUpMessage = (user, req) => {
-    const path = `/users/${user.id}/account-confirmation`;
+    const path = `/users/${user.id}/account/confirmation`;
     const url = `${req.protocol}://${req.hostname}/api/v1${path}`;
 
     const template_data = {

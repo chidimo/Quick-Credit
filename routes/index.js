@@ -39,8 +39,10 @@ router.patch('/users/:id/verify',
     AuthenticationMiddleware.verifyToken,
     UsersController.verify_user
 );
-router.get('/users/:id/account-confirmation',
-    AuthenticationMiddleware.verifyToken,
+
+router.get('/users/:id/account/mail', AuthController.confirm_email);
+
+router.get('/users/:id/account/confirmation',
     UsersController.confirm_account
 );
 
@@ -73,6 +75,12 @@ router.get('/loans',
     AuthenticationMiddleware.verifyToken,
     LoansController.get_all_loans
 );
+
+router.get('/loans/user/:id',
+    AuthenticationMiddleware.verifyToken,
+    LoansController.get_user_loans
+);
+
 router.get('/loans/:id',
     AuthenticationMiddleware.verifyToken,
     LoansController.get_loan

@@ -29,7 +29,7 @@
                                 <li>
                                     <a id="profile_dropdown" href="#" class="">
                                         <span class="micro_avatar_wrapper">
-                                            <img class="micro_avatar" src="https://s3.eu-west-2.amazonaws.com/quick-credit/profile_photos/1" alt="">
+                                            <img class="photos micro_avatar" alt="">
                                         </span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@
                                     <ul id="sub_menu">
                                         <div class="submenu_username">
                                             <a href="./dashboard.html">
-                                                <div>chidi orji matthew</div>
+                                                <div><span class="capitalize firstname"></span> <span class="capitalize lastname"></span></div>
                                             </a>
                                         </div>
                                         <hr class="submenu_hr">
@@ -61,7 +61,7 @@
                                         <hr class="submenu_hr">
                                         <li>
                                             <a href="authentication.html">
-                                                <div class="sub_routes">Logout</div>
+                                                <div id="logout" class="sub_routes">Logout</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -73,17 +73,17 @@
         
                 <section class="profile_edit">
                     <div class="container form_wrapper">
-                        <form action="" method="POST">
+                        <form id="profile_edit_form" action="" method="POST">
                             <h1>Edit your profile</h1>
                             <hr>
                             <label for="first_name"><b>First Name</b></label>
-                            <input type="text" value="Chidi" placeholder="First Name" name="first_name" required>
+                            <input type="text" placeholder="First Name" name="first_name" required>
             
                             <label for="last_name"><b>Last Name</b></label>
-                            <input type="text" value="Orji" placeholder="Last Name" name="last_name" required>
+                            <input type="text" placeholder="Last Name" name="last_name" required>
             
                             <label for="phone_number"><b>Phone Number</b></label>
-                            <input type="tel" value="+2349036650603" placeholder="Phone Number" name="phone_number" required>
+                            <input type="tel" placeholder="Phone Number" name="phone_number" required>
             
                             <label for="home_address"><b>Home Address</b></label>
                             <textarea type="text" placeholder="Home Address" name="home_address"></textarea>
@@ -104,6 +104,8 @@
                 </div>
             </footer>
         </div>
-        <script src="./js/qcredit.js"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="./js/profile_edit.js"></script>
     </body>
 </html>

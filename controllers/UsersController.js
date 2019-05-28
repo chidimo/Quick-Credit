@@ -157,7 +157,7 @@ const UsersController = {
 
     get_aws_signed_url: (req, res) => {
         const { id } = req.params;
-        const { filetype } = req.body;
+        const { filetype } = req.headers;
         const signed_url = aws_signed_url(id, filetype);
         return res.status(200).json({ signed_url });
     },
