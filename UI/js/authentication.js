@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const signin_form = document.getElementById('signin_form');
 const signup_form = document.getElementById('signup_form');
 
@@ -26,41 +27,44 @@ activate_signup.addEventListener('click', e => {
     activate_form(activate_signup, activate_signin);
 });
 
-
 const base_url = 'https://qcredit.herokuapp.com/api/v1';
-// const base_url = 'http://localhost:3000';
+// const base_url = 'http://localhost:3000/api/v1';
 const signupEndpoint = `${base_url}/auth/signup`;
 const signinEndpoint = `${base_url}/auth/signin`;
 
-signin_form.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.getElementById('signin_email').value;
-    const password = document.getElementById('signin_password').value;
-
-    const body = { email, password };
-
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(body),
+const save_user = async (endpoint, body, redirect_to) => {
+    const config = {
         headers: { 
             'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'PUT, GET, POST',
         },
     };
-    fetch(signinEndpoint, options)
-        .then(response => {
-            if (response.status !== 200) {
-                console.log('Request error ', response.status);
-            }
-            return response.json(); })
-        .then(resp => {
-            console.log('response ', resp);
-            if (resp.error) { alert(resp.error); }
-            else {
-                localStorage.setItem('QCtoken', resp.data.token);
-                window.location = './dashboard.html';
-            }
-        });
+    try {
+        const { data, status
+        } = await axios.post(endpoint, body, config);
+        const user = data.data;
+        if ((status === 200) || (status === 201)) {
+            localStorage.QCToken = user.token;
+            localStorage.user = JSON.stringify(user);
+            window.location = redirect_to;
+        }
+    }
+    catch (e) {
+        const { response } = e;
+        const { data, status, statusText } = response;
+        console.log(`
+            ${JSON.stringify(data)}, \n ${status}, \n ${statusText}`);
+    }
+};
+
+signin_form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = document.getElementById('signin_email').value;
+    const password = document.getElementById('signin_password').value;
+    const body = JSON.stringify({ email, password });
+    save_user(signinEndpoint, body, './dashboard.html');
 });
 
 signup_form.addEventListener('click', e => {

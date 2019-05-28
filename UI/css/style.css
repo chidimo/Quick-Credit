@@ -115,6 +115,12 @@ label {
     display: block;
 }
 
+/* names */
+
+.capitalize {
+    text-transform: capitalize;
+}
+
 /* tables */
 .table_wrapper {
     overflow-x: auto;
@@ -275,7 +281,6 @@ ul.base_ul {
 }
 
 .submenu_username a {
-    text-transform: capitalize;
     margin: 0;
     font-size: 16px;
 }
