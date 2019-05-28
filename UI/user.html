@@ -30,7 +30,7 @@
                                 <li>
                                     <a id="profile_dropdown" href="#" class="">
                                         <span class="micro_avatar_wrapper">
-                                            <img class="micro_avatar" src="https://s3.eu-west-2.amazonaws.com/quick-credit/profile_photos/1" alt="">
+                                            <img class="photos micro_avatar" alt="">
                                         </span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@
                                     <ul id="sub_menu">
                                         <div class="submenu_username">
                                             <a href="./dashboard.html">
-                                                <div>chidi orji matthew</div>
+                                                <div><span class="capitalize firstname"></span> <span class="capitalize lastname"></span></div>
                                             </a>
                                         </div>
                                         <hr class="submenu_hr">
@@ -62,7 +62,7 @@
                                         <hr class="submenu_hr">
                                         <li>
                                             <a href="authentication.html">
-                                                <div class="sub_routes">Logout</div>
+                                                <div id="logout" class="sub_routes">Logout</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -74,9 +74,10 @@
                 
                 <section id="main_loan">
                     <div class="container">
-                        <!--show the checkmark only if the load has been repaid-->
-                        <h2 id="page_heading">
-                            User | Chidi Orji <i class="fas fa-check-circle"></i>
+
+                        <h2 class="page_heading">
+                            User | <span class='capitalize firstname'></span> <span class='capitalize lastname'></span> 
+                            <i class="fas fa-check-circle"></i>
                         </h2>
 
                         <hr class="section_divider">
@@ -97,26 +98,20 @@
                         <div class="user_information">
                             <div class="user_card card">
                                 <div class="user_photo">
-                                    <img
-                                        title="Click to change"
-                                        id="profile_pix"
-                                        src="https://s3.eu-west-2.amazonaws.com/quick-credit/profile_photos/1"
-                                        alt="Profile picture"
-                                    >
-                                    <input type="file" id="img_uploader" name="img_uploader" accept="image/*" />
+                                    <img class="photos" src="" alt="">
                                 </div>
                                 <hr class="card_divider">
             
                                 <div class="user_info">
-                                    <h3>Orji Chidi <i class="fas fa-check-circle"></i></h3>
-                                    <p>email@address.com</p>
-                                    <p>+2341234567890</p>
+                                    <h3><span class='capitalize lastname'></span> <span class='capitalize firstname'></span> <i class="fas fa-check-circle"></i></h3>
+                                    <p><span id="email"></span></p>
+                                    <p><span id="phone"></span></p>
                                 </div>
                             </div>
             
                             <div class="user_address card">
-                                <p><span class="addresses">Home</span>: 21 Olugbani street, Off Governor road, By Bayota motel, Ikotun Egbe, Lagos</p>
-                                <p><span class="addresses">Office</>:</span> Andela EPIC Towers, 235 Ikorodu Road, By Niger Insurance House</p>
+                                <p><span class="addresses">Home</span>: <span class="capitalize" id="home"></span></p>
+                                <p><span class="addresses">Office</>:</span> <span class="capitalize" id="office"></span></p>
                             </div>
                         </div>
                     
