@@ -29,8 +29,8 @@ activate_signup.addEventListener('click', e => {
 
 const base_url = 'https://qcredit.herokuapp.com/api/v1';
 // const base_url = 'http://localhost:3000/api/v1';
-const signupEndpoint = `${base_url}/auth/signup`;
-const signinEndpoint = `${base_url}/auth/signin`;
+const sign_up_endpoint = `${base_url}/auth/signup`;
+const sign_in_endpoint = `${base_url}/auth/signin`;
 
 const save_user = async (endpoint, body, redirect_to) => {
     const config = {
@@ -63,7 +63,7 @@ signin_form.addEventListener('submit', async e => {
     const email = document.getElementById('signin_email').value;
     const password = document.getElementById('signin_password').value;
     const body = JSON.stringify({ email, password });
-    save_user(signinEndpoint, body, './dashboard.html');
+    save_user(sign_in_endpoint, body, './dashboard.html');
 });
 
 signup_form.addEventListener('submit', async e => {
@@ -73,5 +73,5 @@ signup_form.addEventListener('submit', async e => {
     const confirm_password = document.getElementById('confirm_password').value;
 
     const body = JSON.stringify({ email, password, confirm_password });
-    save_user(signupEndpoint, body, './profile.edit.html');
+    save_user(sign_up_endpoint, body, './profile.edit.html');
 });

@@ -19,19 +19,29 @@ import
 
 const loans_model = new Model('loans');
 const repayments_model = new Model('repayments');
+const rows = `id, userid, createdon, status, repaid, useremail,
+amount, tenor, interest, balance, paymentinstallment`;
 
 const LoansController = {
+
+    get_user_loans: async (req, res) => {
+        const { id } = req.params;
+        const clause = `WHERE userid=${id}`;
+        try {
+            const data = await loans_model.select(rows, clause);
+            return res.status(200).json({ data: data.rows });
+        }
+        catch (e) { return InternalServerError(res, e); }
+    },
     get_all_loans: async (req, res) => {
         const { status, repaid } = req.query;
-        const rows = `id, userid, createdon, status, repaid, useremail,
-            amount, tenor, interest, balance, paymentinstallment`;
+        // const rows = ;
+        const clause = `WHERE status='${status}' AND repaid='${repaid}'`;
         dev_logger(`rep ${repaid}, ${typeof repaid}`);
         try {
             let data;
             if (status && repaid) {
-                data = await loans_model.select(rows,
-                    `WHERE status='${status}' AND repaid='${repaid}'`
-                );
+                data = await loans_model.select(rows, clause);
             }
             else {
                 data = await loans_model.select(rows);
