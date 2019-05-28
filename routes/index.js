@@ -40,7 +40,6 @@ router.patch('/users/:id/verify',
     UsersController.verify_user
 );
 router.get('/users/:id/account-confirmation',
-    AuthenticationMiddleware.verifyToken,
     UsersController.confirm_account
 );
 
