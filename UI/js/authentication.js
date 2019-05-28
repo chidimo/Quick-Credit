@@ -27,8 +27,8 @@ activate_signup.addEventListener('click', e => {
     activate_form(activate_signup, activate_signin);
 });
 
-// const base_url = 'https://qcredit.herokuapp.com/api/v1';
-const base_url = 'http://localhost:3000/api/v1';
+const base_url = 'https://qcredit.herokuapp.com/api/v1';
+// const base_url = 'http://localhost:3000/api/v1';
 const sign_up_endpoint = `${base_url}/auth/signup`;
 const sign_in_endpoint = `${base_url}/auth/signin`;
 
