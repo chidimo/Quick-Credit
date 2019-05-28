@@ -12,7 +12,14 @@ const ph = document.getElementById('phone');
 const home = document.getElementById('home');
 const office = document.getElementById('office');
 const circles = document.getElementsByClassName('fa-check-circle');
+const table_ref = document.getElementById('user_loans_items');
 const logout = document.getElementById('logout');
+
+const Formatter = new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    currency: 'NGN',
+    minimumFractionDigits: 2
+});
 
 const base_url = 'https://qcredit.herokuapp.com/api/v1';
 // const base_url = 'http://localhost:3000/api/v1';
@@ -26,6 +33,7 @@ const common_headers = {
 };
 
 const user = JSON.parse(localStorage.user);
+const user_loans = JSON.parse(localStorage.user_loans);
 const {
     id, email, firstname, lastname, photo, phone, status, address, mailverified,
 } = user;
@@ -73,6 +81,27 @@ for (const circle of circles) {
 
 if (mailverified) {
     mailverification.style.display = 'none';
+}
+
+for (const [ i, loan ] of user_loans.entries()) {
+    const date = new Date(loan.createdon);
+    let class_;
+    if (loan.status === 'approved') class_ = 'approved_loan';
+    else if (loan.status === 'rejected') class_ = 'rejected_loan';
+    const data = `
+    <tr>
+        <td><a href="./loan.html">${i + 1}</a></td>
+        
+        <td><a href="./loan.html"><time>${date.toDateString()}</time></a></td>
+        <td class=${class_}>
+            <a class='capitalize' href="./loan.html">${loan.status}</a>
+        </td>
+        <td><a href="./loan.html">
+            ${Formatter.format(Number(loan.amount))}</a></td>
+    </tr>
+    `;
+    // table_ref.append(data);
+    table_ref.insertRow(-1).innerHTML = data;
 }
 // end DOM substitutions
 

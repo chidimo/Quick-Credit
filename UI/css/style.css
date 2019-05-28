@@ -535,6 +535,7 @@ footer {
     padding: 5px;
     margin-bottom: 10px;
     font-size: 28px;
+    color: red;
 }
 
 #mailverification button {
