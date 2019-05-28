@@ -35,7 +35,6 @@ const signinEndpoint = `${base_url}/auth/signin`;
 const save_user = async (endpoint, body, redirect_to) => {
     const config = {
         headers: { 
-            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'PUT, GET, POST',
@@ -67,36 +66,12 @@ signin_form.addEventListener('submit', async e => {
     save_user(signinEndpoint, body, './dashboard.html');
 });
 
-signup_form.addEventListener('click', e => {
+signup_form.addEventListener('submit', async e => {
     e.preventDefault();
     const email = document.getElementById('signup_email').value;
     const password = document.getElementById('signup_password').value;
     const confirm_password = document.getElementById('confirm_password').value;
-    const firstname = document.getElementById('first_name').value;
-    const lastname = document.getElementById('last_name').value;
 
-    const body = { email, password, confirm_password };
-
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: { 
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-        },
-    };
-    fetch(signupEndpoint, options)
-        .then(response => {
-            if (response.status !== 200) {
-                console.log('Request error ', response.status);
-            }
-            return response.json(); })
-        .then(resp => {
-            console.log('response ', resp);
-            if (resp.error) { alert(resp.error); }
-            else {
-                localStorage.setItem('QCtoken', resp.data.token);
-                window.location = './dashboard.html';
-            }
-        });
+    const body = JSON.stringify({ email, password, confirm_password });
+    save_user(signupEndpoint, body, './profile.edit.html');
 });
