@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 
+const mailverification = document.getElementById('mailverification');
 const profile_pix = document.getElementById('profile_pix');
 const img_uploader = document.querySelector('input[id=img_uploader]');
 const images = document.getElementsByClassName('photos');
@@ -40,6 +41,15 @@ profile_pix.addEventListener('click', e => {
     img_uploader.click();
 });
 
+mailverification.addEventListener('click', async e => {
+    e.preventDefault();
+    const url = `${base_url}/users/${id}/get-mail`;
+    const { data, status } = await axios.get(url);
+    if (status === 200) {
+        alert(`${data.msg}\nPlease check your inbox`);
+    }
+});
+
 // DOM substitutions
 for (const image of images) {
     image.src = photo;
@@ -61,29 +71,10 @@ for (const circle of circles) {
     }
 }
 
-// const reload_pix = () => {
-//     const container = document.getElementById('photo_window');
-//     const content = container.innerHTML;
-//     container.innerHTML = content; 
-    
-//     // this line is to watch the result in console , you can remove it later	
-//     console.log('Refreshed'); 
-// };
-
-// const update_profile_pix = file => {
-//     const reader  = new FileReader();
-//     reader.addEventListener('load', () => {
-//         const { result } = reader;
-//         profile_pix.src = result;
-//     });
-//     if (file) {
-//         reader.readAsDataURL(file);
-//     }
-//     else {
-//         const src = `https://${endpoint}/quick-credit/profile_photos/${id}`;
-//         profile_pix.src = src;
-//     }
-// };
+if (mailverified) {
+    mailverification.style.display = 'none';
+}
+// end DOM substitutions
 
 img_uploader.onchange = async e => {
     e.preventDefault();

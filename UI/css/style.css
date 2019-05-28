@@ -531,6 +531,18 @@ footer {
 
 /* Dashboard */
 
+#mailverification {
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+#mailverification button {
+    width: 100%;
+    height: 60px;
+    font-size: 28px;
+}
+
 .card {
     padding: 10px;
     width: 450px;
@@ -552,7 +564,7 @@ footer {
     overflow: hidden;
 }
 
-.fa-check-circle {
+.status-ok {
     color: green;
 }
 

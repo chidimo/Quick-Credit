@@ -39,6 +39,9 @@ router.patch('/users/:id/verify',
     AuthenticationMiddleware.verifyToken,
     UsersController.verify_user
 );
+
+router.get('/users/:id/get-mail', AuthController.confirm_email);
+
 router.get('/users/:id/account-confirmation',
     UsersController.confirm_account
 );
