@@ -75,6 +75,12 @@ router.get('/loans',
     AuthenticationMiddleware.verifyToken,
     LoansController.get_all_loans
 );
+
+router.get('/loans/user/:id',
+    AuthenticationMiddleware.verifyToken,
+    LoansController.get_user_loans
+);
+
 router.get('/loans/:id',
     AuthenticationMiddleware.verifyToken,
     LoansController.get_loan

@@ -77,6 +77,20 @@ describe('/loans', () => {
                     done();
                 });
         });
+
+        it('should return all loans for specified user', done => {
+            const id = 1;
+            server
+                .get(`${BASE_URL}/loans/user/${id}`)
+                .expect(200)
+                .end((err, res) => {
+                    res.status.should.equal(200);
+                    for (const each of res.body.data) {
+                        each.should.have.property('userid', id);
+                    }
+                    done();
+                });
+        });
     });
 
     describe('/loans: Get loan', () => {
