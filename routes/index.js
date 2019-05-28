@@ -40,9 +40,9 @@ router.patch('/users/:id/verify',
     UsersController.verify_user
 );
 
-router.get('/users/:id/get-mail', AuthController.confirm_email);
+router.get('/users/:id/account/mail', AuthController.confirm_email);
 
-router.get('/users/:id/account-confirmation',
+router.get('/users/:id/account/confirmation',
     UsersController.confirm_account
 );
 

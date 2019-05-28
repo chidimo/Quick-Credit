@@ -8,8 +8,9 @@ import { test_logger } from '../utils/loggers';
 import { createDB, clearDB } from '../utils/localDbOps';
 
 const server = supertest.agent(app);
+const BASE_URL = '/api/v1';
 
-describe('/api/v1/users', () => {
+describe('/users', () => {
 
     before(async () => {
         test_logger('Creating DB in users-spec');
@@ -21,11 +22,11 @@ describe('/api/v1/users', () => {
         await clearDB();
     });
 
-    describe('/api/v1/auth/signup', () => {
-        describe('POST /api/v1/auth/signup', () => { 
+    describe('/auth/signup', () => {
+        describe('POST /auth/signup', () => { 
             it('should return invalid email error', done => {
                 server
-                    .post('/api/v1/auth/signup')
+                    .post(`${BASE_URL}/auth/signup`)
                     .send({ email: 'abcd', password: 'wrongpassword' })
                     .expect(200)
                     .end((err, res) => {
@@ -42,7 +43,7 @@ describe('/api/v1/users', () => {
                     confirm_password: 'password'
                 };
                 server
-                    .post('/api/v1/auth/signup')
+                    .post(`${BASE_URL}/auth/signup`)
                     .send(data)
                     .expect(200)
                     .end((err, res) => {
@@ -62,7 +63,7 @@ describe('/api/v1/users', () => {
                     lastname: 'orjinta'
                 };
                 server
-                    .post('/api/v1/auth/signup')
+                    .post(`${BASE_URL}/auth/signup`)
                     .send(data)
                     .expect(200)
                     .end((err, res) => {
@@ -80,7 +81,7 @@ describe('/api/v1/users', () => {
                     lastname: 'orjinta'
                 };
                 server
-                    .post('/api/v1/auth/signup')
+                    .post(`${BASE_URL}/auth/signup`)
                     .send(data)
                     .expect(200)
                     .end((err, res) => {
@@ -91,11 +92,11 @@ describe('/api/v1/users', () => {
                     });
             });
 
-            describe('/api/v1/users/:id/account-confirmation', () => {
-                it('should confirm a user account', done => {
+            describe('/users/:id/account/confirmation', () => {
+                it('should confirm a user email account', done => {
                     const id = 5;
                     server
-                        .get(`/api/v1/users/${id}/account-confirmation`)
+                        .get(`${BASE_URL}/users/${id}/account/confirmation`)
                         .expect(200)
                         .end((err, res) => {
                             res.status.should.equal(200);
@@ -104,16 +105,28 @@ describe('/api/v1/users', () => {
                             done();
                         });
                 });
+
+                it('should send a confirmation email', done => {
+                    const id = 1;
+                    server
+                        .get(`${BASE_URL}/users/${id}/account/mail`)
+                        .expect(200)
+                        .end((err, res) => {
+                            res.status.should.equal(200);
+                            done();
+                        });
+                });
             });
+
         });
     });
 
-    describe('/api/v1/auth/signin', () => {
-        describe('POST /api/v1/auth/signin', () => {
+    describe('/auth/signin', () => {
+        describe('POST /auth/signin', () => {
             it('should return registered user if found', done => {
                 const user = { email: 'a@b.com', password: 'password' };
                 server
-                    .post('/api/v1/auth/signin')
+                    .post(`${BASE_URL}/auth/signin`)
                     .send(user)
                     .expect(200)
                     .end((err, res) => {
@@ -128,7 +141,7 @@ describe('/api/v1/users', () => {
             it('should return error for wrong password', done => {
                 const user = { email: 'a@b.com', password: 'wrongpassword' };
                 server
-                    .post('/api/v1/auth/signin')
+                    .post(`${BASE_URL}/auth/signin`)
                     .send(user)
                     .expect(200)
                     .end((err, res) => {
@@ -141,7 +154,7 @@ describe('/api/v1/users', () => {
             it('should return error if user does NOT exist', done => {
                 const user = { email: 'not@exist.com', password: 'password' };
                 server
-                    .post('/api/v1/auth/signin')
+                    .post(`${BASE_URL}/auth/signin`)
                     .send(user)
                     .expect(200)
                     .end((err, res) => {
@@ -154,11 +167,11 @@ describe('/api/v1/users', () => {
         });
     });
 
-    describe('POST /api/v1/users/:email/reset_password', () => {
+    describe('POST /users/:email/reset_password', () => {
         it('should return error if user not found', done => {
             const email = 'unknown@email.com';
             server
-                .post(`/api/v1/users/${email}/reset_password`)
+                .post(`${BASE_URL}/users/${email}/reset_password`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(404);
@@ -176,7 +189,7 @@ describe('/api/v1/users', () => {
                 confirm_new: 'newpassword' 
             };
             server
-                .post(`/api/v1/users/${email}/reset_password`)
+                .post(`${BASE_URL}/users/${email}/reset_password`)
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -193,7 +206,7 @@ describe('/api/v1/users', () => {
                 confirm_new: '' 
             };
             server
-                .post(`/api/v1/users/${email}/reset_password`)
+                .post(`${BASE_URL}/users/${email}/reset_password`)
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -210,7 +223,7 @@ describe('/api/v1/users', () => {
                 confirm_new: 'newpassword1' 
             };
             server
-                .post(`/api/v1/users/${email}/reset_password`)
+                .post(`${BASE_URL}/users/${email}/reset_password`)
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -229,7 +242,7 @@ describe('/api/v1/users', () => {
                 confirm_new: '' 
             };
             server
-                .post(`/api/v1/users/${email}/reset_password`)
+                .post(`${BASE_URL}/users/${email}/reset_password`)
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -248,7 +261,7 @@ describe('/api/v1/users', () => {
                 confirm_new: 'password' 
             };
             server
-                .post(`/api/v1/users/${email}/reset_password`)
+                .post(`${BASE_URL}/users/${email}/reset_password`)
                 .send(data)
                 .expect(200)
                 .end((err, res) => {
@@ -260,10 +273,10 @@ describe('/api/v1/users', () => {
         });
     });
     
-    describe('PATCH /api/v1/users/:id/verify', () => {
+    describe('PATCH /users/:id/verify', () => {
         it('should verify user', done => {
             server
-                .patch('/api/v1/users/2/verify')
+                .patch(`${BASE_URL}/users/2/verify`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -275,7 +288,7 @@ describe('/api/v1/users', () => {
         it('should not verify non-existent user', done => {
             const id = 100;
             server
-                .patch(`/api/v1/users/${id}/verify`)
+                .patch(`${BASE_URL}/users/${id}/verify`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(404);
@@ -285,10 +298,10 @@ describe('/api/v1/users', () => {
         });
     });
     
-    describe('GET /api/v1/users?status=', () => {
+    describe('GET /users?status=', () => {
         it('should return a list of all users', done => {
             server
-                .get('/api/v1/users')
+                .get(`${BASE_URL}/users`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -308,7 +321,7 @@ describe('/api/v1/users', () => {
         
         it('should return a list of verified users', done => {
             server
-                .get('/api/v1/users')
+                .get(`${BASE_URL}/users`)
                 .query({ status: 'verified' })
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -321,7 +334,7 @@ describe('/api/v1/users', () => {
 
         it('should return a list of unverified users', done => {
             server
-                .get('/api/v1/users')
+                .get(`${BASE_URL}/users`)
                 .query({ status: 'unverified' })
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -333,10 +346,10 @@ describe('/api/v1/users', () => {
         });
     });
 
-    describe('GET /api/v1/users/:id', () => {
+    describe('GET /users/:id', () => {
         it('should return a user if user with id is found', done => {
             server
-                .get('/api/v1/users/1')
+                .get(`${BASE_URL}/users/1`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(200);
@@ -347,7 +360,7 @@ describe('/api/v1/users', () => {
     
         it('should return error message for non-existent user', done => {
             server
-                .get('/api/v1/users/45')
+                .get(`${BASE_URL}/users/45`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(404);
@@ -358,7 +371,7 @@ describe('/api/v1/users', () => {
 
         it('should return 500 internal server error', done => {
             server
-                .get('/api/v1/users/whatever')
+                .get(`${BASE_URL}/users/whatever`)
                 .expect(200)
                 .end((err, res) => {
                     res.status.should.equal(500);
@@ -368,10 +381,10 @@ describe('/api/v1/users', () => {
         });
     });
 
-    describe('PATCH /api/v1/users/:id/update', () => {
+    describe('PATCH /users/:id/update', () => {
         it('should update and return the user profile', done => {
             server
-                .patch('/api/v1/users/1/update')
+                .patch(`${BASE_URL}/users/1/update`)
                 .send({ 
                     firstname: 'new_firstname',
                     lastname: 'new_lastname',
@@ -398,7 +411,7 @@ describe('/api/v1/users', () => {
         it('should indicate if user is not found', done => {
             const id = 100;
             server
-                .patch(`/api/v1/users/${100}/update`)
+                .patch(`${BASE_URL}/users/${100}/update`)
                 .send({ 
                     firstname: 'new_firstname',
                     lastname: 'new_lastname',
@@ -414,7 +427,7 @@ describe('/api/v1/users', () => {
         });
         it('should throw error for wrong phone number format', done => {
             server
-                .patch('/api/v1/users/4/update')
+                .patch(`${BASE_URL}/users/4/update`)
                 .send({ 
                     firstname: 'new_first',
                     lastname: 'new_last',
@@ -432,11 +445,11 @@ describe('/api/v1/users', () => {
         });
     });
 
-    describe('PATCH /api/v1/users/:id/photo/update/', () => {
+    describe('PATCH /users/:id/photo/update/', () => {
         it('should update user photo and return user', done => {
             const body = { photo_url: 'https://amazon.com/whatever' };
             server
-                .patch('/api/v1/users/4/photo/update')
+                .patch(`${BASE_URL}/users/4/photo/update`)
                 .send(body)
                 .expect(200)
                 .end((err, res) => {
@@ -447,12 +460,12 @@ describe('/api/v1/users', () => {
         });
     });
 
-    describe('GET /api/v1/users/:id/photo/upload/', () => {
+    describe('GET /users/:id/photo/upload/', () => {
         it('should return a presigned url', done => {
             const id = 4;
             const filetype = 'image/png';
             server
-                .get(`/api/v1/users/${id}/photo/upload/`)
+                .get(`${BASE_URL}/users/${id}/photo/upload/`)
                 .send({ filetype })
                 .expect(200)
                 .end((err, res) => {

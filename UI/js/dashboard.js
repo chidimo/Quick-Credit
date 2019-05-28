@@ -43,7 +43,7 @@ profile_pix.addEventListener('click', e => {
 
 mailverification.addEventListener('click', async e => {
     e.preventDefault();
-    const url = `${base_url}/users/${id}/get-mail`;
+    const url = `${base_url}/users/${id}/account/mail`;
     const { data, status } = await axios.get(url);
     if (status === 200) {
         alert(`${data.msg}\nPlease check your inbox`);
