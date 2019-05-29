@@ -11,7 +11,7 @@ import {
 } from './helpers/AuthController';
 import { aws_signed_url, } from './helpers/UsersController';
 
-const users_model = new Model('users');
+export const users_model = new Model('users');
 
 const reset_password = async (model_instance, email, clause, res) => {
     const new_password = generatePassword();

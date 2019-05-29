@@ -1,12 +1,19 @@
 // should is not used directly in the file but is added as a mocha requirement
 
-
 import supertest from 'supertest';
+import sinon from 'sinon';
 import assert from 'assert';
-import app from '../app';
+import chai from 'chai';
+import sinonChai from 'sinon-chai';
 
+import app from '../app';
+import LoansController, { loans_model } from '../controllers/LoansController';
 import { test_logger } from '../utils/loggers';
 import { createDB, clearDB } from '../utils/localDbOps';
+
+chai.use(sinonChai);
+const { expect } = chai;
+
 
 const server = supertest.agent(app);
 const BASE_URL = '/api/v1';
@@ -21,6 +28,8 @@ describe('/loans', () => {
         test_logger('Clearing DB in loans-spec');
         await clearDB();
     });
+
+    afterEach(() => sinon.restore());
 
     describe('/loans: Get all loans', () => {
         it('should be return a list of all loans', done => {
@@ -44,6 +53,17 @@ describe('/loans', () => {
                     }
                     done();
                 });
+        });
+
+        it('should throw error while getting all loans', async () => {
+            const req = {
+                query: { status: 'approved', repaid: true }
+            };
+            const res = { status() {}, json() {} };
+            sinon.stub(res, 'status').returnsThis();
+            sinon.stub(loans_model, 'select').throws();
+            await LoansController.get_all_loans(req, res);
+            expect(res.status).to.have.been.calledWith(500);       
         });
                 
         it('should return all loans which have BEEN repaid', done => {
@@ -78,19 +98,32 @@ describe('/loans', () => {
                 });
         });
 
-        it('should return all loans for specified user', done => {
-            const id = 1;
-            server
-                .get(`${BASE_URL}/loans/user/${id}`)
-                .expect(200)
-                .end((err, res) => {
-                    res.status.should.equal(200);
-                    for (const each of res.body.data) {
-                        each.should.have.property('userid', id);
-                    }
-                    done();
-                });
+        describe('/loans/user', () => {
+            it('should return all loans for specified user', done => {
+                const id = 1;
+                server
+                    .get(`${BASE_URL}/loans/user/${id}`)
+                    .expect(200)
+                    .end((err, res) => {
+                        res.status.should.equal(200);
+                        for (const each of res.body.data) {
+                            each.should.have.property('userid', id);
+                        }
+                        done();
+                    });
+            });
+
+            it('should throw error while getting user loans', async () => {
+                const req = { params: { id: 5 } };
+                const res = { status() {}, json() {} };
+                sinon.stub(res, 'status').returnsThis();
+                sinon.stub(loans_model, 'select').throws();
+                await LoansController.get_user_loans(req, res);
+                expect(res.status).to.have.been.calledWith(500);       
+            });
+            
         });
+        
     });
 
     describe('/loans: Get loan', () => {
