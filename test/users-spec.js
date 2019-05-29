@@ -4,23 +4,11 @@
 
 import supertest from 'supertest';
 import app from '../app';
-import { test_logger } from '../utils/loggers';
-import { createDB, clearDB } from '../utils/localDbOps';
 
 const server = supertest.agent(app);
 const BASE_URL = '/api/v1';
 
 describe('/users', () => {
-
-    before(async () => {
-        test_logger('Creating DB in users-spec');
-        await createDB();
-    });
-
-    after(async () => {
-        test_logger('Clearing DB in users-spec');
-        await clearDB();
-    });
 
     describe('/auth/signup', () => {
         describe('POST /auth/signup', () => { 

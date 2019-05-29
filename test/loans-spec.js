@@ -8,28 +8,14 @@ import sinonChai from 'sinon-chai';
 
 import app from '../app';
 import LoansController, { loans_model } from '../controllers/LoansController';
-import { test_logger } from '../utils/loggers';
-import { createDB, clearDB } from '../utils/localDbOps';
 
 chai.use(sinonChai);
 const { expect } = chai;
-
 
 const server = supertest.agent(app);
 const BASE_URL = '/api/v1';
 
 describe('/loans', () => {
-    before(async () => {
-        test_logger('Creating DB in loans-spec');
-        await createDB();
-    });
-
-    after(async () => {
-        test_logger('Clearing DB in loans-spec');
-        await clearDB();
-    });
-
-    afterEach(() => sinon.restore());
 
     describe('/loans: Get all loans', () => {
         it('should be return a list of all loans', done => {
@@ -75,8 +61,8 @@ describe('/loans', () => {
                     res.status.should.equal(200);
                     res.body.data.should.be.an.instanceOf(Array);
                     for (const loan of res.body.data) {
-                        assert(loan.status === 'approved');
-                        assert(loan.repaid === true);
+                        loan.should.have.property('status', 'approved');
+                        loan.should.have.property('repaid', true);
                     }
                     done();
                 });
@@ -91,8 +77,8 @@ describe('/loans', () => {
                     res.status.should.equal(200);
                     res.body.data.should.be.an.instanceOf(Array);
                     for (const loan of res.body.data) {
-                        assert(loan.status === 'approved');
-                        assert(loan.repaid === false);
+                        loan.should.have.property('status', 'approved');
+                        loan.should.have.property('repaid', false);
                     }
                     done();
                 });
@@ -121,9 +107,7 @@ describe('/loans', () => {
                 await LoansController.get_user_loans(req, res);
                 expect(res.status).to.have.been.calledWith(500);       
             });
-            
         });
-        
     });
 
     describe('/loans: Get loan', () => {
