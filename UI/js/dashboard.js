@@ -1,48 +1,26 @@
 /* eslint-disable no-undef */
+import {
+    id,
+    status,
+    mailverified,
+    firstname,
+    lastname
+} from './common/user.js';
+
+import {
+    retrieve_signed_url,
+    upload_to_aws,
+    update_photo_in_db
+} from './common/img_uploader.js';
+
+import { BASE_URL } from './common/constants.js';
 
 const mailverification = document.getElementById('mailverification');
 const profile_pix = document.getElementById('profile_pix');
 const img_uploader = document.querySelector('input[id=img_uploader]');
-const images = document.getElementsByClassName('photos');
-const dp = document.getElementById('dp');
-const fname = document.getElementsByClassName('firstname');
-const lname = document.getElementsByClassName('lastname');
-const em = document.getElementById('email');
-const ph = document.getElementById('phone');
-const home = document.getElementById('home');
-const office = document.getElementById('office');
+const dash_firstname = document.getElementById('dash_firstname');
+const dash_lastname = document.getElementById('dash_lastname');
 const circles = document.getElementsByClassName('fa-check-circle');
-const table_ref = document.getElementById('user_loans_items');
-const logout = document.getElementById('logout');
-
-const Formatter = new Intl.NumberFormat('en-US', {
-    style: 'decimal',
-    currency: 'NGN',
-    minimumFractionDigits: 2
-});
-
-const base_url = 'https://qcredit.herokuapp.com/api/v1';
-// const base_url = 'http://localhost:3000/api/v1';
-
-const common_headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'PUT, GET, PATCH,',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Max-Age': '3000',
-    'x-access-token': localStorage.QCToken
-};
-
-const user = JSON.parse(localStorage.user);
-const user_loans = JSON.parse(localStorage.user_loans);
-const {
-    id, email, firstname, lastname, photo, phone, status, address, mailverified,
-} = user;
-
-logout.addEventListener('click', e => {
-    e.preventDefault();
-    localStorage.clear();
-    window.location = './authentication.html';
-});
 
 profile_pix.addEventListener('click', e => {
     e.preventDefault();
@@ -51,59 +29,12 @@ profile_pix.addEventListener('click', e => {
 
 mailverification.addEventListener('click', async e => {
     e.preventDefault();
-    const url = `${base_url}/users/${id}/account/mail`;
+    const url = `${BASE_URL}/users/${id}/account/mail`;
     const { data, status } = await axios.get(url);
     if (status === 200) {
         alert(`${data.msg}\nPlease check your inbox`);
     }
 });
-
-// DOM substitutions
-for (const image of images) {
-    image.src = photo;
-}
-dp.style = `background-image: url('${photo}')`;
-for (const name of fname) {
-    name.textContent = firstname;
-}
-for (const name of lname) {
-    name.textContent = lastname;
-}
-ph.textContent = phone;
-em.textContent = email;
-home.textContent = address.home;
-office.textContent = address.office;
-for (const circle of circles) {
-    if (status === 'verified') {
-        circle.classList.toggle('status-ok');
-    }
-}
-
-if (mailverified) {
-    mailverification.style.display = 'none';
-}
-
-for (const [ i, loan ] of user_loans.entries()) {
-    const date = new Date(loan.createdon);
-    let class_;
-    if (loan.status === 'approved') class_ = 'approved_loan';
-    else if (loan.status === 'rejected') class_ = 'rejected_loan';
-    const data = `
-    <tr>
-        <td><a href="./loan.html">${i + 1}</a></td>
-        
-        <td><a href="./loan.html"><time>${date.toDateString()}</time></a></td>
-        <td class=${class_}>
-            <a class='capitalize' href="./loan.html">${loan.status}</a>
-        </td>
-        <td><a href="./loan.html">
-            ${Formatter.format(Number(loan.amount))}</a></td>
-    </tr>
-    `;
-    // table_ref.append(data);
-    table_ref.insertRow(-1).innerHTML = data;
-}
-// end DOM substitutions
 
 img_uploader.onchange = async e => {
     e.preventDefault();
@@ -117,67 +48,23 @@ img_uploader.onchange = async e => {
         return;
     }
     // const ext = file.name.slice(filename.lastIndexOf('.') + 1);
-    const signed_upload_url = await axios_get_signed_url(id, filetype);
+    const signed_upload_url = await retrieve_signed_url(id, filetype);
     const photo_aws_url = await upload_to_aws(id, file, signed_upload_url);
     const user = await update_photo_in_db(id, photo_aws_url);
     localStorage.user = JSON.stringify(user);
 };
 
-// step 1: get a signed URL
-const axios_get_signed_url = async (id, filetype) => {
-    const url = `${base_url}/users/${id}/photo/upload`;
-    const headers = {
-        filetype,
-        'x-access-token': localStorage.QCToken
-    };
-    try {
-        const { data, status } = await axios.get(url, { headers } );
-        if (status === 200) return data.signed_url;
-    }
-    catch (e) {
-        const { response } = e;
-        const { data, status } = response;
-        console.log(`${JSON.stringify(data)}, \n ${status}`);
-    }
-};
+// DOM substitutions
 
-// step 2. Upload to AWS S3 bucket   
-const upload_to_aws = async (id, file, signed_url) => {
-    const config = {
-        headers: { ...common_headers,
-            'Content-Type': file.type, 
-        },
-        onUploadProgress: progressEvent => {
-            const { loaded, total } = progressEvent;
-            console.log(`loaded: ${loaded}, total: ${total}`);
-        }
-    };
+dash_firstname.textContent = firstname;
+dash_lastname.textContent = lastname;
 
-    try {
-        const resp = await axios.put(signed_url, file, config);
-        if (resp.status === 200) {
-            const bucket = 'quick-credit';
-            const folder = 'profile_photos';
-            const endpoint = 's3.eu-west-2.amazonaws.com';
-            const aws_url = `https://${endpoint}/${bucket}/${folder}/${id}`;
-            return aws_url;
-        }
+for (const circle of circles) {
+    if (status === 'verified') {
+        circle.classList.toggle('status-ok');
     }
-    catch (e) {
-        const { response } = e;
-        const { data, status } = response;
-        console.log(`${JSON.stringify(data)}, \n ${status}`);
-    }
-};
+}
 
-// step 3. Update photo in db
-const update_photo_in_db = async (id, photo_url) => {
-    const url = `${base_url}/users/${id}/photo/update`;
-    const body = { photo_url };
-    const config = {
-        headers: { ...common_headers, },
-    };
-    const { data } = await axios.patch(url, body, config);
-    const user = data.data;
-    return user;
-};
+if (mailverified) {
+    mailverification.style.display = 'none';
+}

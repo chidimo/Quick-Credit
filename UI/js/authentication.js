@@ -1,4 +1,7 @@
+import { BASE_URL, common_headers, token_name } from './common/constants.js';
+
 /* eslint-disable no-undef */
+
 const signin_form = document.getElementById('signin_form');
 const signup_form = document.getElementById('signup_form');
 
@@ -27,27 +30,19 @@ activate_signup.addEventListener('click', e => {
     activate_form(activate_signup, activate_signin);
 });
 
-const base_url = 'https://qcredit.herokuapp.com/api/v1';
-// const base_url = 'http://localhost:3000/api/v1';
-const sign_up_endpoint = `${base_url}/auth/signup`;
-const sign_in_endpoint = `${base_url}/auth/signin`;
-
-const common_headers = { 
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'PUT, GET, POST',
-}
-
 const save_user = async (endpoint, body) => {
     const config = {
-        headers: { ...common_headers },
+        headers: {
+            ...common_headers,
+            'Content-Type': 'application/json',
+        },
     };
     try {
         const { data, status
         } = await axios.post(endpoint, body, config);
         const user = data.data;
         if ((status === 200) || (status === 201)) {
-            localStorage.QCToken = user.token;
+            localStorage[token_name()] = user.token;
             localStorage.user = JSON.stringify(user);
         }
     }
@@ -64,7 +59,7 @@ signin_form.addEventListener('submit', async e => {
     const email = document.getElementById('signin_email').value;
     const password = document.getElementById('signin_password').value;
     const body = JSON.stringify({ email, password });
-    await save_user(sign_in_endpoint, body);
+    await save_user(`${BASE_URL}/auth/signin`, body);
     const { id } = JSON.parse(localStorage.user);
     await get_user_loans(id);
     window.location = './dashboard.html';
@@ -77,17 +72,15 @@ signup_form.addEventListener('submit', async e => {
     const confirm_password = document.getElementById('confirm_password').value;
 
     const body = JSON.stringify({ email, password, confirm_password });
-    await save_user(sign_up_endpoint, body);
-    const { id } = JSON.parse(localStorage.user);
-    await get_user_loans(id);
+    await save_user(`${BASE_URL}/auth/signup`, body);
     window.location = './profile.edit.html';
 });
 
 const get_user_loans = async id => {
-    const url = `${base_url}/loans/user/${id}`;
+    const url = `${BASE_URL}/loans/user/${id}`;
     const headers = {
         ...common_headers,
-        'x-access-token': localStorage.QCToken
+        'x-access-token': localStorage[token_name()]
     };
     try {
         const { data, status } = await axios.get(url, { headers });

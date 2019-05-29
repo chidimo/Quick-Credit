@@ -1,3 +1,5 @@
+import { BASE_URL, token_name } from './common/constants.js';
+
 /* eslint-disable no-undef */
 const logout = document.getElementById('logout');
 const profile_edit_form = document.getElementById('profile_edit_form');
@@ -29,9 +31,7 @@ logout.addEventListener('click', e => {
     window.location = './authentication.html';
 });
 
-const base_url = 'https://qcredit.herokuapp.com/api/v1';
-// const base_url = 'http://localhost:3000/api/v1';
-const endpoint = `${base_url}/users/${id}/update`;
+const endpoint = `${BASE_URL}/users/${id}/update`;
 
 const update_profile = async (endpoint, body, redirect_to) => {
     const config = {
@@ -39,7 +39,7 @@ const update_profile = async (endpoint, body, redirect_to) => {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'PATCH',
-            'x-access-token': localStorage.QCToken,
+            'x-access-token': localStorage[token_name()],
         },
     };
     try {
