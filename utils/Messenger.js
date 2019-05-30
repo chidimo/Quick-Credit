@@ -1,6 +1,5 @@
 import sgMail from '@sendgrid/mail';
 import Settings from '../settings';
-import { dev_logger, test_logger } from './loggers';
 
 sgMail.setApiKey(Settings.sendgridKey);
 
@@ -14,7 +13,6 @@ const templates = {
 
 const Messenger = {
     sendEmail: (data, template_data) => {
-        dev_logger('data ********* ', data);
         const msg = {
             to: data.email,
             from: 'qcredit@herokuapp.com',
@@ -24,15 +22,10 @@ const Messenger = {
             }
         };
         
-        if (Settings.skipEmailSend()) return;
         sgMail.send(msg, (err, result) => {
-            if (err) {
-                test_logger(`There was an error sending your message ${err}\n`);
-            } else {
-                dev_logger('Email sent successfully', result);
-            }
+            if (err) return err;
+            return result;
         });
     },
-    
 };
 export default Messenger;

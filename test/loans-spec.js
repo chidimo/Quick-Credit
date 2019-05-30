@@ -1,8 +1,7 @@
 // should is not used directly in the file but is added as a mocha requirement
-
-import supertest from 'supertest';
 import sinon from 'sinon';
-import assert from 'assert';
+import sgMail from '@sendgrid/mail';
+import supertest from 'supertest';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 
@@ -16,6 +15,16 @@ const server = supertest.agent(app);
 const BASE_URL = '/api/v1';
 
 describe('/loans', () => {
+
+    const sandbox = sinon.createSandbox();
+
+    before(() => {
+        sandbox.stub(sgMail, 'send').returns();
+    });
+
+    after(() => {
+        sandbox.restore();
+    });
 
     describe('/loans: Get all loans', () => {
         it('should return a list of all loans', done => {
@@ -49,7 +58,8 @@ describe('/loans', () => {
             sinon.stub(res, 'status').returnsThis();
             sinon.stub(loans_model, 'select').throws();
             await LoansController.get_all_loans(req, res);
-            expect(res.status).to.have.been.calledWith(500);       
+            expect(res.status).to.have.been.calledWith(500); 
+            sinon.restore();      
         });
                 
         it('should return all loans which have BEEN repaid', done => {

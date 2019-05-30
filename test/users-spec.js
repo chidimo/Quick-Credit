@@ -1,7 +1,8 @@
 /* eslint-disable func-style */
 /* eslint-disable prefer-arrow-callback */
 // should is not used directly in the file but is added as a mocha requirement
-
+import sinon from 'sinon';
+import sgMail from '@sendgrid/mail';
 import supertest from 'supertest';
 import app from '../app';
 
@@ -9,6 +10,15 @@ const server = supertest.agent(app);
 const BASE_URL = '/api/v1';
 
 describe('/users', () => {
+
+    const sandbox = sinon.createSandbox();
+    before(() => {
+        sandbox.stub(sgMail, 'send').returns();
+    });
+
+    after(() => {
+        sandbox.restore();
+    });
 
     describe('/auth/signup', () => {
         describe('POST /auth/signup', () => { 
