@@ -18,7 +18,7 @@ const BASE_URL = '/api/v1';
 describe('/loans', () => {
 
     describe('/loans: Get all loans', () => {
-        it('should be return a list of all loans', done => {
+        it('should return a list of all loans', done => {
             server
                 .get(`${BASE_URL}/loans`)
                 .expect(200)
