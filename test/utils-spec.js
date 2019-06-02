@@ -10,6 +10,8 @@ const { expect, assert } = chai;
 
 describe('Messenger', () => {
     describe('sendMail', () => {
+
+        afterEach(() => { sandbox.restore(); });
         const sandbox = sinon.createSandbox();
 
         it('should return error passed in callback', done => {
@@ -22,7 +24,6 @@ describe('Messenger', () => {
 
             assert(sgMail.send.called);
             expect(res[0]).to.equal(err);
-            sandbox.restore();
             done();
         });
         
@@ -36,7 +37,6 @@ describe('Messenger', () => {
 
             assert(sgMail.send.called);
             expect(res[0]).to.equal(result);
-            sandbox.restore();
             done();
         });
     });
