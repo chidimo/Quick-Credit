@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import titlecase from 'titlecase';
 
 import { InternalServerError } from '../../utils/errorHandlers';
-import sendEmail from '../../utils/sendEmail';
+import Messenger from '../../utils/Messenger';
 import hashPassword from '../../utils/hashPassword';
 
 export const sendSignUpMessage = (user, req) => {
@@ -18,7 +18,7 @@ export const sendSignUpMessage = (user, req) => {
         email: user.email,
         template_name: 'confirm_account',
     };
-    sendEmail(data, template_data);
+    Messenger.sendEmail(data, template_data);
     return;
 };
 
@@ -30,7 +30,7 @@ export const sendPassword = (email, new_password) => {
         email,
         template_name: 'new_password',
     };
-    sendEmail(data, template_data);
+    Messenger.sendEmail(data, template_data);
     return;
 };
 

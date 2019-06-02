@@ -1,7 +1,7 @@
 import titlecase from 'titlecase';
 
 import { InternalServerError } from '../../utils/errorHandlers';
-import sendEmail from '../../utils/sendEmail';
+import Messenger from '../../utils/Messenger';
 // import { dev_logger } from '../../utils/loggers';
 
 export const sendNewApplicationMessage = loan => {
@@ -15,7 +15,7 @@ export const sendNewApplicationMessage = loan => {
         email: loan.useremail,
         template_name: 'new_loan_application',
     };
-    sendEmail(data, template_data);
+    Messenger.sendEmail(data, template_data);
     return;
 };
 
@@ -35,7 +35,7 @@ export const sendFollowUpMessage = (status, loan) => {
         email: loan.useremail,
         template_name: 'loan_status',
     };
-    sendEmail(data, template_data);
+    Messenger.sendEmail(data, template_data);
     return;
 };
 

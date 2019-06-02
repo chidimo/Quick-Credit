@@ -12,9 +12,6 @@ const AuthenticationMiddleware = {
     },
 
     verifyToken: (req, res, next) => {
-        if (Settings.skipTokenVerification()) {
-            return next();
-        }
         const token = req.headers['x-access-token'];
         if (!token) {
             const msg = 'Include a valid token in the x-access-token header';

@@ -8,7 +8,7 @@ import
     sendSignUpMessage
 } from './helpers/AuthController';
 
-const users_model = new Model('users');
+export const users_model = new Model('users');
 
 const AuthController = {
     signup: async (req, res) => {

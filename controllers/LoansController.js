@@ -17,8 +17,8 @@ import
     sendNewApplicationMessage
 } from './helpers/LoansController';
 
-const loans_model = new Model('loans');
-const repayments_model = new Model('repayments');
+export const loans_model = new Model('loans');
+export const repayments_model = new Model('repayments');
 const rows = `id, userid, createdon, status, repaid, useremail,
 amount, tenor, interest, balance, paymentinstallment`;
 

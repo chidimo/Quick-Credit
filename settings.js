@@ -24,8 +24,6 @@ const Settings = {
         region: 'eu-west-2',
         signatureVersion: 'v4'
     },
-    skipTokenVerification: () => (process.env.NODE_ENV === 'test'),
-    skipEmailSend: () => (process.env.NODE_ENV === 'test'),
 };
 
 dev_logger(Settings);
