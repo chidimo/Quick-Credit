@@ -70,12 +70,17 @@
                         </nav>
                     </div>
                 </header>
+
+                <div id="loading_modal" class="modal">
+                    <div class="loader"></div>
+                </div>
         
                 <section class="profile_edit">
                     <div class="container form_wrapper">
                         <form id="profile_edit_form" action="" method="POST">
                             <h1>Edit your profile</h1>
                             <hr>
+                            <div id="profile_err"></div>
                             <label for="first_name"><b>First Name</b></label>
                             <input type="text" placeholder="First Name" name="first_name" required>
             

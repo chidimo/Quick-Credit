@@ -25,6 +25,10 @@
                 </header>
                 
                 <section class="authentication_section">
+                    
+                    <div id="loading_modal" class="modal">
+                        <div class="loader"></div>
+                    </div>
         
                     <div id="reg_form_toggle" class="container">
                         <div id="activate_signin" class="authentication_div selected">
@@ -41,6 +45,9 @@
                         <div id="signin_form" class="">
                             <h1 class="authentication_title">Sign in to your account</h1>
                             <hr>
+
+                            <div id="sign_in_err"></div>
+                            
                             <form method="POST" class="authentication sign_up" action="http://localhost:3000/auth/signin">
                                 <label for="email"><b>Email</b></label>
                                 <input id="signin_email" type="email" placeholder="Enter email" name="email" required>
@@ -60,6 +67,9 @@
                             <h1 class="authentication_title">Create your account</h1>
                             <p class="form_message">Please fill the form to create an account.</p>
                             <hr>
+
+                            <div id="sign_up_err"></div>
+
                             <form class="authentication sign_up" action="">
                                 <label for="email"><b>Email</b></label>
                                 <input id="signup_email" type="email" placeholder="Enter email" name="email" required>

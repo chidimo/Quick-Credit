@@ -302,6 +302,30 @@ ul.base_ul {
 	opacity:1;
 }
 
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    margin: auto;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 5s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* END Globals */
+
 /* Showcase */
 
 #showcase {
@@ -493,6 +517,11 @@ footer {
 
 /* authentication */
 
+p.error-from-api{
+    text-align: center;
+    color: #FF0000;
+}
+
 .authentication_div {
     text-align: center;
     cursor: pointer;
@@ -652,7 +681,7 @@ hr.section_divider {
     height: 100%;
     overflow: auto;
     opacity: 0.97;
-    padding-top: 50px;
+    padding-top: 30vh;
     background-color: #474e5d;
 }
 
