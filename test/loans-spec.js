@@ -5,6 +5,8 @@ import supertest from 'supertest';
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 
+import { mockRequest, mockResponse } from './mocks';
+
 import app from '../app';
 import LoansController, { loans_model } from '../controllers/LoansController';
 
@@ -51,11 +53,8 @@ describe('/loans', () => {
         });
 
         it('should throw error while getting all loans', async () => {
-            const req = {
-                query: { status: 'approved', repaid: true }
-            };
-            const res = { status() {}, json() {} };
-            sinon.stub(res, 'status').returnsThis();
+            const req = mockRequest();
+            const res = mockResponse();
             sinon.stub(loans_model, 'select').throws();
             await LoansController.get_all_loans(req, res);
             expect(res.status).to.have.been.calledWith(500); 
