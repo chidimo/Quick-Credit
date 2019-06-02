@@ -45,12 +45,13 @@ const save_user = async (endpoint, body) => {
             localStorage[token_name()] = user.token;
             localStorage.user = JSON.stringify(user);
         }
+        return { user };
     }
     catch (e) {
         const { response } = e;
-        const { data, status, statusText } = response;
-        console.log(`
-            ${JSON.stringify(data)}, \n ${status}, \n ${statusText}`);
+        const { data, status } = response;
+        if (status === 422) return data.errors[0].msg;
+        return data.error; // status 404 and 409
     }
 };
 
@@ -58,11 +59,18 @@ signin_form.addEventListener('submit', async e => {
     e.preventDefault();
     const email = document.getElementById('signin_email').value;
     const password = document.getElementById('signin_password').value;
+    const sign_in_err = document.getElementById('sign_in_err');
+
     const body = JSON.stringify({ email, password });
-    await save_user(`${BASE_URL}/auth/signin`, body);
-    const { id } = JSON.parse(localStorage.user);
-    await get_user_loans(id);
-    window.location = './dashboard.html';
+    const data = await save_user(`${BASE_URL}/auth/signin`, body);
+
+    if (data.user) {
+        const { id } = JSON.parse(localStorage.user);
+        await get_user_loans(id);
+        window.location = './dashboard.html';
+        return;
+    }
+    sign_in_err.innerHTML = `<p class='error-from-api'>${data}</p>`;
 });
 
 signup_form.addEventListener('submit', async e => {
@@ -70,10 +78,18 @@ signup_form.addEventListener('submit', async e => {
     const email = document.getElementById('signup_email').value;
     const password = document.getElementById('signup_password').value;
     const confirm_password = document.getElementById('confirm_password').value;
+    const sign_up_err = document.getElementById('sign_up_err');
 
     const body = JSON.stringify({ email, password, confirm_password });
-    await save_user(`${BASE_URL}/auth/signup`, body);
-    window.location = './profile.edit.html';
+    const data = await save_user(`${BASE_URL}/auth/signup`, body);
+
+    if (data.user) {
+        const { id } = JSON.parse(localStorage.user);
+        await get_user_loans(id);
+        window.location = './profile.edit.html';
+        return;
+    }
+    sign_up_err.innerHTML = `<p class='error-from-api'>${data}</p>`;
 });
 
 const get_user_loans = async id => {
