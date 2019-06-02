@@ -1,4 +1,4 @@
-import { BASE_URL, token_name, common_headers } from './common/constants.js';
+import { BASE_URL, common_headers } from './common/constants.js';
 
 /* eslint-disable no-undef */
 const logout = document.getElementById('logout');
@@ -17,6 +17,7 @@ const ph = document.querySelector('input[name="phone_number"]');
 const hm = document.querySelector('textarea[name="home_address"]');
 const off = document.querySelector('textarea[name="office_address"]');
 const profile_err = document.getElementById('profile_err');
+const loading_modal = document.getElementById('loading_modal');
 
 fname.value = firstname;
 lname.value = lastname;
@@ -41,6 +42,7 @@ const update_profile = async (endpoint, body) => {
             'Content-Type': 'application/json',
         },
     };
+    loading_modal.style.display = 'block';
     try {
         const {
             data, status
@@ -54,7 +56,7 @@ const update_profile = async (endpoint, body) => {
     catch (e) {
         const { response } = e;
         const { data, status } = response;
-        console.log(`${JSON.stringify(data)}, \n ${status}`);
+        // console.log(`${JSON.stringify(data)}, \n ${status}`);
         if (status === 422) return data.errors[0].msg;
         return data.error;
     }
@@ -70,6 +72,7 @@ profile_edit_form.addEventListener('submit', async e => {
 
     const body = JSON.stringify({ firstname, lastname, phone, home, office });
     const data = await update_profile(endpoint, body);
+    loading_modal.style.display = 'none';
 
     if (data.user) {
         window.location = './dashboard.html';
