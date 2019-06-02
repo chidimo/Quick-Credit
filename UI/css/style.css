@@ -493,6 +493,11 @@ footer {
 
 /* authentication */
 
+p.error-from-api{
+    text-align: center;
+    color: #FF0000;
+}
+
 .authentication_div {
     text-align: center;
     cursor: pointer;
