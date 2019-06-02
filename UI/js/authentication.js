@@ -4,6 +4,7 @@ import { BASE_URL, common_headers, token_name } from './common/constants.js';
 
 const signin_form = document.getElementById('signin_form');
 const signup_form = document.getElementById('signup_form');
+const loading_modal = document.getElementById('loading_modal');
 
 const activate_signup = document.getElementById('activate_signup');
 const activate_signin = document.getElementById('activate_signin');
@@ -37,6 +38,7 @@ const save_user = async (endpoint, body) => {
             'Content-Type': 'application/json',
         },
     };
+    loading_modal.style.display = 'block';
     try {
         const { data, status
         } = await axios.post(endpoint, body, config);
@@ -63,6 +65,7 @@ signin_form.addEventListener('submit', async e => {
 
     const body = JSON.stringify({ email, password });
     const data = await save_user(`${BASE_URL}/auth/signin`, body);
+    loading_modal.style.display = 'none';
 
     if (data.user) {
         const { id } = JSON.parse(localStorage.user);
@@ -82,6 +85,7 @@ signup_form.addEventListener('submit', async e => {
 
     const body = JSON.stringify({ email, password, confirm_password });
     const data = await save_user(`${BASE_URL}/auth/signup`, body);
+    loading_modal.style.display = 'none';
 
     if (data.user) {
         const { id } = JSON.parse(localStorage.user);
