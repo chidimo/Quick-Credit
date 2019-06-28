@@ -1895,13 +1895,13 @@ expand-brackets@^2.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-express-validator@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/express-validator/-/express-validator-5.3.1.tgz#6f42c6d52554441b0360c40ccfb555b1770affe2"
-  integrity sha512-g8xkipBF6VxHbO1+ksC7nxUU7+pWif0+OZXjZTybKJ/V0aTVhuCoHbyhIPgSYVldwQLocGExPtB2pE0DqK4jsw==
+express-validator@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/express-validator/-/express-validator-6.1.0.tgz#131061a6bdaa3547b76df163c0310197b2d4723b"
+  integrity sha512-1zakkbF72uFqJS/6btO70GLn0REhLGbLtMdRHCaek2IqSK9VoReohMDVwJpHIu4Jt2IXDmV9P7p/ZLdlDv7P7w==
   dependencies:
-    lodash "^4.17.10"
-    validator "^10.4.0"
+    lodash "^4.17.11"
+    validator "^11.0.0"
 
 express@~4.16.0:
   version "4.16.4"
@@ -5055,10 +5055,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-validator@^10.4.0:
-  version "10.11.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-10.11.0.tgz#003108ea6e9a9874d31ccc9e5006856ccd76b228"
-  integrity sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
+validator@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-11.0.0.tgz#fb10128bfb1fd14ce4ed36b79fc94289eae70667"
+  integrity sha512-+wnGLYqaKV2++nUv60uGzUJyJQwYVOin6pn1tgEiFCeCQO60yeu3Og9/yPccbBX574kxIcEJicogkzx6s6eyag==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"
