@@ -1,7 +1,7 @@
 language: node_js
 env:
   global:
-    - CC_TEST_REPORTER_ID=f9b005dd05d6cf7849f22ee7d91f197a81979d400077e3d9f9fcc6de3c4159da
+    - CC_TEST_REPORTER_ID=4cad6d0665e59f28aa5303c81f6b73680e5020a94ad0634c501e9cd0bef715b5
     - NODE_ENV=test
 services:
   - postgresql
@@ -20,7 +20,7 @@ matrix:
   - node_js: '12'
   - dist: xenial
 cache:
-  directories: node_modules
+  directories: [node_modules]
 deploy:
   provider: heroku
   api_key:
