@@ -30,7 +30,7 @@ deploy:
 after_success: yarn coverage
 
 before_script:
-  - psql -c 'create database quick-credit-db;' -U postgres
+  - psql -c 'create database qcDB;' -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
