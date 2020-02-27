@@ -17,9 +17,8 @@ before_install:
   - sleep 1
 matrix:
   include:
-  - node_js: '10'
+  - node_js: '12'
   - dist: xenial
-  # - node_js: '12'
 cache:
   directories: node_modules
 deploy:
