@@ -1,5 +1,5 @@
-import { body } from 'express-validator/check';
-import { sanitizeBody } from 'express-validator/filter';
+import { body } from 'express-validator';
+import { sanitizeBody } from 'express-validator';
 import validate_error_or_next from './validate_error_or_next';
 import titlecase from 'titlecase';
 
