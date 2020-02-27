@@ -1,19 +1,12 @@
 import dotenv from 'dotenv';
-import { dev_logger } from './utils/loggers';
 
 dotenv.config();
 
-export const s3_bucket = 'quick-credit';
+// export const s3_bucket = 'quick-credit';
+export const s3_bucket = process.env.S3_BUCKET;
 export const jwtSecret = process.env.JWT_SECRET.trim();
 export const sendgridKey = process.env.SENDGRIDKEY.trim();
-
-export const dbSettings = () => ({
-    dbName: process.env.DBNAME.trim(),
-    dbHost: process.env.PGHOST.trim(),
-    dbUser: process.env.PGUSER.trim(),
-    dbPort: process.env.PGPORT,
-    dbPassword: process.env.PGPASSWORD.trim(),
-});
+export const connectionString = process.env.CONNECTION_STRING.trim();
 
 export const AWS_settings = () => ({
     accessKeyId: process.env.accessKeyId,

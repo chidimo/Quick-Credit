@@ -1,18 +1,10 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
-import { dbSettings } from '../settings';
+import { connectionString } from '../settings';
 
 dotenv.config();
 
-const config = {
-    user: dbSettings().dbUser,
-    host: dbSettings().dbHost,
-    port: dbSettings().dbPort,
-    database: dbSettings().dbName,
-    password: dbSettings().dbPassword
-};
-
-const pool = new Pool(config);
+const pool = new Pool({ connectionString });
 
 export default pool;
