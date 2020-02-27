@@ -1,7 +1,7 @@
 import sgMail from '@sendgrid/mail';
-import Settings from '../settings';
+import { sendgridKey } from '../settings';
 
-sgMail.setApiKey(Settings.sendgridKey);
+sgMail.setApiKey(sendgridKey);
 
 const templates = {
     new_password          : 'd-af4dcbb73450412480a3ed50ea04b344',

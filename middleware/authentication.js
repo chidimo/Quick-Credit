@@ -1,12 +1,12 @@
 import jwt from 'jsonwebtoken';
-import Settings from '../settings';
+import { jwtSecret } from '../settings';
 
 const AuthenticationMiddleware = {
     generateToken: (req, res, next) => {
         const { email, password } = req.body;
         const payload = { email, password };
         req.token = jwt.sign(
-            payload, Settings.jwtSecret, { expiresIn: '24h' }
+            payload, jwtSecret, { expiresIn: '24h' }
         );
         return next();
     },
@@ -21,7 +21,7 @@ const AuthenticationMiddleware = {
             });
         }
         try {
-            req.user = jwt.verify(token, Settings.jwtSecret);
+            req.user = jwt.verify(token, jwtSecret);
             req.token = token;
             return next();
         }
