@@ -33,7 +33,7 @@
         "@babel/register": "^7.4.4",
         "@babel/runtime": "^7.4.4",
         "@sendgrid/mail": "^6.4.0",
-        "aws-sdk": "^2.458.0",
+        "aws-sdk": "^2.814.0",
         "babel-plugin-istanbul": "^5.1.4",
         "bcrypt": "^3.0.6",
         "cookie-parser": "~1.4.3",
